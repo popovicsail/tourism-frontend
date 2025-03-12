@@ -1,0 +1,23 @@
+@import '../../../styles/global.scss';
+
+#logout {
+    display: none;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin-top: 15px;
+}
