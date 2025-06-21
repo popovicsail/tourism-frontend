@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/tours/pages/toursOverview/toursOverview.css">
+    <title>Tour Overview</title>
+    <script type="module" src="../../../../dist/tours/pages/toursOverview/toursOverview.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li class="nav-item" id="login"><a href="users/pages/login/login.html">Login</a></li>
+            <li class="nav-item" id="logout"><a href="index.html">Logout</a></li>
+            <li class="nav-item" id="toursOverview"><a href="toursOverview.html?guideId=10">Tour Overview</a></li>               
+        </ul>
+    </nav>
+    <section class="toursOverviewSection">
+        <table id="toursOverviewTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Date and Time</th>
+                    <th>Max Guests</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="toursOverviewTableBody">
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><button id="addTourButton">Add Tour</button></td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </section>
+</body>
+
+</html>

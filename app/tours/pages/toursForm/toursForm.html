@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/tours/pages/toursForm/toursForm.css">
+    <title>Tours Form</title>
+    <script type="module" src="../../../../dist/tours/pages/toursForm/toursForm.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li class="nav-item" id="login"><a href="users/pages/login/login.html">Login</a></li>
+            <li class="nav-item" id="logout"><a href="index.html">Logout</a></li>
+            <li class="nav-item" id="toursOverview"><a href="../../pages/toursOverview/toursOverview.html?guideId=10">Tour Overview</a></li>               
+        </ul>
+    </nav>
+    <section>
+        <form>
+            <label for="tourName">Name</label>
+            <input type="text" id="tourName" name="tourName" placeholder="Tour Name">
+            <span id="tourNameError"></span>
+
+            <label for="tourDescription">Description</label>
+            <input type="text" id="tourDescription"name="tourDescription" placeholder="Tour Description">
+            <span id="tourDescriptionError"></span>
+
+            <label for="tourDateTime">Date</label>
+            <input type="datetime-local" id="tourDateTime"name="tourDateTime" placeholder="Tour Date">
+            <span id="tourDateTimeError"></span>
+
+            <label for="tourMaxGuests">Max Guests</label>
+            <input type="number" id="tourMaxGuests"name="tourMaxGuests" placeholder="Tour Max Guests">
+            <span id="tourMaxGuestsError"></span>
+        </form>
+            <button id="submitButton">Submit</button>
+            <button id="cancelButton">Cancel</button>
+    </section>
+</body>
+</html>
