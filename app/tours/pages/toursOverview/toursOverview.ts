@@ -40,7 +40,7 @@ function toursOverviewInitialize(data: Tour[]) {
 
         const editButton = document.createElement("button")
         editButton.textContent = "Edit Tour"
-        editButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html?tourId=${tour.id}`)
+        editButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html?guideId=${guideId}&tourId=${tour.id}`)
         newRow.appendChild(editButton)
 
         const deleteButton = document.createElement("button")
