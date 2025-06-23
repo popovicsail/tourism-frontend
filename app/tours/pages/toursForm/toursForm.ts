@@ -5,10 +5,10 @@ const url = window.location.search
 const searchParams = new URLSearchParams(url)
 const guideId = parseInt(searchParams.get("guideId"))
 const tourId = parseInt(searchParams.get("tourId"))
-let tourName = document.querySelector("#tourName") as HTMLInputElement
-let tourDescription = document.querySelector("#tourDescription") as HTMLInputElement
-let tourDateTime = document.querySelector("#tourDateTime") as HTMLInputElement
-let tourMaxGuests = document.querySelector("#tourMaxGuests") as HTMLInputElement
+const tourName = document.querySelector("#tourName") as HTMLInputElement
+const tourDescription = document.querySelector("#tourDescription") as HTMLInputElement
+const tourDateTime = document.querySelector("#tourDateTime") as HTMLInputElement
+const tourMaxGuests = document.querySelector("#tourMaxGuests") as HTMLInputElement
 
 
 function tourFormInitialize(guideId: number, tourId?: number): void {

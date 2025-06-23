@@ -4,7 +4,7 @@ export class ToursServices {
     private apiUrl: string
     private pagedDefault: string
 
-    constructor(guideId?: number) {
+    constructor() {
         this.apiUrl = "http://localhost:48696/api/tours"
         this.pagedDefault = ""
     }
