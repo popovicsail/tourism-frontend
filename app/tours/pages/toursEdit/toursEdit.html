@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../dist/tours/pages/toursForm/toursForm.css">
+    <link rel="stylesheet" href="../../../../dist/tours/pages/toursEdit/toursEdit.css">
     <title>Tours Form</title>
-    <script type="module" src="../../../../dist/tours/pages/toursForm/toursForm.js"></script>
+    <script type="module" src="../../../../dist/tours/pages/toursEdit/toursEdit.js"></script>
 </head>
 
 <body>
@@ -20,35 +20,45 @@
         </ul>
     </nav>
 
-    <section class="formSection" id="tourFormSection">
-        <form>
-            <h1>Tour Creation</h1>
-            <div class="tourFormInputDiv">
+    <section id="mainSection">
+        <section id="tourEditSection">
+            <form>
+                <h1>Tour Creation</h1>
+
                 <label for="tourName">Name</label>
                 <input type="text" id="tourName" name="tourName" placeholder="Tour Name" required>
-            </div>
+                <span id="tourNameError"></span>
 
-            <div class="tourFormInputDiv">
                 <label for="tourDescription">Description</label>
                 <textarea id="tourDescription" name="tourDescription" rows="8" placeholder="Tour Description"
                     required></textarea>
-            </div>
+                <span id="tourDescriptionError"></span>
 
-            <div class="tourFormInputDiv">
                 <label for="tourDateTime">Date</label>
                 <input type="datetime-local" id="tourDateTime" name="tourDateTime" placeholder="Tour Date" required>
-            </div>
+                <span id="tourDateTimeError"></span>
 
-            <div class="tourFormInputDiv">
-                <label for="tourMaxGuests">Guests(Max)</label>
+                <label for="tourMaxGuests">Max Guests</label>
                 <input type="number" id="tourMaxGuests" name="tourMaxGuests" placeholder="Tour Max Guests" required>
-            </div>
+                <span id="tourMaxGuestsError"></span>
 
-            <div class="tourFormButtonDiv">
+                <button id="keyPointManagementButton">Key Points</button>
+            </form>
+            <div id="tourFormButtonDiv">
                 <button id="cancelButton">Cancel</button>
-                <button id="submitButton" disabled>Submit</button>
+                <button id="saveChanges">Save Changes</button>
             </div>
-        </form>
+        </section>
+
+        <section id="keyPointOverviewSection">
+        </section>
+
+        <section id="keyPointFormSection">
+        </section>
+
+
+
+
     </section>
 </body>
 
