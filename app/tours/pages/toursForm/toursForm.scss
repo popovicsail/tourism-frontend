@@ -1,1 +1,9 @@
-@import "../../../../dist/styles/global.css"
+@import "../../../../dist/styles/global.css";
+
+#mainSection {
+    display: flex;
+}
+
+section#tourFormSection {
+    width: 30%;
+}

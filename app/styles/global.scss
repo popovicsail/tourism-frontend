@@ -1,7 +1,7 @@
 $primary-color: #007bff;
 $accent-color: #ff5733;
-$warn-color: #d9534f; 
-$button-color: #28a745; 
+$warn-color: #d9534f;
+$button-color: #28a745;
 
 body {
     font-family: Arial, sans-serif;
@@ -9,23 +9,10 @@ body {
     padding: 0;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 200px;
-    margin: 20px auto;
-}
-
-label {
-    font-size: 14px;
-    color: $primary-color;
-}
-
-input {
-    padding: 8px;
-    border-radius: 4px;
-    font-size: 14px;
+h1 {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 0;
 }
 
 button {
@@ -36,6 +23,60 @@ button {
     border-radius: 4px;
     font-size: 16px;
 }
+
+section.formSection {
+    form {
+        display: flex;
+        flex-direction: column;
+        border: 2px black solid;
+        background-color: rgb(213, 208, 208);
+        padding: 10px;
+
+        .tourFormInputDiv {
+            display: flex;
+
+            label {
+                font-size: 20px;
+                color: $primary-color;
+                width: 25%;
+            }
+
+            input {
+                width: 60%;
+                padding: 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                margin-bottom: 15px;
+                
+            }
+
+            textarea {
+                width: 60%;
+                padding: 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+        }
+
+        .tourFormButtonDiv {
+            display: flex;
+            justify-content: space-evenly;
+
+            #cancelButton {
+                background-color: rgb(174, 58, 58);
+                width: 30%;
+            }
+
+            #submitButton {
+                background-color: gray;
+                width: 30%;
+            }
+        }
+
+    }
+}
+
 
 .navbar {
     background-color: $primary-color;
@@ -58,10 +99,11 @@ button {
 
     #login {
         margin-left: auto;
+        display: none;
     }
 
     #logout {
         margin-left: auto;
+        display: none;
     }
-    
 }

@@ -38,11 +38,14 @@ function toursOverviewInitialize(data: Tour[]) {
         status.textContent = tour.status
         newRow.appendChild(status)
 
+        const editButtonTd = document.createElement("td")
         const editButton = document.createElement("button")
         editButton.textContent = "Edit Tour"
-        editButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html?guideId=${guideId}&tourId=${tour.id}`)
-        newRow.appendChild(editButton)
+        editButton.addEventListener("click", () => window.location.href = `../toursEdit/toursEdit.html?guideId=${guideId}&tourId=${tour.id}`)
+        editButtonTd.append(editButton)
+        newRow.appendChild(editButtonTd)
 
+        const deleteButtonTd = document.createElement("td")
         const deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete Tour"
         deleteButton.addEventListener("click", () => {
@@ -51,7 +54,8 @@ function toursOverviewInitialize(data: Tour[]) {
             .catch((error) => console.error(error.status, error.message))
             
         })
-        newRow.appendChild(deleteButton)
+        deleteButtonTd.appendChild(deleteButton)
+        newRow.appendChild(deleteButtonTd)
 
         toursOverviewTableBody.appendChild(newRow)
     })
