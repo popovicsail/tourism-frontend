@@ -36,7 +36,9 @@ function tourFormInitialize(guideId: number): void {
     })
 
     const submitButton = document.getElementById("submitButton") as HTMLButtonElement
-    submitButton.addEventListener("click", () => submitTourFormData(guideId));
+    submitButton.addEventListener("click", () => {
+        submitTourFormData(guideId)
+    });
 
     const cancelButton = document.getElementById("cancelButton") as HTMLButtonElement
     cancelButton.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html?guideId=${guideId}`)
