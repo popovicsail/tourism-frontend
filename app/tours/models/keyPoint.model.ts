@@ -1,6 +1,6 @@
 export interface KeyPoint {
     id?: number;
-    order: number;
+    order?: number;
     name: string;
     description: string;
     imageUrl: string;
