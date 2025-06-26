@@ -1,4 +1,4 @@
-import { UserService } from "../../services/user.services.js";
+import { UserService } from "../../service/user.services.js";
 
 const userService = new UserService();
 const loginLink = document.querySelector('#login') as HTMLElement;
