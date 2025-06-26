@@ -8,85 +8,84 @@ const url = window.location.search
 const searchParams = new URLSearchParams(url)
 const guideId = parseInt(searchParams.get("guideId"))
 
-let tourName
-let tourDescription
-let tourDateTime
-let tourMaxGuests
-
-const loadingGif = document.querySelector(".loading") as HTMLImageElement
-
+let tourNameElement
+let tourDescriptionElement
+let tourDateTimeElement
+let tourMaxGuestsElement
+let tourCancelButtonElement
+let tourSubmitButtonElement
+let tourFormLoadingElement
 
 function tourFormInitialize(guideId: number): void {
-    tourName.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourName)
+    tourNameElement.addEventListener("blur", () => {
+        toursUtils.validationSingleInput(tourNameElement)
         validationTourFormData()
     })
 
-    tourDescription.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourDescription)
+    tourDescriptionElement.addEventListener("blur", () => {
+        toursUtils.validationSingleInput(tourDescriptionElement)
         validationTourFormData()
     })
 
-    tourDateTime.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourDateTime)
+    tourDateTimeElement.addEventListener("blur", () => {
+        toursUtils.validationSingleInput(tourDateTimeElement)
         validationTourFormData()
     })
 
-    tourMaxGuests.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourMaxGuests)
+    tourMaxGuestsElement.addEventListener("blur", () => {
+        toursUtils.validationSingleInput(tourMaxGuestsElement)
         validationTourFormData()
     })
 
-    const submitButton = document.getElementById("submitButton") as HTMLButtonElement
-    submitButton.addEventListener("click", () => {
+    tourCancelButtonElement.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html?guideId=${guideId}`)
+
+    tourSubmitButtonElement.addEventListener("click", () => {
         submitTourFormData(guideId)
     });
-
-    const cancelButton = document.getElementById("cancelButton") as HTMLButtonElement
-    cancelButton.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html?guideId=${guideId}`)
 }
 
 function validationTourFormData() {
-    const submitButton = document.getElementById("submitButton") as HTMLButtonElement
-
-    const tourNameFlag = toursUtils.validationFinal(tourName)
-    const tourDescriptionFlag = toursUtils.validationFinal(tourDescription)
-    const tourDateTimeFlag = toursUtils.validationFinal(tourDateTime)
-    const tourMaxGuestsFlag = toursUtils.validationFinal(tourMaxGuests)
+    const tourNameFlag = toursUtils.validationFinal(tourNameElement)
+    const tourDescriptionFlag = toursUtils.validationFinal(tourDescriptionElement)
+    const tourDateTimeFlag = toursUtils.validationFinal(tourDateTimeElement)
+    const tourMaxGuestsFlag = toursUtils.validationFinal(tourMaxGuestsElement)
 
     if (!tourNameFlag || !tourDescriptionFlag || !tourDateTimeFlag || !tourMaxGuestsFlag) {
-        submitButton.disabled = true;
-        submitButton.style.backgroundColor = "grey"
+        tourSubmitButtonElement.disabled = true;
+        tourSubmitButtonElement.style.backgroundColor = "grey"
         return;
     }
-    submitButton.disabled = false;
-    submitButton.style.backgroundColor = "green"
+    tourSubmitButtonElement.disabled = false;
+    tourSubmitButtonElement.style.backgroundColor = "green"
     return;
 }
 
 function submitTourFormData(guideId: number): void {
-    const name = tourName.value
-    const description = tourDescription.value
-    const dateTime = tourDateTime.value
-    const maxGuests = parseInt(tourMaxGuests.value)
+    const name = tourNameElement.value
+    const description = tourDescriptionElement.value
+    const dateTime = tourDateTimeElement.value
+    const maxGuests = parseInt(tourMaxGuestsElement.value)
     const status = "U pripremi"
 
     const newTour: Tour = { name, description, dateTime, maxGuests, status, guideId }
 
-    loadingGif.style.display = "flex";
+    tourFormLoadingElement.style.display = "flex";
     toursServices.add(newTour)
-        .then((data: Tour) => {       
-            loadingGif.style.display = "none";
+        .then((data: Tour) => {
+            tourFormLoadingElement.style.display = "none";
             window.location.href = `../toursEdit/toursEdit.html?guideId=${guideId}&tourId=${data.id}`
         })
         .catch(error => console.error(error.status, error.message))
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    tourName = document.querySelector("#tourName") as HTMLInputElement
-    tourDescription = document.querySelector("#tourDescription") as HTMLInputElement
-    tourDateTime = document.querySelector("#tourDateTime") as HTMLInputElement
-    tourMaxGuests = document.querySelector("#tourMaxGuests") as HTMLInputElement
+    tourNameElement = document.querySelector("#tourNameElement") as HTMLInputElement
+    tourDescriptionElement = document.querySelector("#tourDescriptionElement") as HTMLInputElement
+    tourDateTimeElement = document.querySelector("#tourDateTimeElement") as HTMLInputElement
+    tourMaxGuestsElement = document.querySelector("#tourMaxGuestsElement") as HTMLInputElement
+    tourCancelButtonElement = document.getElementById("tourFormCancelButtonElement") as HTMLButtonElement
+    tourSubmitButtonElement = document.getElementById("tourFormSubmitButtonElement") as HTMLButtonElement
+    tourFormLoadingElement = document.querySelector(".tourFormLoadingElement") as HTMLButtonElement
 
     tourFormInitialize(guideId);
 })

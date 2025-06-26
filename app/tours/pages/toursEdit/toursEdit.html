@@ -13,10 +13,10 @@
     <nav class="navbar">
         <ul class="nav-list">
             <li class="nav-item"><a href="../../../index.html">Home</a></li>
-            <li class="nav-item" id="login"><a href="users/pages/login/login.html">Login</a></li>
-            <li class="nav-item" id="logout"><a href="index.html">Logout</a></li>
             <li class="nav-item" id="toursOverview"><a
                     href="../../pages/toursOverview/toursOverview.html?guideId=10">Tour Overview</a></li>
+            <li class="nav-item push-right" id="login"><a href="../../../users/pages/login/login.html">Login</a></li>
+            <li class="nav-item" id="logout"><a href="../../../index.html">Logout</a></li>
         </ul>
     </nav>
 
@@ -37,17 +37,20 @@
 
                 <div class="formInputDiv">
                     <label for="tourDateTimeElement">Date</label>
-                    <input type="datetime-local" id="tourDateTimeElement" name="tourDateTime" placeholder="Tour Date" required>
+                    <input type="datetime-local" id="tourDateTimeElement" name="tourDateTime" placeholder="Tour Date"
+                        required>
                 </div>
 
                 <div class="formInputDiv">
                     <label for="tourMaxGuestsElement">Guests(Max)</label>
-                    <input type="number" id="tourMaxGuestsElement" name="tourMaxGuests" placeholder="Tour Max Guests" required>
+                    <input type="number" id="tourMaxGuestsElement" name="tourMaxGuests" placeholder="Tour Max Guests"
+                        required>
                 </div>
 
                 <div id="tourFormMainButtonDiv">
                     <button type="button" id="keyPointButtonElement">Key Points</button>
-                    <button type="button" id="tourFormPublishButtonElement" disabled>At least 2 key points needed to publish
+                    <button type="button" id="tourFormPublishButtonElement" disabled>At least 2 key points needed to
+                        publish
                         tour</button>
                 </div>
 
@@ -87,7 +90,8 @@
                             placeholder="Key Point ImageURL" required>
                     </div>
                     <div class="keyPointButtonDiv">
-                        <button type="button" id="deleteKeyPointButtonElement" class="deleteKeyPointButton">Delete</button>
+                        <button type="button" id="deleteKeyPointButtonElement"
+                            class="deleteKeyPointButton">Delete</button>
                         <button type="button" id="saveKeyPointButtonElement" class="saveKeyPointButton" disabled>Save
                             Info</button>
                     </div>

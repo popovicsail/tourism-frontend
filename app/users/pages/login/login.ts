@@ -8,9 +8,9 @@ const submitButton = document.querySelector("#submit") as HTMLElement;
 function setUserLoginState(isLoggedIn: boolean) {
     if (isLoggedIn) {
         loginLink.style.display = 'none';
-        logoutLink.style.display = 'block';
+        logoutLink.style.display = 'flex';
     } else {
-        loginLink.style.display = 'block';
+        loginLink.style.display = 'flex';
         logoutLink.style.display = 'none';
     }
 }

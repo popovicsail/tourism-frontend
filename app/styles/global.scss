@@ -88,9 +88,11 @@ button {
 
     .nav-list {
         list-style: none;
+        display: flex;
+        align-items: center;
         margin: 0;
         padding: 0;
-        display: flex;
+        width: 100%;
     }
 
     .nav-item {
@@ -98,14 +100,11 @@ button {
 
         a {
             color: white;
+            text-decoration: none;
         }
     }
 
-    #login {
-        margin-left: auto;
-    }
-
-    #logout {
+    .push-right {
         margin-left: auto;
     }
 }
