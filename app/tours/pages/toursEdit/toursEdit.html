@@ -21,47 +21,79 @@
     </nav>
 
     <section id="mainSection">
-        <section class="formSection" id="tourFormSection">
+        <section id="tourFormSection" class="formSection">
             <form>
-                <h1>Tour Creation</h1>
-                <div class="tourFormInputDiv">
-                    <label for="tourName">Name</label>
-                    <input type="text" id="tourName" name="tourName" placeholder="Tour Name" required>
+                <h1>Tour Management</h1>
+                <div class="formInputDiv">
+                    <label for="tourNameElement">Name</label>
+                    <input type="text" id="tourNameElement" name="tourName" placeholder="Tour Name" required>
                 </div>
 
-                <div class="tourFormInputDiv">
-                    <label for="tourDescription">Description</label>
-                    <textarea id="tourDescription" name="tourDescription" rows="8" placeholder="Tour Description"
+                <div class="formInputDiv">
+                    <label for="tourDescriptionElement">Description</label>
+                    <textarea id="tourDescriptionElement" name="tourDescription" rows="8" placeholder="Tour Description"
                         required></textarea>
                 </div>
 
-                <div class="tourFormInputDiv">
-                    <label for="tourDateTime">Date</label>
-                    <input type="datetime-local" id="tourDateTime" name="tourDateTime" placeholder="Tour Date" required>
+                <div class="formInputDiv">
+                    <label for="tourDateTimeElement">Date</label>
+                    <input type="datetime-local" id="tourDateTimeElement" name="tourDateTime" placeholder="Tour Date" required>
                 </div>
 
-                <div class="tourFormInputDiv">
-                    <label for="tourMaxGuests">Guests(Max)</label>
-                    <input type="number" id="tourMaxGuests" name="tourMaxGuests" placeholder="Tour Max Guests" required>
+                <div class="formInputDiv">
+                    <label for="tourMaxGuestsElement">Guests(Max)</label>
+                    <input type="number" id="tourMaxGuestsElement" name="tourMaxGuests" placeholder="Tour Max Guests" required>
                 </div>
 
-                <div class="tourFormButtonDiv">
-                    <button type="button" id="cancelButton">Cancel</button>
-                    <button type="button" id="submitButton" disabled>Submit</button>
+                <div id="tourFormMainButtonDiv">
+                    <button type="button" id="keyPointButtonElement">Key Points</button>
+                    <button type="button" id="tourFormPublishButtonElement" disabled>At least 2 key points needed to publish
+                        tour</button>
+                </div>
+
+                <div class="formButtonDiv">
+                    <button type="button" id="tourFormCancelButtonElement">Cancel</button>
+                    <button type="button" id="tourFormSubmitButtonElement" disabled>Save Changes</button>
                 </div>
             </form>
         </section>
 
         <section id="keyPointOverviewSection">
-            
+            <div class="keyPointOverviewDiv">
+                <div class="keyPointImageDiv">
+                    <img id="keyPointImageElement" src="../../../styles/loading.gif" />
+                </div>
+                <div class="keyPointInfoDiv">
+                    <div class="keyPointInputDiv">
+                        <input type="text" id="keyPointNameElement" name="keyPointName" placeholder="Key Point Name"
+                            required>
+                    </div>
+                    <div class="keyPointLocationDiv">
+                        <div class="keyPointInputDiv">
+                            <input type="number" id="keyPointLatitudeElement" name="keyPointLatitude"
+                                placeholder="Latitude" required>
+                        </div>
+                        <div class="keyPointInputDiv">
+                            <input type="number" id="keyPointLongitudeElement" name="keyPointLongitude"
+                                placeholder="Langitude" required>
+                        </div>
+                    </div>
+                    <div class="keyPointInputDiv">
+                        <textarea id="keyPointDescription" name="keyPointDescription"
+                            placeholder="Key Point Description" required></textarea>
+                    </div>
+                    <div class="keyPointInputDiv">
+                        <input type="text" id="keyPointImageURLElement" name="keyPointImageURL"
+                            placeholder="Key Point ImageURL" required>
+                    </div>
+                    <div class="keyPointButtonDiv">
+                        <button type="button" id="deleteKeyPointButtonElement" class="deleteKeyPointButton">Delete</button>
+                        <button type="button" id="saveKeyPointButtonElement" class="saveKeyPointButton" disabled>Save
+                            Info</button>
+                    </div>
+                </div>
+            </div>
         </section>
-
-        <section id="keyPointFormSection">
-        </section>
-
-
-
-
     </section>
 </body>
 

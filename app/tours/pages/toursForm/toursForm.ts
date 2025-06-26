@@ -8,10 +8,12 @@ const url = window.location.search
 const searchParams = new URLSearchParams(url)
 const guideId = parseInt(searchParams.get("guideId"))
 
-const tourName = document.querySelector("#tourName") as HTMLInputElement
-const tourDescription = document.querySelector("#tourDescription") as HTMLInputElement
-const tourDateTime = document.querySelector("#tourDateTime") as HTMLInputElement
-const tourMaxGuests = document.querySelector("#tourMaxGuests") as HTMLInputElement
+let tourName
+let tourDescription
+let tourDateTime
+let tourMaxGuests
+
+const loadingGif = document.querySelector(".loading") as HTMLImageElement
 
 
 function tourFormInitialize(guideId: number): void {
@@ -71,11 +73,20 @@ function submitTourFormData(guideId: number): void {
 
     const newTour: Tour = { name, description, dateTime, maxGuests, status, guideId }
 
+    loadingGif.style.display = "flex";
     toursServices.add(newTour)
-        .then(() => window.location.href = `../toursOverview/toursOverview.html?guideId=${guideId}`)
+        .then((data: Tour) => {       
+            loadingGif.style.display = "none";
+            window.location.href = `../toursEdit/toursEdit.html?guideId=${guideId}&tourId=${data.id}`
+        })
         .catch(error => console.error(error.status, error.message))
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    tourName = document.querySelector("#tourName") as HTMLInputElement
+    tourDescription = document.querySelector("#tourDescription") as HTMLInputElement
+    tourDateTime = document.querySelector("#tourDateTime") as HTMLInputElement
+    tourMaxGuests = document.querySelector("#tourMaxGuests") as HTMLInputElement
+
     tourFormInitialize(guideId);
 })

@@ -1,3 +1,5 @@
+import { KeyPoint } from "./keyPoint.model.js"
+
 export interface Tour {
     id?: number;
     name: string;
@@ -5,7 +7,7 @@ export interface Tour {
     dateTime: string;
     maxGuests: number;
     status: string;
-    //guide: Guide; Ovo treba implementirati kasnije
+    //guide: Guide;
     guideId: number;
-    //keyPoints: number[];
+    keyPoints?: KeyPoint[];
 }
