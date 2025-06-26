@@ -1,0 +1,18 @@
+@import "../../../styles/global.scss";
+
+#mainSection {
+    display: flex;
+}
+
+section#tourFormSection {
+    width: 30%;
+}
+
+.loading {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: 30%;
+    left: 20%;
+    display: none;
+}
