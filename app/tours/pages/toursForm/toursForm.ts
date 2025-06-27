@@ -5,7 +5,7 @@ import { handleLogout } from "../../../users/pages/login/login.js"
 const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
 
-const guideId = parseInt(localStorage.getItem('guideId'));
+const guideId = parseInt(localStorage.getItem('id'));
 
 let logoutButton
 

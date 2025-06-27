@@ -10,7 +10,7 @@ const toursUtils = new ToursUtils()
 
 const url = window.location.search
 const searchParams = new URLSearchParams(url)
-const guideId = parseInt(localStorage.getItem('guideId'));
+const guideId = parseInt(localStorage.getItem('id'));
 const tourId = parseInt(searchParams.get("tourId"))
 const guide: Guide = {
     id: guideId,
@@ -39,10 +39,10 @@ let keyPointImageElement
 let keyPointNameElement
 let keyPointLatitudeElement
 let keyPointLongitudeElement
-let keyPointDescription
+let keyPointDescriptionElement
 let keyPointImageURLElement
-let keyPointCancelButton
-let keyPointSubmitButton
+let keyPointCancelButtonElement
+let keyPointSubmitButtonElement
 
 
 const keyPointServices = new KeyPointServices(tourId)
@@ -268,10 +268,10 @@ function keyPointOverviewInitialize(tourById: Tour): void {
     keyPointNameElement = emptyKeyPointOverviewDiv.querySelector("#keyPointNameElement") as HTMLInputElement
     keyPointLatitudeElement = emptyKeyPointOverviewDiv.querySelector("#keyPointLatitudeElement") as HTMLInputElement
     keyPointLongitudeElement = emptyKeyPointOverviewDiv.querySelector("#keyPointLongitudeElement") as HTMLInputElement
-    keyPointDescription = emptyKeyPointOverviewDiv.querySelector("#keyPointDescription") as HTMLInputElement
+    keyPointDescriptionElement = emptyKeyPointOverviewDiv.querySelector("#keyPointDescription") as HTMLInputElement
     keyPointImageURLElement = emptyKeyPointOverviewDiv.querySelector("#keyPointImageURLElement") as HTMLInputElement
-    keyPointCancelButton = emptyKeyPointOverviewDiv.querySelector("#deleteKeyPointButtonElement") as HTMLButtonElement
-    keyPointSubmitButton = emptyKeyPointOverviewDiv.querySelector("#saveKeyPointButtonElement") as HTMLButtonElement
+    keyPointCancelButtonElement = emptyKeyPointOverviewDiv.querySelector("#deleteKeyPointButtonElement") as HTMLButtonElement
+    keyPointSubmitButtonElement = emptyKeyPointOverviewDiv.querySelector("#saveKeyPointButtonElement") as HTMLButtonElement
 
 
 
@@ -290,8 +290,8 @@ function keyPointOverviewInitialize(tourById: Tour): void {
         validateKeyPointData()
     })
 
-    keyPointDescription.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(keyPointDescription)
+    keyPointDescriptionElement.addEventListener("blur", () => {
+        toursUtils.validationSingleInput(keyPointDescriptionElement)
         validateKeyPointData()
     })
 
@@ -302,12 +302,12 @@ function keyPointOverviewInitialize(tourById: Tour): void {
 
     keyPointImageElement.src = keyPointImageURLElement.value
 
-    keyPointSubmitButton.textContent = "Submit"
-    keyPointSubmitButton.addEventListener("click", () => {
+    keyPointSubmitButtonElement.textContent = "Submit"
+    keyPointSubmitButtonElement.addEventListener("click", () => {
         const name = keyPointNameElement.value
         const latitude = parseInt(keyPointLatitudeElement.value)
         const longitude = parseInt(keyPointLongitudeElement.value)
-        const description = keyPointDescription.value
+        const description = keyPointDescriptionElement.value
         const imageUrl = keyPointImageURLElement.value
         const newKeyPoint: KeyPoint = { order, name, description, latitude, longitude, imageUrl, tourId }
         submitKeyPointData(newKeyPoint)
@@ -317,8 +317,8 @@ function keyPointOverviewInitialize(tourById: Tour): void {
 
     order = order + 1
 
-    keyPointCancelButton.disabled = true
-    keyPointCancelButton.style.visibility = "hidden"
+    keyPointCancelButtonElement.disabled = true
+    keyPointCancelButtonElement.style.visibility = "hidden"
 }
 
 
@@ -342,7 +342,7 @@ function validateKeyPointData(keyPointId?) {
         keyPointNameFlag = toursUtils.validationFinal(keyPointNameElement)
         keyPointLongitudeFlag = toursUtils.validationFinal(keyPointLatitudeElement)
         keyPointLatitudeFlag = toursUtils.validationFinal(keyPointLongitudeElement)
-        keyPointDescriptionFlag = toursUtils.validationFinal(keyPointDescription)
+        keyPointDescriptionFlag = toursUtils.validationFinal(keyPointDescriptionElement)
         keyPointImageURLFlag = toursUtils.validationFinal(keyPointImageURLElement)
     }
 

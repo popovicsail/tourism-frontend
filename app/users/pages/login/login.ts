@@ -12,7 +12,7 @@ function handleLogin(event: Event) {
 
     userService.login(username, password)
         .then((user) => {
-            localStorage.setItem('guideId', String(user.id));
+            localStorage.setItem('id', String(user.id));
             localStorage.setItem('username', user.username);
             localStorage.setItem('role', user.role);
             localStorage.setItem('password', password);
@@ -24,7 +24,7 @@ function handleLogin(event: Event) {
 }
 
 export function handleLogout() {
-    localStorage.removeItem('guideId');
+    localStorage.removeItem('id');
     localStorage.removeItem('username');
     localStorage.removeItem('role');
     localStorage.removeItem('password');

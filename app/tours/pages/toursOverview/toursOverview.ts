@@ -2,7 +2,7 @@ import { Tour } from "../../models/tour.model.js"
 import { ToursServices } from "../../services/tours.services.js"
 import { handleLogout } from "../../../users/pages/login/login.js"
 const toursServices = new ToursServices()
-const guideId = parseInt(localStorage.getItem('guideId'));
+const guideId = parseInt(localStorage.getItem('id'));
 const addTourButton = document.getElementById("addTourButton")
 
 let logoutButton
