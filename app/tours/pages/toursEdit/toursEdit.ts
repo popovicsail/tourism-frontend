@@ -250,6 +250,8 @@ function keyPointOverviewInitialize(tourById: Tour): void {
                 .catch(error => console.error(error.status, error.message))
         })
 
+        newSaveKeyPointButtonElement.disabled = true
+        newSaveKeyPointButtonElement.textContent = "DISABLED TEMP"
         newKeyPointOverviewDiv.style.display = "flex"
         keyPointOverviewSection.append(newKeyPointOverviewDiv)
 
