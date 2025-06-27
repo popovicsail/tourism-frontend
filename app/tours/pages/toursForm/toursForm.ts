@@ -1,12 +1,13 @@
 import { Tour } from "../../../tours/models/tour.model.js";
 import { ToursServices } from "../../services/tours.services.js"
 import { ToursUtils } from "../../utils/tours.utils.js"
+import { handleLogout } from "../../../users/pages/login/login.js"
 const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
 
-const url = window.location.search
-const searchParams = new URLSearchParams(url)
-const guideId = parseInt(searchParams.get("guideId"))
+const guideId = parseInt(localStorage.getItem('guideId'));
+
+let logoutButton
 
 let tourNameElement
 let tourDescriptionElement
@@ -37,7 +38,7 @@ function tourFormInitialize(guideId: number): void {
         validationTourFormData()
     })
 
-    tourCancelButtonElement.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html?guideId=${guideId}`)
+    tourCancelButtonElement.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html`)
 
     tourSubmitButtonElement.addEventListener("click", () => {
         submitTourFormData(guideId)
@@ -79,6 +80,9 @@ function submitTourFormData(guideId: number): void {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+        logoutButton = document.querySelector('#logoutButton') as HTMLElement;
+        logoutButton.addEventListener('click', handleLogout)
+
     tourNameElement = document.querySelector("#tourNameElement") as HTMLInputElement
     tourDescriptionElement = document.querySelector("#tourDescriptionElement") as HTMLInputElement
     tourDateTimeElement = document.querySelector("#tourDateTimeElement") as HTMLInputElement

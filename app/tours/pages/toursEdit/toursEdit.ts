@@ -3,14 +3,24 @@ import { ToursServices } from "../../services/tours.services.js"
 import { ToursUtils } from "../../utils/tours.utils.js"
 import { KeyPoint } from "../../models/keyPoint.model.js"
 import { KeyPointServices } from "../../services/keyPoint.services.js";
+import { handleLogout } from "../../../users/pages/login/login.js"
+import { Guide } from "../../../users/model/guide.model.js"
 const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
 
 const url = window.location.search
 const searchParams = new URLSearchParams(url)
-const guideId = parseInt(searchParams.get("guideId"))
+const guideId = parseInt(localStorage.getItem('guideId'));
 const tourId = parseInt(searchParams.get("tourId"))
+const guide: Guide = {
+    id: guideId,
+    username: localStorage.getItem('username'),
+    password: localStorage.getItem('password'),
+    role: localStorage.getItem('role')
+};
+
 let tourById
+let logoutButton
 
 let tourNameElement
 let tourDescriptionElement
@@ -40,22 +50,22 @@ const keyPointServices = new KeyPointServices(tourId)
 function tourFormInitialize(guideId: number, tourId: number): void {
     tourNameElement.addEventListener("blur", () => {
         toursUtils.validationSingleInput(tourNameElement)
-        validationTourFormData()
+        validateTourFormData()
     })
 
     tourDescriptionElement.addEventListener("blur", () => {
         toursUtils.validationSingleInput(tourDescriptionElement)
-        validationTourFormData()
+        validateTourFormData()
     })
 
     tourDateTimeElement.addEventListener("blur", () => {
         toursUtils.validationSingleInput(tourDateTimeElement)
-        validationTourFormData()
+        validateTourFormData()
     })
 
     tourMaxGuestsElement.addEventListener("blur", () => {
         toursUtils.validationSingleInput(tourMaxGuestsElement)
-        validationTourFormData()
+        validateTourFormData()
     })
 
     tourKeyPointButtonElement.addEventListener("click", () => {
@@ -63,7 +73,7 @@ function tourFormInitialize(guideId: number, tourId: number): void {
         keyPointOverviewInitialize(tourById)
     }, { once: true })
 
-    tourCancelButtonElement.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html?guideId=${guideId}`)
+    tourCancelButtonElement.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html`)
 
     tourSubmitButtonElement.addEventListener("click", () => {
         submitTourFormData(guideId, tourId)
@@ -71,7 +81,7 @@ function tourFormInitialize(guideId: number, tourId: number): void {
     fillTourFormData()
 }
 
-function validationTourFormData() {
+function validateTourFormData() {
     const tourNameFlag = toursUtils.validationFinal(tourNameElement)
     const tourDescriptionFlag = toursUtils.validationFinal(tourDescriptionElement)
     const tourDateTimeFlag = toursUtils.validationFinal(tourDateTimeElement)
@@ -95,10 +105,11 @@ function fillTourFormData() {
             tourDescriptionElement.value = tourById.description
             tourDateTimeElement.value = tourById.dateTime.toString()
             tourMaxGuestsElement.value = tourById.maxGuests.toString()
+            tourById.guide = guide
 
             tourFormPublishButtonElement.addEventListener("click", () => {
-                tourById.status = "objavljeno"
                 toursServices.update(tourId, tourById)
+                    .then(() => submitTourFormData(guideId, tourId, true))
             })
             checkForPublishButton(tourById)
         })
@@ -111,6 +122,7 @@ function updateTourData() {
     toursServices.getByTourId(tourId)
         .then((tour: Tour) => {
             tourById = tour
+            tourById.guide = guide
             checkForPublishButton(tourById)
             keyPointOverviewInitialize(tourById)
         })
@@ -125,27 +137,38 @@ function checkForPublishButton(tourById: Tour) {
         tourFormPublishButtonElement.disabled = false
         tourFormPublishButtonElement.style.backgroundColor = "green"
         tourFormPublishButtonElement.textContent = "publish"
-
     }
     else {
         tourFormPublishButtonElement.disabled = true
         tourFormPublishButtonElement.style.backgroundColor = "gray"
         tourFormPublishButtonElement.textContent = "At least 2 key points needed to publish tour"
     }
+    if (tourById.status == 'objavljeno') {
+        tourFormPublishButtonElement.disabled = true
+        tourFormPublishButtonElement.style.backgroundColor = "gray"
+        tourFormPublishButtonElement.textContent = "objavljeno"
+    }
 }
 
 
-function submitTourFormData(guideId: number, tourId: number): void {
+function submitTourFormData(guideId: number, tourId: number, statusFlag?: boolean): void {
     const name = tourNameElement.value
     const description = tourDescriptionElement.value
     const dateTime = tourDateTimeElement.value
     const maxGuests = parseInt(tourMaxGuestsElement.value)
-    const status = "U pripremi"
+    let status = "U pripremi"
 
-    const newTour: Tour = { name, description, dateTime, maxGuests, status, guideId }
+    if (statusFlag) {
+        status = "objavljeno"
+    }
+
+    const newTour: Tour = { name, description, dateTime, maxGuests, status, guideId, guide }
 
     toursServices.update(tourId, newTour)
-        .then(() => window.location.href = `../toursEdit/toursEdit.html?guideId=${guideId}&tourId=${tourId}`)
+        .then((tour:Tour) => {
+            tourById = tour
+            checkForPublishButton(tourById)
+        })
         .catch(error => console.error(error.status, error.message))
 }
 
@@ -211,6 +234,7 @@ function keyPointOverviewInitialize(tourById: Tour): void {
             keyPointServices.delete(keyPointId)
                 .then(() => {
                     order--
+                    submitTourFormData(guideId, tourId)
                     updateTourData()
                 })
                 .catch(error => console.error(error.status, error.message))
@@ -284,7 +308,7 @@ function keyPointOverviewInitialize(tourById: Tour): void {
         const description = keyPointDescription.value
         const imageUrl = keyPointImageURLElement.value
         const newKeyPoint: KeyPoint = { order, name, description, latitude, longitude, imageUrl, tourId }
-        submitKeyPointData(newKeyPoint)     
+        submitKeyPointData(newKeyPoint)
     })
 
     checkForPublishButton(tourById)
@@ -341,6 +365,9 @@ function submitKeyPointData(keyPoint: KeyPoint): void {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    logoutButton = document.querySelector('#logoutButton') as HTMLElement;
+    logoutButton.addEventListener('click', handleLogout)
+
     tourNameElement = document.querySelector("#tourNameElement") as HTMLInputElement
     tourDescriptionElement = document.querySelector("#tourDescriptionElement") as HTMLInputElement
     tourDateTimeElement = document.querySelector("#tourDateTimeElement") as HTMLInputElement

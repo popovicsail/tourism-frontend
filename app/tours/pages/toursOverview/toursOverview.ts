@@ -1,9 +1,11 @@
 import { Tour } from "../../models/tour.model.js"
 import { ToursServices } from "../../services/tours.services.js"
+import { handleLogout } from "../../../users/pages/login/login.js"
 const toursServices = new ToursServices()
-const searchParams = new URLSearchParams(window.location.search)
-const guideId = parseInt(searchParams.get("guideId"))
+const guideId = parseInt(localStorage.getItem('guideId'));
 const addTourButton = document.getElementById("addTourButton")
+
+let logoutButton
 
 function getByGuideId(guideId: number) {
     toursServices.getByGuideId(guideId)
@@ -41,7 +43,7 @@ function toursOverviewInitialize(data: Tour[]) {
         const editButtonTd = document.createElement("td")
         const editButton = document.createElement("button")
         editButton.textContent = "Edit Tour"
-        editButton.addEventListener("click", () => window.location.href = `../toursEdit/toursEdit.html?guideId=${guideId}&tourId=${tour.id}`)
+        editButton.addEventListener("click", () => window.location.href = `../toursEdit/toursEdit.html?tourId=${tour.id}`)
         editButtonTd.append(editButton)
         newRow.appendChild(editButtonTd)
 
@@ -62,6 +64,9 @@ function toursOverviewInitialize(data: Tour[]) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    addTourButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html?guideId=${guideId}`)
+        logoutButton = document.querySelector('#logoutButton') as HTMLButtonElement;
+        logoutButton.addEventListener('click', handleLogout)
+        
+    addTourButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html`)
     getByGuideId(guideId);
 })

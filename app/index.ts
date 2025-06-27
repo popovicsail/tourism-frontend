@@ -1,21 +1,8 @@
-const loginLink = document.querySelector('#login') as HTMLElement;
-const logoutLink = document.querySelector('#logout') as HTMLElement;
-
-function setUserLoginState(isLoggedIn: boolean) {
-    if (isLoggedIn) {
-        loginLink.style.display = 'none';
-        logoutLink.style.display = 'block';
-    } else {
-        loginLink.style.display = 'block';
-        logoutLink.style.display = 'none';
-    }
-}
-
-function handleLogout() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('role');
-    setUserLoginState(false);
-}
+import { handleLogout } from "./users/pages/login/login.js"
+const loginButton = document.querySelector('#loginButton') as HTMLElement;
+const logoutButton = document.querySelector('#logoutButton') as HTMLElement;
+const restaurantsLinkElement = document.querySelector('#restaurantsLinkElement') as HTMLElement;
+const toursOverviewLinkElement = document.querySelector('#toursOverviewLinkElement') as HTMLElement;
 
 function checkLoginStatus() {
     const username = localStorage.getItem('username');
@@ -26,9 +13,23 @@ function checkLoginStatus() {
     }
 }
 
-const logoutElement = document.querySelector('#logout');
-if (logoutElement) {
-    logoutElement.addEventListener('click', handleLogout);
+function setUserLoginState(isLoggedIn: boolean) {
+    if (isLoggedIn) {
+        loginButton.style.display = "none"
+        logoutButton.style.display = "flex"
+        logoutButton.addEventListener('click', handleLogout)
+        restaurantsLinkElement.style.display = "flex"
+        toursOverviewLinkElement.style.display = "flex"
+    } else {
+        loginButton.style.display = "flex"
+        logoutButton.style.display = "none"
+        restaurantsLinkElement.style.display = "none"
+        toursOverviewLinkElement.style.display = "none"
+    }
 }
 
-checkLoginStatus();
+document.addEventListener("DOMContentLoaded", () => {
+    logoutButton.addEventListener('click', handleLogout)
+    checkLoginStatus();
+})
+

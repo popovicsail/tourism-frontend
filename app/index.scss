@@ -1,1 +1,17 @@
 @import '../app/styles/global.scss';
+
+#loginButton {
+    display:flex;
+}
+
+#logoutButton {
+    display:none
+}
+
+#restaurantsLinkElement {
+    display:none;
+}
+
+#toursOverviewLinkElement {
+    display:none;
+}

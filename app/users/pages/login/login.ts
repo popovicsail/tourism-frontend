@@ -1,23 +1,10 @@
 import { UserService } from "../../service/user.services.js";
-
 const userService = new UserService();
-const loginLink = document.querySelector('#login') as HTMLElement;
-const logoutLink = document.querySelector('#logout') as HTMLElement;
-const submitButton = document.querySelector("#submit") as HTMLElement;
-
-function setUserLoginState(isLoggedIn: boolean) {
-    if (isLoggedIn) {
-        loginLink.style.display = 'none';
-        logoutLink.style.display = 'flex';
-    } else {
-        loginLink.style.display = 'flex';
-        logoutLink.style.display = 'none';
-    }
-}
+let submitButton
 
 function handleLogin(event: Event) {
     event.preventDefault();
-    
+
     const form = document.querySelector("form") as HTMLFormElement;
     const formData = new FormData(form);
     const username = formData.get("username") as string;
@@ -25,10 +12,10 @@ function handleLogin(event: Event) {
 
     userService.login(username, password)
         .then((user) => {
+            localStorage.setItem('guideId', String(user.id));
             localStorage.setItem('username', user.username);
             localStorage.setItem('role', user.role);
-            localStorage.setItem('id', String(user.id));
-            setUserLoginState(true);
+            localStorage.setItem('password', password);
             window.location.href = "../../../index.html";
         })
         .catch((error) => {
@@ -36,28 +23,15 @@ function handleLogin(event: Event) {
         });
 }
 
-function handleLogout() {
+export function handleLogout() {
+    localStorage.removeItem('guideId');
     localStorage.removeItem('username');
     localStorage.removeItem('role');
-    setUserLoginState(false);
+    localStorage.removeItem('password');
+    window.location.href = "../../../index.html";
 }
 
-function checkLoginStatus() {
-    const username = localStorage.getItem('username');
-    if (username) {
-        setUserLoginState(true);
-    } else {
-        setUserLoginState(false);
-    }
-}
-
-if (submitButton) {
-    submitButton.addEventListener("click", handleLogin);
-}
-
-const logoutElement = document.querySelector('#logout');
-if (logoutElement) {
-    logoutElement.addEventListener('click', handleLogout);
-}
-
-checkLoginStatus();
+document.addEventListener("DOMContentLoaded", () => {
+    submitButton = document.getElementById("submitButton") as HTMLButtonElement;
+    submitButton.addEventListener("click", handleLogin)
+})
