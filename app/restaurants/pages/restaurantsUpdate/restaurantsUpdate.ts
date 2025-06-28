@@ -31,7 +31,7 @@ function getById(id) {
 
 const cancelBtn = document.querySelector("#cancel")
 cancelBtn.addEventListener("click",function() {
-    window.location.href = "../../../index.html";
+    window.location.href = "../../restaurants.html";
 })
 
 const submitBtn = document.querySelector("#Dodaj")
@@ -46,8 +46,17 @@ submitBtn.addEventListener("click", function() {
         status: status.value,
         ownerID: parseInt(localStorage.getItem('id')),
     };
+    const statusDropdown = document.getElementById("Status") as HTMLSelectElement;
+    const options = statusDropdown.options;
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value === status.value) {
+            statusDropdown.selectedIndex = i;
+            break;
+        }
+    }
+
   restoranService.update(restoranId,formData);
-  window.location.href = "../../../index.html";
+  window.location.href = "../../restaurants.html";
 })
 
 

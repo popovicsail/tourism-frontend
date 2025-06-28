@@ -28,7 +28,6 @@ export function handleLogout() {
     localStorage.removeItem('username');
     localStorage.removeItem('role');
     localStorage.removeItem('password');
-    window.location.href = "../../../index.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {

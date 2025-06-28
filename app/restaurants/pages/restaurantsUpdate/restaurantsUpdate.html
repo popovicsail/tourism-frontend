@@ -10,39 +10,39 @@
 <body>
     <nav class="navbar">
         <ul class="nav-list">
-            <li class="nav-item"><a href="../index.html">Home</a></li>
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
             <li id="logoutButton" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
         </ul>
     </nav>
 
-    <div class="formSection">
-        <form id="Unos">
+    <div class="form-container">
+        <form id="izmeniForm">
 
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="formInputDiv" required>
+        <input type="text" name="name" id="name"  required>
         
         <label for="description">Description</label>
-        <input type="text" name="description" id="description" class="formInputDiv" required>
+        <input type="text" name="description" id="description" required>
         
         <label for="capacity">Capacity</label>
-        <input type="number" name="capacity" id="capacity" class="formInputDiv" required>
+        <input type="number" name="capacity" id="capacity" required>
         
         <label for="image">Image(URL)</label>
-        <input type="url" name="image" id="image" class="formInputDiv">
+        <input type="url" name="image" id="image" >
 
         <label for="Latitude">Latitude</label>
-        <input type="number" name="Latitude" id="Latitude" class="formInputDiv" required>
+        <input type="number" name="Latitude" id="Latitude" required>
 
         <label for="Longitude">Longitude</label>
-        <input type="number" name="Longitude" id="Longitude" class="formInputDiv" required>
+        <input type="number" name="Longitude" id="Longitude" required>
 
-        <select id="Status" name="Status" class="formInputDiv" required>
+        <select id="Status" name="Status" required>
             <option value="Objavljeno">Objavljeno</option>
             <option value="U Pripremi">U Pripremi</option>
         </select>
 
-        <input type="button" value="Submit" id = "Dodaj" class="formButtonDiv"/>
-        <input type="button" value="Cancel" id = "cancel" class="formButtonDiv"/>
+        <input type="button" value="Submit" id = "Dodaj" />
+        <input type="button" value="Cancel" id = "cancel"/>
 
         </form>
     </div>

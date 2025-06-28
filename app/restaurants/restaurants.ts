@@ -1,8 +1,10 @@
 import { Restaurant } from "./models/restaurant.model.js";
 import { RestaurantService } from "./services/restaurants.service.js";
+import { handleLogout } from "../users/pages/login/login.js";
 
 const restoranService = new RestaurantService();
 const dodajBtn = document.querySelector("#Dodaj") as HTMLElement
+let logoutButton
 
 
 function ispisiRestorane(){
@@ -85,3 +87,8 @@ dodajBtn.addEventListener('click', () => {
   });
 
 document.addEventListener('DOMContentLoaded', ispisiRestorane);
+
+document.addEventListener("DOMContentLoaded", () => {
+        logoutButton = document.querySelector('#logoutButton') as HTMLButtonElement;
+        logoutButton.addEventListener('click', handleLogout)
+})
