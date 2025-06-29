@@ -10,16 +10,16 @@
 <body>
     <nav class="navbar">
         <ul class="nav-list">
-            <li class="nav-item"><a href="../index.html">Home</a></li>
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
             <li id="logoutButton" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
         </ul>
     </nav>
 
-    <div>
-        <form id="Unos">
+    <div class="form-container">
+        <form id="izmeniForm">
 
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" required>
+        <input type="text" name="name" id="name"  required>
         
         <label for="description">Description</label>
         <input type="text" name="description" id="description" required>
@@ -28,7 +28,7 @@
         <input type="number" name="capacity" id="capacity" required>
         
         <label for="image">Image(URL)</label>
-        <input type="url" name="image" id="image">
+        <input type="url" name="image" id="image" >
 
         <label for="Latitude">Latitude</label>
         <input type="number" name="Latitude" id="Latitude" required>
@@ -41,7 +41,7 @@
             <option value="U Pripremi">U Pripremi</option>
         </select>
 
-        <input type="button" value="Submit" id = "Dodaj"/>
+        <input type="button" value="Submit" id = "Dodaj" />
         <input type="button" value="Cancel" id = "cancel"/>
 
         </form>

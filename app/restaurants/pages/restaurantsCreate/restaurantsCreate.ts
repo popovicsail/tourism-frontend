@@ -16,10 +16,10 @@ submitBtn.addEventListener("click", function() {
         ownerID: parseInt(localStorage.getItem('id')),
     };
   restoranService.Post(formData);
-  window.location.href = "../../../index.html";
+  window.location.href = "../../restaurants.html";
 })
 
 const cancelBtn = document.querySelector("#cancel")
 cancelBtn.addEventListener("click",function() {
-    window.location.href = "../../../index.html";
+    window.location.href = "../../restaurants.html";
 })

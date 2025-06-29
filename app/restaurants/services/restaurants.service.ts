@@ -104,7 +104,6 @@ export class RestaurantService{
         if (!response.ok) {
             throw new Error('Request failed. Status: ' + response.status);
         }
-        window.location.href = '../../index.html';
         })
         .catch(error => {
         console.error('Error:', error.message);
