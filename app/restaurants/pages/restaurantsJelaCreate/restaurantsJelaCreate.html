@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/restaurants/pages/restaurantsJelaCreate/restaurantsJelaCreate.css">
+    <script type="module" src="../../../../dist/restaurants/pages/restaurantsJelaCreate/restaurantsJelaCreate.js"></script>
+    <title>Restorani</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <form id="dodajForm">
+
+        <label for="order-number">Order Number</label>
+        <input type="number" name="order-number" id="order" required>
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+        
+        <label for="Price">Price</label>
+        <input type="number" name="Price" id="Price" required>
+        
+        <label for="ingredients">Ingredients</label>
+        <input type="text" name="ingredients" id="ingredients" required>
+
+        <label for="image">Image(URL)</label>
+        <input type="url" name="image" id="image">
+
+        <input type="button" value="Zavrsi" id = "zavrsi"/>
+        <input type="button" value="Cancel" id = "cancel"/>
+
+        </form>
+    </div>
+</body>
+</html>

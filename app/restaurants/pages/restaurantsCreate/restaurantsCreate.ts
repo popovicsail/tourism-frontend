@@ -58,7 +58,7 @@ function restaurantFormInitialize(): void {
     });
 }
 
-function submitRestaurantFormData(){
+async function submitRestaurantFormData(){
     const formData: Restaurant = {
         name: restoranNameElement.value,
         description: restoranDescriptionElement.value,
@@ -69,8 +69,15 @@ function submitRestaurantFormData(){
         status: restoranStatusElement.value,
         ownerID: ownerID,
     };
-  restoranService.Post(formData);
-  window.location.href = "../../restaurants.html";
+    try {
+        const createdRestaurant = await restoranService.Post(formData);
+        const restaurantId = createdRestaurant.id;
+
+        console.log(`Kreiran restoran sa ID: ${restaurantId}`);
+        window.location.href = `../restaurantsJela/restaurantsJela.html?restoranId=${restaurantId}`;
+    } catch (error) {
+        console.error("Greška prilikom kreiranja restorana:", error.message);
+    }
 }
 
 function validationRestaurantFormData() {

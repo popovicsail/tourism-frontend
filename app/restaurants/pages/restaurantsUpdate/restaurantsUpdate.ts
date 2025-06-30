@@ -97,7 +97,7 @@ function validationRestaurantFormData() {
     return;
 }
 
-function submitRestaurantFormData(){
+async function submitRestaurantFormData(){
     const formData: Restaurant = {
         name: nameIzmena.value,
         description: descriptionIzmena.value,
@@ -118,8 +118,15 @@ function submitRestaurantFormData(){
         }
     }
 
-  restoranService.Post(formData);
-  window.location.href = "../../restaurants.html";
+    try {
+        const createdRestaurant = await restoranService.update(restoranId,formData);
+        const restaurantId = createdRestaurant.id;
+
+        console.log(`Kreiran restoran sa ID: ${restaurantId}`);
+        window.location.href = `../restaurantsJela/restaurantsJela.html?restoranId=${restaurantId}`;
+    } catch (error) {
+        console.error("Greška prilikom kreiranja restorana:", error.message);
+    }
 }
 
 
