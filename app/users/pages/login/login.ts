@@ -4,9 +4,7 @@ let submitButton: HTMLButtonElement;
 
 document.addEventListener("DOMContentLoaded", () => {
     submitButton = document.getElementById("submit-button") as HTMLButtonElement;
-    submitButton.addEventListener("click", (event) => {
-        handleLogin(event)
-    })
+    submitButton.addEventListener("click", handleLogin)
 })
 
 function handleLogin(event: Event) {
