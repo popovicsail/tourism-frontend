@@ -6,16 +6,13 @@ let logoutButton
 const toursServices = new ToursServices()
 const guideId = parseInt(localStorage.getItem('id'));
 
-let addTourButton
+
 
 document.addEventListener("DOMContentLoaded", () => {
     logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
     logoutButton.addEventListener('click', handleLogout)
 
-    addTourButton = document.getElementById("tours-create-button")
 
-    addTourButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html`)
-    getByGuideId(guideId);
 })
 
 function getByGuideId(guideId: number) {
