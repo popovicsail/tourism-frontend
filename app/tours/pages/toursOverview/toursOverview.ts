@@ -1,11 +1,22 @@
 import { Tour } from "../../models/tour.model.js"
 import { ToursServices } from "../../services/tours.services.js"
 import { handleLogout } from "../../../users/pages/login/login.js"
+let logoutButton
+
 const toursServices = new ToursServices()
 const guideId = parseInt(localStorage.getItem('id'));
-const addTourButton = document.getElementById("addTourButton")
 
-let logoutButton
+let addTourButton
+
+document.addEventListener("DOMContentLoaded", () => {
+    logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
+    logoutButton.addEventListener('click', handleLogout)
+
+    addTourButton = document.getElementById("tours-create-button")
+
+    addTourButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html`)
+    getByGuideId(guideId);
+})
 
 function getByGuideId(guideId: number) {
     toursServices.getByGuideId(guideId)
@@ -14,10 +25,10 @@ function getByGuideId(guideId: number) {
 }
 
 function toursOverviewInitialize(data: Tour[]) {
-    const toursOverviewTableBody = document.getElementById("toursOverviewTableBody")
+    const toursOverviewTableBody = document.getElementById("tours-overview-table-body")
     toursOverviewTableBody.innerHTML = ''
 
-    data.forEach((tour:Tour) => {
+    data.forEach((tour: Tour) => {
         const newRow = document.createElement("tr")
 
         const name = document.createElement("td")
@@ -52,9 +63,9 @@ function toursOverviewInitialize(data: Tour[]) {
         deleteButton.textContent = "Delete Tour"
         deleteButton.addEventListener("click", () => {
             toursServices.delete(tour.id)
-            .then(() => getByGuideId(guideId))
-            .catch((error) => console.error(error.status, error.message))
-            
+                .then(() => getByGuideId(guideId))
+                .catch((error) => console.error(error.status, error.message))
+
         })
         deleteButtonTd.appendChild(deleteButton)
         newRow.appendChild(deleteButtonTd)
@@ -63,10 +74,3 @@ function toursOverviewInitialize(data: Tour[]) {
     })
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-        logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
-        logoutButton.addEventListener('click', handleLogout)
-        
-    addTourButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html`)
-    getByGuideId(guideId);
-})
