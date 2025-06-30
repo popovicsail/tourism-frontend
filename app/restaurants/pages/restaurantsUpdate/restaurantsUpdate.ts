@@ -1,5 +1,7 @@
 import { Restaurant } from '../../models/restaurant.model.js';
 import { RestaurantService } from '../../services/restaurants.service.js'
+import { handleLogout } from "../../../users/pages/login/login.js";
+let logoutButton
 
 const url = window.location.search;
 const searchParams = new URLSearchParams(url)
@@ -61,5 +63,7 @@ submitBtn.addEventListener("click", function() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+            logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
+            logoutButton.addEventListener('click', handleLogout)
     getById(restoranId)
 });

@@ -80,7 +80,7 @@ function submitTourFormData(guideId: number): void {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-        logoutButton = document.querySelector('#logoutButton') as HTMLElement;
+        logoutButton = document.querySelector('#logout-button') as HTMLElement;
         logoutButton.addEventListener('click', handleLogout)
 
     tourNameElement = document.querySelector("#tourNameElement") as HTMLInputElement
