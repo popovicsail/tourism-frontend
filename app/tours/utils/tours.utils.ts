@@ -47,41 +47,4 @@ export class ToursUtils {
 
         return true;
     }
-
-    validationFinal(htmlElement: HTMLInputElement | HTMLTextAreaElement): boolean {
-        const inputType = htmlElement.type
-        const inputValue = htmlElement.value
-        let validFlag = true
-
-        if (inputType === 'text' || htmlElement.tagName.toLowerCase() === 'textarea') {
-            if (inputValue === '') {
-                validFlag = false;
-            }
-        }
-
-        else if (inputType === 'number') {
-            const numberValue = Number(inputValue)
-            if (inputValue === '' || isNaN(numberValue) || numberValue <= 0) {
-                validFlag = false;
-            }
-        }
-
-        else if (inputType === 'datetime-local') {
-            if (inputValue === '') {
-                validFlag = false;
-            }
-            else {
-                const inputDate = new Date(inputValue)
-                const nowDate = new Date()
-                if (inputDate < nowDate) {
-                    validFlag = false;
-                }
-            }
-        }
-
-        if (!validFlag) {
-            return false;
-        }
-        return true;
-    }
 }

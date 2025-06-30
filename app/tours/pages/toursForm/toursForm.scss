@@ -1,18 +1,5 @@
-@import "../../../styles/global.scss";
+@import "../../styles/tours.scss";
 
-#mainSection {
-    display: flex;
-}
-
-section#tourFormSection {
-    width: 30%;
-}
-
-.tourFormLoadingElement {
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    bottom: 30%;
-    left: 20%;
-    display: none;
+#tour-create-section {
+    height: fit-content;
 }

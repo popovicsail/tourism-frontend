@@ -1,3 +1,5 @@
+import { KeyPointFlags } from "./keyPointFlags.model.js"
+
 export interface KeyPoint {
     id?: number;
     order?: number;
@@ -7,4 +9,5 @@ export interface KeyPoint {
     latitude: number;
     longitude: number;
     tourId: number;
+    flags?: KeyPointFlags;
 }
