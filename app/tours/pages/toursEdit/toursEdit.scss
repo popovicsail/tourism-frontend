@@ -1,30 +1,6 @@
-@import "../../../styles/global.scss";
+@import "../../styles/tours.scss";
 
-#mainSection {
-    display: flex;
-}
-
-#tourFormSection {
-    width: 30%;
-    height: 58vh;
-    margin-right: 5px;
-}
-
-#tourFormMainButtonDiv {
-    width: 100%;
-    margin-bottom: 20px;
-
-    button {
-        width: 100%;
-    }
-
-    #tourFormPublishButtonElement {
-        margin-top: 3%;
-        background-color: gray;
-    }
-}
-
-#keyPointOverviewSection {
+#keypoint-section {
     width: 70%;
     height: 95vh;
     display: none;
@@ -34,38 +10,38 @@
     padding: 5px;
     flex-wrap: wrap;
 
-    .keyPointOverviewDiv {
+    .keypoint-form-section {
         display: flex;
         border: 2px black solid;
         height: 26vh;
         margin-bottom: 5px;
         width: 49%;
 
-        .keyPointImageDiv {
+        .keypoint-image-div {
             display: flex;
             align-items: center;
-            width: 50%;
+            width: 200px;
 
-            .keyPointImageElement {
+            img {
                 height: 90%;
                 padding-left: 10px;
             }
         }
 
-        .keyPointInfoDiv {
+        .keypoint-info-div {
             width: 60%;
+        }
 
-            .keyPointLocationDiv {
-                display: flex;
-                flex-direction: row;
+        .keypoint-location-div {
+            display: flex;
+            flex-direction: row;
 
-                div {
-                    width: 45%;
-                }
+            div {
+                width: 45%;
             }
         }
 
-        .keyPointInputDiv {
+        .keypoint-input-div {
             display: flex;
             width: 90%;
 
@@ -87,24 +63,40 @@
             }
         }
 
-        .keyPointButtonDiv {
+        .keypoint-mainbutton-div {
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 70%;
 
-            .deleteKeyPointButton {
+            .keypoint-edit-delete-button {
                 background-color: $cancel-color;
                 width: 30%;
                 margin-right: 30%;
                 height: 30%;
             }
 
-            .saveKeyPointButton {
+            .keypoint-edit-save-button {
                 background-color: gray;
                 width: 30%;
                 height: 30%;
             }
+
+            .keypoint-create-submit-button {
+                background-color: gray;
+                width: 30%;
+                height: 30%;
+                margin-right: 10%;
+                margin-left: auto;
+            }
         }
     }
 }
+
+
+
+
+
+
+
+

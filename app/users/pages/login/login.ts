@@ -5,7 +5,7 @@ let submitButton
 function handleLogin(event: Event) {
     event.preventDefault();
 
-    const form = document.querySelector("form") as HTMLFormElement;
+    const form = document.getElementById("login-form") as HTMLFormElement;
     const formData = new FormData(form);
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
@@ -32,6 +32,6 @@ export function handleLogout() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    submitButton = document.getElementById("submitButton") as HTMLButtonElement;
+    submitButton = document.getElementById("submit-button") as HTMLButtonElement;
     submitButton.addEventListener("click", handleLogin)
 })

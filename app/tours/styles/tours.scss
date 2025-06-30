@@ -1,62 +1,11 @@
-$primary-color: #007bff;
-$accent-color: #ff5733;
-$warn-color: #d9534f;
-$button-color: #28a745;
-$cancel-color: rgb(174, 58, 58);
+@import "../../styles/global.scss";
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    padding: 0;
-}
-
-button {
-    padding: 10px 15px;
-    background-color: $button-color;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.navbar {
-    background-color: $primary-color;
-    padding: 10px;
-
-    .nav-list {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-
-    .nav-item {
-        margin-right: 15px;
-
-        a {
-            color: white;
-            text-decoration: none;
-        }
-    }
-
-    .push-right {
-        margin-left: auto;
-    }
-}
-
-
-.formSection {
+.form-section {
     border: 2px black solid;
     background-color: rgb(213, 208, 208);
+    width: 30%;
+    height: 58vh;
+    margin-right: 5px;
 
     form {
         display: flex;
@@ -64,7 +13,7 @@ button {
         padding: 10px;
         width: 90%;
 
-        .formInputDiv {
+        .tour-input-div {
             display: flex;
 
             label {
@@ -79,7 +28,6 @@ button {
                 border-radius: 4px;
                 font-size: 14px;
                 margin-bottom: 15px;
-
             }
 
             textarea {
@@ -91,21 +39,33 @@ button {
             }
         }
 
-        .formButtonDiv {
+        .tour-button-div {
+            width: 100%;
+            margin-bottom: 20px;
+
+            button {
+                width: 100%;
+            }
+
+            #tour-edit-publish-button {
+                margin-top: 3%;
+                background-color: gray;
+            }
+        }
+
+        .tour-mainbutton-div {
             display: flex;
             justify-content: space-evenly;
 
-            .cancel-button {
+            .tour-edit-cancel-button {
                 background-color: $cancel-color;
                 width: 30%;
             }
 
-            .submit-button {
+            .tour-edit-submit-button {
                 background-color: gray;
                 width: 30%;
             }
         }
     }
 }
-
-

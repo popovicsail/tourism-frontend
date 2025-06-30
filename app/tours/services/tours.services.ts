@@ -28,8 +28,8 @@ export class ToursServices {
             });
     }
 
-    getByTourId(tourId: number): Promise<Tour> {
-        return fetch(this.apiUrl + '/' + tourId + this.pagedDefault)
+    getByTourId(tourId:number): Promise<Tour> {
+        return fetch(this.apiUrl + `/${tourId}` + this.pagedDefault)
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
@@ -89,8 +89,8 @@ export class ToursServices {
             });
     }
 
-    update(tourId: number, formData: Tour): Promise<Tour> {
-        return fetch(this.apiUrl + '/' + tourId, {
+    update(tourId:number, formData: Tour): Promise<Tour> {
+        return fetch(this.apiUrl + `/${tourId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -112,8 +112,8 @@ export class ToursServices {
             });
     }
 
-    delete(tourId: number): Promise<void> {
-        return fetch(this.apiUrl + '/' + tourId, {
+    delete(tourId:number): Promise<void> {
+        return fetch(this.apiUrl + `/${tourId}`, {
             method: 'DELETE'
         })
             .then(response => {

@@ -6,90 +6,89 @@ const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
 
 const guideId = parseInt(localStorage.getItem('id'));
-
 let logoutButton
 
-let tourNameElement
-let tourDescriptionElement
-let tourDateTimeElement
-let tourMaxGuestsElement
-let tourCancelButtonElement
-let tourSubmitButtonElement
-let tourFormLoadingElement
+let tourCreateNameInput
+let tourCreateDescriptionInput
+let tourCreateDateTimeInput
+let tourCreateMaxGuestsInput
+let tourCreateCancelButton
+let tourCreateSubmitButton
+
+let tourNameFlag = false
+let tourDescriptionFlag = false
+let tourDateTimeFlag = false
+let tourMaxGuestsFlag = false
+
+document.addEventListener("DOMContentLoaded", () => {
+    logoutButton = document.getElementById('logout-button') as HTMLElement;
+    logoutButton.addEventListener('click', handleLogout)
+
+    tourCreateNameInput = document.getElementById("tour-create-name-input") as HTMLInputElement
+    tourCreateDescriptionInput = document.getElementById("tour-create-description-input") as HTMLInputElement
+    tourCreateDateTimeInput = document.getElementById("tour-create-datetime-input") as HTMLInputElement
+    tourCreateMaxGuestsInput = document.getElementById("tour-create-maxguests-input") as HTMLInputElement
+
+    tourCreateCancelButton = document.getElementById("tour-create-cancel-button") as HTMLButtonElement
+    tourCreateSubmitButton = document.getElementById("tour-create-submit-button") as HTMLButtonElement
+
+    tourFormInitialize(guideId);
+})
 
 function tourFormInitialize(guideId: number): void {
-    tourNameElement.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourNameElement)
+    tourCreateNameInput.addEventListener("blur", () => {
+        tourNameFlag = toursUtils.validationSingleInput(tourCreateNameInput)
         validationTourFormData()
     })
 
-    tourDescriptionElement.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourDescriptionElement)
+    tourCreateDescriptionInput.addEventListener("blur", () => {
+        tourDescriptionFlag = toursUtils.validationSingleInput(tourCreateDescriptionInput)
         validationTourFormData()
     })
 
-    tourDateTimeElement.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourDateTimeElement)
+    tourCreateDateTimeInput.addEventListener("blur", () => {
+        tourDateTimeFlag = toursUtils.validationSingleInput(tourCreateDateTimeInput)
         validationTourFormData()
     })
 
-    tourMaxGuestsElement.addEventListener("blur", () => {
-        toursUtils.validationSingleInput(tourMaxGuestsElement)
+    tourCreateMaxGuestsInput.addEventListener("blur", () => {
+        tourMaxGuestsFlag = toursUtils.validationSingleInput(tourCreateMaxGuestsInput)
         validationTourFormData()
     })
 
-    tourCancelButtonElement.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html`)
+    tourCreateCancelButton.addEventListener("click", () => window.location.href = `../toursOverview/toursOverview.html`)
 
-    tourSubmitButtonElement.addEventListener("click", () => {
+    tourCreateSubmitButton.addEventListener("click", () => {
         submitTourFormData(guideId)
     });
+
+    validationTourFormData()
 }
 
 function validationTourFormData() {
-    const tourNameFlag = toursUtils.validationFinal(tourNameElement)
-    const tourDescriptionFlag = toursUtils.validationFinal(tourDescriptionElement)
-    const tourDateTimeFlag = toursUtils.validationFinal(tourDateTimeElement)
-    const tourMaxGuestsFlag = toursUtils.validationFinal(tourMaxGuestsElement)
-
     if (!tourNameFlag || !tourDescriptionFlag || !tourDateTimeFlag || !tourMaxGuestsFlag) {
-        tourSubmitButtonElement.disabled = true;
-        tourSubmitButtonElement.style.backgroundColor = "grey"
+        tourCreateSubmitButton.disabled = true;
+        tourCreateSubmitButton.style.backgroundColor = "grey"
         return;
     }
-    tourSubmitButtonElement.disabled = false;
-    tourSubmitButtonElement.style.backgroundColor = "green"
+    tourCreateSubmitButton.disabled = false;
+    tourCreateSubmitButton.style.backgroundColor = "green"
     return;
 }
 
 function submitTourFormData(guideId: number): void {
-    const name = tourNameElement.value
-    const description = tourDescriptionElement.value
-    const dateTime = tourDateTimeElement.value
-    const maxGuests = parseInt(tourMaxGuestsElement.value)
-    const status = "U pripremi"
+    const name = tourCreateNameInput.value
+    const description = tourCreateDescriptionInput.value
+    const dateTime = tourCreateDateTimeInput.value
+    const maxGuests = parseInt(tourCreateMaxGuestsInput.value)
+    const status = "Not ready"
 
     const newTour: Tour = { name, description, dateTime, maxGuests, status, guideId }
 
-    tourFormLoadingElement.style.display = "flex";
     toursServices.add(newTour)
-        .then((data: Tour) => {
-            tourFormLoadingElement.style.display = "none";
-            window.location.href = `../toursEdit/toursEdit.html?guideId=${guideId}&tourId=${data.id}`
+        .then((tour: Tour) => {
+            window.location.href = `../toursedit/toursedit.html?tourId=${tour.id}`
         })
         .catch(error => console.error(error.status, error.message))
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-        logoutButton = document.querySelector('#logoutButton') as HTMLElement;
-        logoutButton.addEventListener('click', handleLogout)
-
-    tourNameElement = document.querySelector("#tourNameElement") as HTMLInputElement
-    tourDescriptionElement = document.querySelector("#tourDescriptionElement") as HTMLInputElement
-    tourDateTimeElement = document.querySelector("#tourDateTimeElement") as HTMLInputElement
-    tourMaxGuestsElement = document.querySelector("#tourMaxGuestsElement") as HTMLInputElement
-    tourCancelButtonElement = document.getElementById("tourFormCancelButtonElement") as HTMLButtonElement
-    tourSubmitButtonElement = document.getElementById("tourFormSubmitButtonElement") as HTMLButtonElement
-    tourFormLoadingElement = document.querySelector(".tourFormLoadingElement") as HTMLButtonElement
-
-    tourFormInitialize(guideId);
-})
