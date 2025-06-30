@@ -251,6 +251,7 @@ function keyPointCreateFormInitialize() {
     keyPointCreateSubmitButton.addEventListener("click", () => {
         keyPointCreateSubmitFormData()
     })
+    keyPointCreateCheckSubmitButton()
 }
 
 
@@ -345,7 +346,7 @@ function keyPointEditSectionSetup() {
 
         //----------------------------------------------TO BE IMPLEMENTED
         keyPointEditSaveButton.id = `keypoint-edit-save-button${keyPointId}`
-        keyPointEditSaveButton.addEventListener("click", () => {
+        keyPointEditSaveButton.addEventListener("", () => {
             keyPointServices.add(keyPoint)
                 .then(() => {
                     tourGetById()
@@ -353,7 +354,7 @@ function keyPointEditSectionSetup() {
                 .catch(error => console.error(error.status, error.message))
         })
         keyPointEditSaveButton.disabled = true
-        keyPointEditSaveButton.textContent = "DISABLED TEMP"
+        keyPointEditSaveButton.textContent = "DISABLED"
         //----------------------------------------------
 
         keyPointEditSection.style.display = "flex"
@@ -391,6 +392,7 @@ function keyPointCreateSubmitFormData() {
     keyPointCreateLongitudeInput.value = ''
     keyPointCreateDescriptionInput.value = ''
     keyPointCreateImageURLInput.value = ''
+    keyPointCreateImageImg.src = ''
 
     keyPointServices.add(newKeyPoint)
         .then(() => {

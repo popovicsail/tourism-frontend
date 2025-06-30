@@ -1,6 +1,13 @@
 import { UserService } from "../../service/user.services.js";
 const userService = new UserService();
-let submitButton
+let submitButton: HTMLButtonElement;
+
+document.addEventListener("DOMContentLoaded", () => {
+    submitButton = document.getElementById("submit-button") as HTMLButtonElement;
+    submitButton.addEventListener("click", (event) => {
+        handleLogin(event)
+    })
+})
 
 function handleLogin(event: Event) {
     event.preventDefault();
@@ -30,8 +37,3 @@ export function handleLogout() {
     localStorage.removeItem('password');
     window.location.href = "../../../index.html";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    submitButton = document.getElementById("submit-button") as HTMLButtonElement;
-    submitButton.addEventListener("click", handleLogin)
-})

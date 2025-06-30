@@ -63,6 +63,43 @@
 
 
         <section id="keypoint-section">
+                        <section id="keypoint-create-section" class="keypoint-form-section">
+                <div class="keypoint-image-div">
+                    <img id="keypoint-create-image-img" src="../../../styles/loading.gif" />
+                </div>
+
+                <div class="keypoint-info-div">
+                    <div class="keypoint-input-div">
+                        <input type="text" id="keypoint-create-name-input" name="keyPointName"
+                            placeholder="Key Point Name" required>
+                    </div>
+                    <div class="keypoint-location-div">
+                        <div class="keypoint-input-div">
+                            <input type="number" id="keypoint-create-latitude-input" name="keyPointLatitude"
+                                placeholder="Latitude" required>
+                        </div>
+                        <div class="keypoint-input-div">
+                            <input type="number" id="keypoint-create-longitude-input" name="keyPointLongitude"
+                                placeholder="Longitude" required>
+                        </div>
+                    </div>
+
+                    <div class="keypoint-input-div">
+                        <textarea id="keypoint-create-description-input" name="keyPointDescription"
+                            placeholder="Key Point Description" required></textarea>
+                    </div>
+
+                    <div class="keypoint-input-div">
+                        <input type="text" id="keypoint-create-imageurl-input" name="keyPointImageURL"
+                            placeholder="Key Point ImageURL" required>
+                    </div>
+
+                    <div class="keypoint-mainbutton-div">
+                        <button type="button" id="keypoint-create-submit-button" class="keypoint-create-submit-button">Submit</button>
+                    </div>
+                </div>
+            </section>
+            
             <section id="keypoint-edit-section-template-handler">
                 <section id="keypoint-edit-section-template" class="keypoint-form-section">
                     <div class="keypoint-image-div">
@@ -105,42 +142,7 @@
             </section>
 
 
-            <section id="keypoint-create-section" class="keypoint-form-section">
-                <div class="keypoint-image-div">
-                    <img id="keypoint-create-image-img" src="../../../styles/loading.gif" />
-                </div>
 
-                <div class="keypoint-info-div">
-                    <div class="keypoint-input-div">
-                        <input type="text" id="keypoint-create-name-input" name="keyPointName"
-                            placeholder="Key Point Name" required>
-                    </div>
-                    <div class="keypoint-location-div">
-                        <div class="keypoint-input-div">
-                            <input type="number" id="keypoint-create-latitude-input" name="keyPointLatitude"
-                                placeholder="Latitude" required>
-                        </div>
-                        <div class="keypoint-input-div">
-                            <input type="number" id="keypoint-create-longitude-input" name="keyPointLongitude"
-                                placeholder="Longitude" required>
-                        </div>
-                    </div>
-
-                    <div class="keypoint-input-div">
-                        <textarea id="keypoint-create-description-input" name="keyPointDescription"
-                            placeholder="Key Point Description" required></textarea>
-                    </div>
-
-                    <div class="keypoint-input-div">
-                        <input type="text" id="keypoint-create-imageurl-input" name="keyPointImageURL"
-                            placeholder="Key Point ImageURL" required>
-                    </div>
-
-                    <div class="keypoint-mainbutton-div">
-                        <button type="button" id="keypoint-create-submit-button" class="keypoint-create-submit-button">Submit</button>
-                    </div>
-                </div>
-            </section>
         </section>
     </section>
 </body>
