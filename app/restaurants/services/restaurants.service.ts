@@ -111,6 +111,8 @@ export class RestaurantService{
         });
     }
 
+
+
     update(restaurantId: number, formData: Restaurant): Promise<Restaurant> {
         return fetch(this.apiUrl + '/' + restaurantId, {
             method: 'PUT',
