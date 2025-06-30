@@ -1,17 +1,64 @@
 import { Restaurant } from '../../models/restaurant.model.js';
 import { RestaurantService } from '../../services/restaurants.service.js'
+import {RestaurantUtils} from '../../utils/restaurants.utils.js'
 
 const url = window.location.search;
-const searchParams = new URLSearchParams(url)
-const restoranId = parseInt(searchParams.get('id'))
+const searchParams = new URLSearchParams(url);
+const restoranId = parseInt(searchParams.get('id'));
+const ownerID = parseInt(localStorage.getItem('id'));
 const restoranService = new RestaurantService();
-const nameIzmena = (document.getElementById("name") as HTMLInputElement)
-const descriptionIzmena = (document.getElementById("description") as HTMLInputElement)
-const capacityIzmena = ((document.getElementById("capacity") as HTMLInputElement))
-const imageUrlIzmena = (document.getElementById("image") as HTMLInputElement)
-const latitude = ((document.getElementById("Latitude") as HTMLInputElement))
-const longitude = ((document.getElementById("Longitude") as HTMLInputElement))
-const status = (document.getElementById("Status") as HTMLInputElement)
+const restoranUtils = new RestaurantUtils();
+const nameIzmena = (document.getElementById("name") as HTMLInputElement);
+const descriptionIzmena = (document.getElementById("description") as HTMLInputElement);
+const capacityIzmena = ((document.getElementById("capacity") as HTMLInputElement));
+const imageUrlIzmena = (document.getElementById("image") as HTMLInputElement);
+const latitude = ((document.getElementById("Latitude") as HTMLInputElement));
+const longitude = ((document.getElementById("Longitude") as HTMLInputElement));
+const status = (document.getElementById("Status") as HTMLSelectElement);
+const cancelBtn = document.querySelector("#cancel") as HTMLButtonElement;
+const submitBtn = document.querySelector("#Dodaj") as HTMLButtonElement;
+
+
+
+function restaurantFormInitialize(): void {
+    nameIzmena.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(nameIzmena)
+        validationRestaurantFormData()
+    })
+
+    descriptionIzmena.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(descriptionIzmena)
+        validationRestaurantFormData()
+    })
+
+    capacityIzmena.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(capacityIzmena)
+        validationRestaurantFormData()
+    })
+
+    imageUrlIzmena.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(imageUrlIzmena)
+        validationRestaurantFormData()
+    })
+
+    latitude.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(latitude)
+        validationRestaurantFormData()
+    })
+
+    longitude.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(longitude)
+        validationRestaurantFormData()
+    })
+
+    cancelBtn.addEventListener("click",function() {
+        window.location.href = "../../restaurants.html";
+    })
+
+    submitBtn.addEventListener("click", () => {
+        submitRestaurantFormData()
+    });
+}
 
 function getById(id) {
     restoranService.getById(id)
@@ -29,13 +76,28 @@ function getById(id) {
     })
 }
 
-const cancelBtn = document.querySelector("#cancel")
-cancelBtn.addEventListener("click",function() {
-    window.location.href = "../../restaurants.html";
-})
 
-const submitBtn = document.querySelector("#Dodaj")
-submitBtn.addEventListener("click", function() {
+function validationRestaurantFormData() {
+    const restoranNameFlag = restoranUtils.validationFinal(nameIzmena)
+    const restoranDescriptionFlag = restoranUtils.validationFinal(descriptionIzmena)
+    const restoranCapacityFlag = restoranUtils.validationFinal(capacityIzmena)
+    const restoranImageFlag = restoranUtils.validationFinal(imageUrlIzmena)
+    const restoranLatitudeFlag = restoranUtils.validationFinal(latitude)
+    const restoranLongitudeFlag = restoranUtils.validationFinal(longitude);
+
+
+    if (!restoranNameFlag || !restoranDescriptionFlag || !restoranCapacityFlag || !restoranImageFlag 
+        || !restoranLatitudeFlag || !restoranLongitudeFlag) {
+            submitBtn.disabled = true;
+            submitBtn.style.backgroundColor = "grey"
+        return;
+    }
+    submitBtn.disabled = false;
+    submitBtn.style.backgroundColor = "green"
+    return;
+}
+
+function submitRestaurantFormData(){
     const formData: Restaurant = {
         name: nameIzmena.value,
         description: descriptionIzmena.value,
@@ -44,22 +106,25 @@ submitBtn.addEventListener("click", function() {
         latitude: parseFloat(latitude.value),
         longitude: parseFloat(longitude.value),
         status: status.value,
-        ownerID: parseInt(localStorage.getItem('id')),
+        ownerID: ownerID,
     };
-    const statusDropdown = document.getElementById("Status") as HTMLSelectElement;
-    const options = statusDropdown.options;
+
+    
+    const options = status.options;
     for (let i = 0; i < options.length; i++) {
         if (options[i].value === status.value) {
-            statusDropdown.selectedIndex = i;
+            status.selectedIndex = i;
             break;
         }
     }
 
-  restoranService.update(restoranId,formData);
+  restoranService.Post(formData);
   window.location.href = "../../restaurants.html";
-})
+}
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    restaurantFormInitialize()
     getById(restoranId)
 });
