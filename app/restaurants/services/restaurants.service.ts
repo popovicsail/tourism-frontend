@@ -31,24 +31,28 @@ export class RestaurantService{
                 throw error
             });
     }
-
-    getById(restaurantId:number): Promise<Restaurant> {
-        return fetch(this.apiUrl +'/'+ restaurantId + this.pagedDefault)
+    
+    getById(restaurantId: number): Promise<Restaurant> {
+        return fetch(this.apiUrl + '/' + restaurantId + this.pagedDefault)
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
-                        throw { status: response.status, message: errorMessage }
-                    })
+                        throw { status: response.status, message: errorMessage };
+                    });
                 }
-                return response.json()
+                return response.json();
             })
             .then((responseData) => {
                 console.log('Odgovor sa servera:', responseData);
-                return responseData as Restaurant;
+
+                // Mapiranje odgovora sa servera na model Restaurant
+                const restaurant: Restaurant = responseData as Restaurant;
+                restaurant.jela = responseData.meals
+                return restaurant;
             })
             .catch(error => {
-                console.error('Error', error.status)
-                throw error
+                console.error('Error', error.status);
+                throw error;
             });
     }
 
@@ -110,6 +114,8 @@ export class RestaurantService{
         alert('Došlo je do greške pri brisanju korisnika.');
         });
     }
+
+
 
     update(restaurantId: number, formData: Restaurant): Promise<Restaurant> {
         return fetch(this.apiUrl + '/' + restaurantId, {

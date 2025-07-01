@@ -1,3 +1,5 @@
+import { Jelo } from "./jela.model.js";
+
 export interface Restaurant {
 id?:number
 name:string
@@ -8,4 +10,5 @@ latitude:number
 longitude:number
 status:string
 ownerID:number
+jela?: Jelo[];
 }

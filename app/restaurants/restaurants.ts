@@ -70,11 +70,16 @@ function ispisiRestorane(){
             izbrisiCell.appendChild(izbrisiBtn);
 
             izbrisiBtn.addEventListener('click', () => {
-                const red = izbrisiBtn.closest('tr')!;
-                const id = parseInt(red.cells[0].textContent!);
-                restoranService.deleteUser(id);
-                window.location.href = '../index.html'
-            });
+                const confirmation = confirm("Da li ste sigurni da želite da izbrišete restoran?");
+
+                if (confirmation) {
+                            const red = izbrisiBtn.closest('tr')!;
+                            const id = parseInt(red.cells[0].textContent!);
+                            restoranService.deleteUser(id)
+                            alert("Restoran je uspešno izbrisan.");
+                            window.location.href = '../index.html';
+
+         }});
             
          });
      }}).catch((error) => {

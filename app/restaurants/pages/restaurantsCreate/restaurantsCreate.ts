@@ -1,32 +1,132 @@
 import { Restaurant } from '../../models/restaurant.model.js';
 import { RestaurantService } from '../../services/restaurants.service.js'
+import {RestaurantUtils} from '../../utils/restaurants.utils.js'
 import { handleLogout } from "../../../users/pages/login/login.js";
-let logoutButton
+
+
 
 const restoranService = new RestaurantService();
+const restoranUtils = new RestaurantUtils();
 
-const submitBtn = document.querySelector("#Dodaj")
-submitBtn.addEventListener("click", function() {
+const ownerID = parseInt(localStorage.getItem('id'))
+let restoranNameElement;
+let restoranDescriptionElement;
+let restoranCapacityElement;
+let restoranImageElement;
+let restoranLatitudeElement;
+let restoranLongitudeElement;
+let restoranStatusElement;
+let submitBtn;
+let cancelBtn;
+let logoutButton;
+
+
+
+function restaurantFormInitialize(): void {
+    restoranNameElement.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(restoranNameElement)
+        validationRestaurantFormData()
+    })
+
+    restoranDescriptionElement.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(restoranDescriptionElement)
+        validationRestaurantFormData()
+    })
+
+    restoranCapacityElement.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(restoranCapacityElement)
+        validationRestaurantFormData()
+    })
+
+    restoranImageElement.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(restoranImageElement)
+        validationRestaurantFormData()
+    })
+
+    restoranLatitudeElement.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(restoranLatitudeElement)
+        validationRestaurantFormData()
+    })
+
+    restoranLongitudeElement.addEventListener("blur", () => {
+        restoranUtils.validationSingleInput(restoranLongitudeElement)
+        validationRestaurantFormData()
+    })
+
+    cancelBtn.addEventListener("click",function() {
+        window.location.href = "../../restaurants.html";
+    })
+
+    submitBtn.addEventListener("click", () => {
+        submitRestaurantFormData()
+    });
+}
+
+async function submitRestaurantFormData(){
     const formData: Restaurant = {
-        name: (document.getElementById("name") as HTMLInputElement).value,
-        description: (document.getElementById("description") as HTMLInputElement).value,
-        capacity: parseInt((document.getElementById("capacity") as HTMLInputElement).value) || 0, // Convert to number
-        imageUrl: (document.getElementById("image") as HTMLInputElement).value,
-        latitude: parseFloat((document.getElementById("Latitude") as HTMLInputElement).value) || 0, // Convert to number
-        longitude: parseFloat((document.getElementById("Longitude") as HTMLInputElement).value) || 0, // Convert to number
-        status: (document.getElementById("Status") as HTMLInputElement).value,
-        ownerID: parseInt(localStorage.getItem('id')),
+        name: restoranNameElement.value,
+        description: restoranDescriptionElement.value,
+        capacity: parseInt(restoranCapacityElement.value) || 0, 
+        imageUrl: restoranImageElement.value,
+        latitude: parseFloat(restoranLatitudeElement.value) || 0,
+        longitude: parseFloat(restoranLongitudeElement.value) || 0,
+        status: restoranStatusElement.value,
+        ownerID: ownerID,
     };
-  restoranService.Post(formData);
-  window.location.href = "../../restaurants.html";
-})
 
-const cancelBtn = document.querySelector("#cancel")
-cancelBtn.addEventListener("click",function() {
-    window.location.href = "../../restaurants.html";
-})
+    try {
+        const createdRestaurant = await restoranService.Post(formData);
+        const restaurantId = createdRestaurant.id;
 
-document.addEventListener('DOMContentLoaded', () => {
-            logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
-            logoutButton.addEventListener('click', handleLogout)
+        console.log(`Kreiran restoran sa ID: ${restaurantId}`);
+        window.location.href = `../restaurantsJela/restaurantsJela.html?restoranId=${restaurantId}`;
+    } catch (error) {
+        console.error("Greška prilikom kreiranja restorana:", error.message);
+    }
+}
+
+function validationRestaurantFormData() {
+    const restoranNameFlag = restoranUtils.validationFinal(restoranNameElement)
+    const restoranDescriptionFlag = restoranUtils.validationFinal(restoranDescriptionElement)
+    const restoranCapacityFlag = restoranUtils.validationFinal(restoranCapacityElement)
+    const restoranImageFlag = restoranUtils.validationFinal(restoranImageElement)
+    const restoranLatitudeFlag = restoranUtils.validationFinal(restoranLatitudeElement)
+    const restoranLongitudeFlag = restoranUtils.validationFinal(restoranLongitudeElement);
+
+
+    if (!restoranNameFlag || !restoranDescriptionFlag || !restoranCapacityFlag || !restoranImageFlag 
+        || !restoranLatitudeFlag || !restoranLongitudeFlag) {
+            submitBtn.disabled = true;
+            submitBtn.style.backgroundColor = "grey"
+        return;
+    }
+    submitBtn.disabled = false;
+    submitBtn.style.backgroundColor = "green"
+    return;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    restoranNameElement = document.querySelector("#name") as HTMLInputElement;
+    restoranDescriptionElement = document.querySelector("#description") as HTMLInputElement;
+    restoranCapacityElement = document.querySelector("#capacity") as HTMLInputElement;
+    restoranImageElement = document.querySelector("#image") as HTMLInputElement;
+    restoranLatitudeElement = document.querySelector("#Latitude") as HTMLInputElement;
+    restoranLongitudeElement = document.querySelector("#Longitude") as HTMLInputElement;
+    restoranStatusElement = document.querySelector("#Status") as HTMLInputElement;
+    submitBtn = document.querySelector("#Dodaj") as HTMLButtonElement;
+    cancelBtn = document.querySelector("#cancel") as HTMLButtonElement;
+    logoutButton = document.querySelector("#logout-button") as HTMLButtonElement;
+
+    cancelBtn.addEventListener("click", () => {
+        window.location.href = "../../restaurants.html";
+    });
+
+    if (logoutButton) {
+        logoutButton.addEventListener("click", handleLogout);
+    }
+
+    restaurantFormInitialize();
 });
+
