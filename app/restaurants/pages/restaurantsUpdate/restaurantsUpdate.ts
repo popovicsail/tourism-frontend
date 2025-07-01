@@ -1,6 +1,7 @@
 import { Restaurant } from '../../models/restaurant.model.js';
 import { RestaurantService } from '../../services/restaurants.service.js'
 import {RestaurantUtils} from '../../utils/restaurants.utils.js'
+import { handleLogout } from "../../../users/pages/login/login.js";
 
 const url = window.location.search;
 const searchParams = new URLSearchParams(url);
@@ -17,6 +18,7 @@ const longitude = ((document.getElementById("Longitude") as HTMLInputElement));
 const status = (document.getElementById("Status") as HTMLSelectElement);
 const cancelBtn = document.querySelector("#cancel") as HTMLButtonElement;
 const submitBtn = document.querySelector("#Dodaj") as HTMLButtonElement;
+const logoutButton = document.querySelector("#logout-button") as HTMLButtonElement;
 
 
 
@@ -156,6 +158,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error("Greška prilikom validacije restorana:", error.message);
     }
+
+    if (logoutButton) {
+            logoutButton.addEventListener("click", handleLogout);
+        }
     restaurantFormInitialize()
     getById(restoranId)
 });
