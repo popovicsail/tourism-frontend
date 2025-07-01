@@ -4,6 +4,7 @@ import {RestaurantUtils} from '../../utils/restaurants.utils.js'
 import { handleLogout } from "../../../users/pages/login/login.js";
 
 
+
 const restoranService = new RestaurantService();
 const restoranUtils = new RestaurantUtils();
 
@@ -72,6 +73,7 @@ async function submitRestaurantFormData(){
         status: restoranStatusElement.value,
         ownerID: ownerID,
     };
+
     try {
         const createdRestaurant = await restoranService.Post(formData);
         const restaurantId = createdRestaurant.id;
@@ -127,3 +129,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     restaurantFormInitialize();
 });
+

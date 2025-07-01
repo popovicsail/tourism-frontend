@@ -1,11 +1,18 @@
 import { UserService } from "../../service/user.services.js";
 const userService = new UserService();
-let submitButton
+let submitButton: HTMLButtonElement;
+
+document.addEventListener("DOMContentLoaded", () => {
+    submitButton = document.getElementById("submit-button") as HTMLButtonElement;
+    submitButton.addEventListener("click", (event) => {
+        handleLogin(event)
+    })
+})
 
 function handleLogin(event: Event) {
     event.preventDefault();
 
-    const form = document.querySelector("form") as HTMLFormElement;
+    const form = document.getElementById("login-form") as HTMLFormElement;
     const formData = new FormData(form);
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
@@ -28,9 +35,5 @@ export function handleLogout() {
     localStorage.removeItem('username');
     localStorage.removeItem('role');
     localStorage.removeItem('password');
+    window.location.href = "../../../index.html";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    submitButton = document.getElementById("submitButton") as HTMLButtonElement;
-    submitButton.addEventListener("click", handleLogin)
-})

@@ -1,8 +1,8 @@
 import { handleLogout } from "./users/pages/login/login.js"
-const loginButton = document.querySelector('#loginButton') as HTMLElement;
-const logoutButton = document.querySelector('#logoutButton') as HTMLElement;
-const restaurantsLinkElement = document.querySelector('#restaurantsLinkElement') as HTMLElement;
-const toursOverviewLinkElement = document.querySelector('#toursOverviewLinkElement') as HTMLElement;
+const loginButton = document.getElementById('login-button') as HTMLElement;
+const logoutButton = document.getElementById('logout-button') as HTMLElement;
+const restaurantsLinkElement = document.getElementById('restaurants-link') as HTMLElement;
+const toursOverviewLinkElement = document.getElementById('toursOverview-link') as HTMLElement;
 
 function checkLoginStatus() {
     const username = localStorage.getItem('username');

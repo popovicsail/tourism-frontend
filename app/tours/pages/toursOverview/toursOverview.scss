@@ -1,6 +1,6 @@
-@import "../../../styles/global.scss";
+@import "../../styles/tours.scss";
 
-.toursOverviewSection {
+.tours-overview-section {
 
     table {
         width: 50%;
@@ -21,7 +21,7 @@
             padding: 0.5rem;
             text-align: left;
 
-            button.tableButton {
+            button {
                 width: 100%;
                 height: 100%;
                 background-color: $primary-color;

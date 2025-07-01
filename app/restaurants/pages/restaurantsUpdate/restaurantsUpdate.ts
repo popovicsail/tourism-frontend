@@ -3,6 +3,7 @@ import { RestaurantService } from '../../services/restaurants.service.js'
 import {RestaurantUtils} from '../../utils/restaurants.utils.js'
 import { handleLogout } from "../../../users/pages/login/login.js";
 
+
 const url = window.location.search;
 const searchParams = new URLSearchParams(url);
 const restoranId = parseInt(searchParams.get('id'));
@@ -135,6 +136,7 @@ async function submitRestaurantFormData(){
 
 
 
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     try {
@@ -163,5 +165,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             logoutButton.addEventListener("click", handleLogout);
         }
     restaurantFormInitialize()
+
     getById(restoranId)
 });

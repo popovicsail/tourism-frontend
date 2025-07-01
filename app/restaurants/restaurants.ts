@@ -94,6 +94,6 @@ dodajBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', ispisiRestorane);
 
 document.addEventListener("DOMContentLoaded", () => {
-        logoutButton = document.querySelector('#logoutButton') as HTMLButtonElement;
+        logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
         logoutButton.addEventListener('click', handleLogout)
 })
