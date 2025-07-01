@@ -1,6 +1,8 @@
 import { Restaurant } from '../../models/restaurant.model.js';
 import { RestaurantService } from '../../services/restaurants.service.js'
 import {RestaurantUtils} from '../../utils/restaurants.utils.js'
+import { handleLogout } from "../../../users/pages/login/login.js";
+
 
 const restoranService = new RestaurantService();
 const restoranUtils = new RestaurantUtils();
@@ -15,6 +17,7 @@ let restoranLongitudeElement;
 let restoranStatusElement;
 let submitBtn;
 let cancelBtn;
+let logoutButton;
 
 
 
@@ -103,7 +106,6 @@ function validationRestaurantFormData() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-
     restoranNameElement = document.querySelector("#name") as HTMLInputElement;
     restoranDescriptionElement = document.querySelector("#description") as HTMLInputElement;
     restoranCapacityElement = document.querySelector("#capacity") as HTMLInputElement;
@@ -112,7 +114,16 @@ document.addEventListener("DOMContentLoaded", () => {
     restoranLongitudeElement = document.querySelector("#Longitude") as HTMLInputElement;
     restoranStatusElement = document.querySelector("#Status") as HTMLInputElement;
     submitBtn = document.querySelector("#Dodaj") as HTMLButtonElement;
-    cancelBtn = document.querySelector('#cancel') as HTMLButtonElement;
+    cancelBtn = document.querySelector("#cancel") as HTMLButtonElement;
+    logoutButton = document.querySelector("#logout-button") as HTMLButtonElement;
+
+    cancelBtn.addEventListener("click", () => {
+        window.location.href = "../../restaurants.html";
+    });
+
+    if (logoutButton) {
+        logoutButton.addEventListener("click", handleLogout);
+    }
 
     restaurantFormInitialize();
-})
+});
