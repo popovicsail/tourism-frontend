@@ -131,7 +131,31 @@ async function submitRestaurantFormData(){
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    try {
+        const restaurant = await restoranService.getById(restoranId);
+
+        // Provera da li restoran ima bar 5 jela
+        const hasEnoughMeals = restaurant.jela && restaurant.jela.length >= 5;
+
+        // Provera da li restoran ima sliku enterijera
+        const hasInteriorImage = restaurant.imageUrl && restaurant.imageUrl.trim() !== "";
+
+        if (hasEnoughMeals && hasInteriorImage) {
+            const openOption = document.createElement("option");
+            openOption.value = "Otvoren";
+            openOption.textContent = "Otvoren";
+            status.appendChild(openOption);
+            alert("Restoran sada moze biti otvoren!");
+        } else {
+            alert("Restoran mora imati bar 5 jela i jednu sliku enterijera da bi bio otvoren.");
+        }
+    } catch (error) {
+        console.error("Greška prilikom validacije restorana:", error.message);
+    }
     restaurantFormInitialize()
     getById(restoranId)
 });

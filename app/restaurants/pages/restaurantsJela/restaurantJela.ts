@@ -12,6 +12,7 @@ const restaurantService = new RestaurantService();
 const jeloService = new JelaService(restoranId);
 const restoranPromise: Promise<Restaurant> = restaurantService.getById(restoranId);
 const dodajJelo = document.querySelector('.add-meal-button') as HTMLButtonElement;
+const backButton = document.getElementById("backButton") as HTMLAnchorElement;
 
 
 
@@ -54,6 +55,14 @@ function renderJela(jela: Jelo[]) {
 dodajJelo.addEventListener("click",() => {
     window.location.href = `../restaurantsJelaCreate/restaurantsJelaCreate.html?restoranId=${restoranId}`;
 })
+
+backButton.addEventListener("click", () => {
+    if (restoranId) {
+        backButton.href = `../restaurantsUpdate/restaurantsUpdate.html?id=${restoranId}`;
+    } else {
+        console.error("ID restorana nije pronađen u URL-u.");
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     restoranPromise.then((restoran) => {
