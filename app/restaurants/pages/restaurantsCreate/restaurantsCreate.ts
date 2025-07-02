@@ -5,20 +5,19 @@ import { handleLogout } from "../../../users/pages/login/login.js";
 
 
 
+const ownerID = parseInt(localStorage.getItem('id'));
 const restoranService = new RestaurantService();
 const restoranUtils = new RestaurantUtils();
-
-const ownerID = parseInt(localStorage.getItem('id'))
-let restoranNameElement;
-let restoranDescriptionElement;
-let restoranCapacityElement;
-let restoranImageElement;
-let restoranLatitudeElement;
-let restoranLongitudeElement;
-let restoranStatusElement;
-let submitBtn;
-let cancelBtn;
-let logoutButton;
+const restoranNameElement = (document.getElementById("name") as HTMLInputElement);
+const restoranDescriptionElement = (document.getElementById("description") as HTMLInputElement);
+const restoranCapacityElement = ((document.getElementById("capacity") as HTMLInputElement));
+const restoranImageElement = (document.getElementById("image") as HTMLInputElement);
+const restoranLatitudeElement = ((document.getElementById("Latitude") as HTMLInputElement));
+const restoranLongitudeElement = ((document.getElementById("Longitude") as HTMLInputElement));
+const restoranStatusElement = (document.getElementById("Status") as HTMLSelectElement);
+const cancelBtn = document.querySelector("#cancel") as HTMLButtonElement;
+const submitBtn = document.querySelector("#Dodaj") as HTMLButtonElement;
+const logoutButton = document.querySelector("#logout-button") as HTMLButtonElement;
 
 
 
@@ -107,21 +106,13 @@ function validationRestaurantFormData() {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    restoranNameElement = document.querySelector("#name") as HTMLInputElement;
-    restoranDescriptionElement = document.querySelector("#description") as HTMLInputElement;
-    restoranCapacityElement = document.querySelector("#capacity") as HTMLInputElement;
-    restoranImageElement = document.querySelector("#image") as HTMLInputElement;
-    restoranLatitudeElement = document.querySelector("#Latitude") as HTMLInputElement;
-    restoranLongitudeElement = document.querySelector("#Longitude") as HTMLInputElement;
-    restoranStatusElement = document.querySelector("#Status") as HTMLInputElement;
-    submitBtn = document.querySelector("#Dodaj") as HTMLButtonElement;
-    cancelBtn = document.querySelector("#cancel") as HTMLButtonElement;
-    logoutButton = document.querySelector("#logout-button") as HTMLButtonElement;
+document.addEventListener("DOMContentLoaded", async () => {
 
     cancelBtn.addEventListener("click", () => {
         window.location.href = "../../restaurants.html";
     });
+
+
 
     if (logoutButton) {
         logoutButton.addEventListener("click", handleLogout);

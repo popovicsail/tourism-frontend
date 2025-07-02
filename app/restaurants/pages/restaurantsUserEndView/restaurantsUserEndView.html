@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/restaurants/pages/restaurantsUserEndView/restaurantsUserEndView.css">
+    <script type="module" src="../../../../dist/restaurants/pages/restaurantsUserEndView/restaurantsUserEndView.js"></script>
+    <title>Restorani</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div id="filter-container">
+        <label for="sort-select">Sortiraj po:</label>
+        <select id="sort-select">
+            <option value="name">Nazivu</option>
+            <option value="capacity">Kapacitetu</option>
+        </select>
+    
+        <label for="per-page-select">Broj restorana po stranici:</label>
+        <select id="per-page-select">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    
+    <div id="pagination-container">
+        <button class="pagination-button" data-page="1">1</button>
+        <button class="pagination-button" data-page="2">2</button>
+        <button class="pagination-button" data-page="3">3</button>
+    </div>
+
+    <div id="restoran-container">
+
+    </div>
+</body>
+</html>
