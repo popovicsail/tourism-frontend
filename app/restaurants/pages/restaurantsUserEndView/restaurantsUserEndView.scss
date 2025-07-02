@@ -61,59 +61,59 @@
 
 #pagination-container {
     display: flex;
-    justify-content: center; // Centriranje horizontalno
-    align-items: center; // Centriranje vertikalno (ako je potrebno)
-    position: fixed; // Fiksiranje na dnu stranice
-    bottom: 0px; // Razmak od dna stranice
-    width: 100%; // Širina da zauzme ceo prostor
-    background-color: #f9f9f9; // Svetla pozadina
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: #f9f9f9;
     color: $primary-color;
-    padding: 10px; // Unutrašnji razmak
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); // Blagi efekat senke
-    z-index: 10; // Osigurava da bude iznad drugih elemenata
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
 .pagination-button {
-    margin: 0 5px; // Razmak između dugmadi
-    padding: 10px 15px; // Veličina dugmadi
-    border: 1px solid #ccc; // Okvir dugmadi
-    border-radius: 5px; // Zaobljeni uglovi
-    background-color: #fff; // Boja pozadine
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
     color: $primary-color;
-    cursor: pointer; // Promena kursora na hover
-    transition: background-color 0.3s ease; // Animacija na hover
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .pagination-button:hover {
-    background-color: #e0e0e0; // Svetlija boja na hover
+    background-color: #e0e0e0;
 }
 
 #filter-container {
-    position: absolute; // Postavljanje u odnosu na roditeljski element
-    top: 50px; // Razmak od vrha stranice
-    left: 50px; // Razmak od levog ruba stranice
+    position: absolute;
+    top: 50px;
+    left: 50px;
     display: flex;
-    flex-direction: column; // Vertikalno raspoređivanje elemenata
-    gap: 15px; // Razmak između elemenata
-    padding: 20px; // Unutrašnji razmak
-    border: 2px solid #ccc; // Okvir pravougaonika
-    border-radius: 10px; // Zaobljeni uglovi
-    background-color: #f9f9f9; // Svetla pozadina
-    width: 300px; // Širina pravougaonika
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Blagi efekat senke
-    z-index: 10; // Osigurava da bude iznad drugih elemenata
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
 #filter-container label {
-    font-size: 14px; // Veličina fonta za label
-    color: #333; // Boja teksta
+    font-size: 14px;
+    color: #333;
 }
 
 #filter-container select {
-    padding: 10px; // Unutrašnji razmak unutar selekt polja
-    border: 1px solid #ccc; // Okvir selekt polja
-    border-radius: 5px; // Zaobljeni uglovi
-    background-color: #fff; // Boja pozadine
-    font-size: 14px; // Veličina fonta
-    width: 100%; // Širina selekt polja
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    width: 100%;
 }

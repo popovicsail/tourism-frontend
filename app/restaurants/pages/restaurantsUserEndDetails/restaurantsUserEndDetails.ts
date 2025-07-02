@@ -53,7 +53,6 @@ function renderJela(jela: Jelo[]) {
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        // Povlačenje svih restorana
         const restaurant = await restaurantService.getById(restoranId);
         renderRestaurant(restaurant);
         renderJela(restaurant.jela);

@@ -10,9 +10,9 @@ let openRestaurants;
 
 function generatePaginationButtons(totalRestaurants: number, perPage: number) {
     const paginationContainer = document.getElementById("pagination-container") as HTMLDivElement;
-    paginationContainer.innerHTML = ""; // Čisti prethodne dugmadi
+    paginationContainer.innerHTML = "";
 
-    const totalPages = Math.ceil(totalRestaurants / perPage); // Izračunavanje ukupnog broja stranica
+    const totalPages = Math.ceil(totalRestaurants / perPage);
 
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement("button");
@@ -72,15 +72,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     logoutButton.addEventListener('click', handleLogout)
 
     try {
-        // Povlačenje svih restorana
+        
         const allRestaurants: Restaurant[] = await restaurantService.getAll();
 
-        // Filtriranje restorana sa statusom "Otvoren"
+        
         openRestaurants = allRestaurants.filter((restaurant) => restaurant.status === "Otvoren");
 
         console.log("Otvoreni restorani:", openRestaurants);
 
-        // Renderovanje otvorenih restorana (primer)
+        
         renderRestaurants(openRestaurants);
     } catch (error) {
         console.error("Greška prilikom povlačenja restorana:", error.message);
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const paginatedRestaurants = paginateRestaurants(sortedRestaurants, currentPage, perPage);
         renderRestaurants(paginatedRestaurants);
 
-        // Dinamičko generisanje dugmadi za paginaciju
+        
         generatePaginationButtons(openRestaurants.length, perPage);
     }
 
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     perPageSelect.addEventListener("change", (event) => {
         perPage = parseInt((event.target as HTMLSelectElement).value, 10);
-        currentPage = 1; // Resetujemo na prvu stranicu
+        currentPage = 1;
         updateView();
     });
 
