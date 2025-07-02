@@ -15,6 +15,27 @@
         </ul>
     </nav>
 
+    <div id="filter-container">
+        <label for="sort-select">Sortiraj po:</label>
+        <select id="sort-select">
+            <option value="name">Nazivu</option>
+            <option value="capacity">Kapacitetu</option>
+        </select>
+    
+        <label for="per-page-select">Broj restorana po stranici:</label>
+        <select id="per-page-select">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    
+    <div id="pagination-container">
+        <button class="pagination-button" data-page="1">1</button>
+        <button class="pagination-button" data-page="2">2</button>
+        <button class="pagination-button" data-page="3">3</button>
+    </div>
+
     <div id="restoran-container">
 
     </div>
