@@ -1,7 +1,7 @@
 import { handleLogout } from "./users/pages/login/login.js"
 const loginButton = document.getElementById('login-button') as HTMLElement;
 const logoutButton = document.getElementById('logout-button') as HTMLElement;
-const restaurantsLinkElement = document.getElementById('restaurants-link') as HTMLElement;
+const restaurantsLinkElement = document.getElementById('restaurants-link') as HTMLAnchorElement;
 const toursOverviewLinkElement = document.getElementById('toursOverview-link') as HTMLElement;
 
 function checkLoginStatus() {
@@ -13,6 +13,17 @@ function checkLoginStatus() {
     }
 }
 
+function checkUserRole() {
+    const role = localStorage.getItem('role');
+    console.log('Uloga iz localStorage:', role);
+    
+    if (role?.trim().toLowerCase() === 'turista') {
+        restaurantsLinkElement.setAttribute('href', 'restaurants/pages/restaurantsUserEndView/restaurantsUserEndView.html');
+    }
+
+    console.log('Trenutni href:', restaurantsLinkElement.getAttribute('href'));
+}
+
 function setUserLoginState(isLoggedIn: boolean) {
     if (isLoggedIn) {
         loginButton.style.display = "none"
@@ -20,6 +31,8 @@ function setUserLoginState(isLoggedIn: boolean) {
         logoutButton.addEventListener('click', handleLogout)
         restaurantsLinkElement.style.display = "flex"
         toursOverviewLinkElement.style.display = "flex"
+
+        checkUserRole();
     } else {
         loginButton.style.display = "flex"
         logoutButton.style.display = "none"
