@@ -71,7 +71,7 @@ export class KeyPointServices {
             })
             .catch(error => {
                 console.error('Greška pri brisanju:', error.message);
-                alert('ERROR: Key Point deletion unsuccessful');
+                alert('ERROR: Reservation deletion unsuccessful');
                 throw error;
             });
     }

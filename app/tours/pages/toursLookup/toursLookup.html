@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../../dist/tours/pages/toursLookup/toursLookup.css">
     <title>Tour Overview</title>
-    <script type="module" src="../../../../dist/tours/pages/toursOverview/toursOverview.js"></script>
+    <script type="module" src="../../../../dist/tours/pages/toursLookup/toursLookup.js"></script>
 </head>
 
 <body>
@@ -17,18 +17,137 @@
         </ul>
     </nav>
 
-    <section id="tours-lookup-section">
+    <section id="main-section">
+        <section id="tours-lookup-filter-section">
+            <h1>Search Filters:</h1>
+            <div class="tours-lookup-filter-div">
+                <div class="tours-lookup-div">
+                    <input type="radio" id="order-by-name" name="order-by" value="Name" checked />
+                    <label for="order-by-name">Name</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="order-by-description" name="order-by" value="Description" />
+                    <label for="order-by-description">Description</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="order-by-datetime" name="order-by" value="Date and Time" />
+                    <label for="order-by-datetime">Date and Time</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="order-by-maxguests" name="order-by" value="Max Guests" />
+                    <label for="order-by-maxguests">Max Guests</label>
+                </div>
+            </div>
+
+            <div class="tours-lookup-filter-div">
+                <div class="tours-lookup-div">
+                    <input type="radio" id="page-size-5" name="page-size" value="5" checked />
+                    <label for="page-size-5">5</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="page-size-10" name="page-size" value="10" />
+                    <label for="page-size-10">10</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="page-size-20" name="page-size" value="20" />
+                    <label for="page-size-20">20</label>
+                </div>
+            </div>
+
+            <div class="tours-lookup-filter-div">
+                <div class="tours-lookup-div">
+                    <input type="radio" id="published" name="tour-status" value="Published" checked />
+                    <label for="published">Published</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="ready" name="tour-status" value="Ready" />
+                    <label for="ready">Ready</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="not-ready" name="tour-status" value="Not Ready" />
+                    <label for="not-ready">Not Ready</label>
+                </div>
+            </div>
+
+            <div class="tours-lookup-filter-div">
+                <div class="tours-lookup-div">
+                    <input type="radio" id="order-direction-asc" name="order-direction" value="ASC" checked />
+                    <label for="order-direction-asc">Ascending</label>
+                </div>
+
+                <div class="tours-lookup-div">
+                    <input type="radio" id="order-direction-desc" name="order-direction" value="DESC" />
+                    <label for="order-direction-desc">Descending</label>
+                </div>
+            </div>
+        </section>
+
         <section id="tours-lookup-section-template-handler">
             <section id="tours-lookup-section-template" class="tours-lookup-section">
-                <div class="tours-info-div">
+                <div id="tours-info-div-title" class="tours-info-div">
                     <p id="tours-lookup-name"></p>
                     <p id="tours-lookup-datetime"></p>
                 </div>
-                <div class="tours-info-div">
-                    <p id="tours-lookup-description"></p>
+                <div id="tours-info-div-about" class="tours-info-div">
+                    <textarea id="tours-lookup-description" rows="3"></textarea>
                     <p id="tours-lookup-maxguests"></p>
                 </div>
             </section>
+        </section>
+        <template id="tours-pages-template">
+            <div id="tours-pages-div">
+                <p id="tours-previous-button" class="filter-button">Previous Page</p>
+
+                <p id="tours-pos1-number"></p>
+                <p id="tours-low-dots" class="dots">...</p>
+                <p id="tours-pos2-number"></p>
+                <p id="tours-pos3-number"></p>
+                <p id="tours-pos4-number"></p>
+                <p id="tours-pos5-number"></p>
+                <p id="tours-pos6-number"></p>
+                <p id="tours-high-dots" class="dots">...</p>
+                <p id="tours-pos7-number"></p>
+
+                <p id="tours-next-button" class="filter-button">Next Page</p>
+            </div>
+        </template>
+
+        <section id="keypoint-section">
+            <section id="keypoint-edit-section-template-handler">
+                <section id="keypoint-edit-section-template" class="keypoint-form-section">
+                    <div class="keypoint-image-div">
+                        <img id="keypoint-edit-image-img" src="../../../styles/loading.gif" />
+                    </div>
+
+                    <div class="keypoint-info-div">
+                        <div class="keypoint-input-div">
+                            <input type="text" id="keypoint-edit-name-input" name="keyPointName"
+                                placeholder="Key Point Name" disabled>
+                        </div>
+
+                        <div class="keypoint-input-div">
+                            <textarea id="keypoint-edit-description-input" name="keyPointDescription"
+                                placeholder="Key Point Description" disabled></textarea>
+                        </div>
+                </section>
+            </section>   
+            <div id="reserve-amount-div">
+                <label id="reserve-amount-label" for="reserve-amount-input">Enter the amount of reservations: </label>
+                <input type="number" id="reserve-amount-input" min="1" value="1"/>  
+            </div>
+   
+            <div class="keypoint-mainbutton-div">
+                <button type="button" id="tour-reserve-button">Reserve</button> 
+                <button type="button" id="tour-unreserve-button">Cancel Reservation</button> 
+            </div>
+
         </section>
     </section>
 </body>

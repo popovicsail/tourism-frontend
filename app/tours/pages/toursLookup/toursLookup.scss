@@ -1,5 +1,201 @@
 @import "../../styles/tours.scss";
 
-.tours-lookup-section {
-    background-color: red;
+#main-section {
+    display: flex;
+
+    #tours-lookup-filter-section {
+        display: flex;
+        flex-direction: column;
+        width: 15%;
+        height: fit-content;
+        margin: 0.5%;
+        background-color: grey;
+        gap: 20px;
+        border: 2px black solid;
+        padding: 1%;
+        flex-shrink: 0;
+
+        .tours-lookup-filter-div {
+            display: flex;
+            flex-direction: column;
+            border: 2px black solid;
+            border-radius: 10px;
+            padding: 5%;
+
+            .tours-lookup-div {
+
+                label {
+                    width: 40%;
+                }
+
+                input {
+                    padding: 0px;
+                    margin: 0px;
+                }
+            }
+        }
+    }
+
+    #tours-lookup-section-template-handler {
+        display: flex;
+        margin: 0.5%;
+        flex-direction: column;
+        height: fit-content;
+        width: 30%;
+        padding: 10px;
+        gap: 10px;
+        border: 2px black solid;
+        flex-shrink: 0;
+
+        .tours-lookup-section {
+            padding-right: 30%;
+            border: 2px black solid;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: right;
+
+            #tours-info-div-title {
+                display: flex;
+                justify-content: center;
+            }
+
+            #tours-info-div-about {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                textarea {
+                    width: 60%;
+                }
+            }
+        }
+    }
+
+    #tours-pages-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+            visibility: visible;
+        }
+
+        .dots {
+            display: none;
+        }
+    }
+}
+
+
+#keypoint-section {
+    margin: 0.5%;
+    width: 60%;
+    height: fit-content;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    border: 2px black solid;
+    background-color: rgb(213, 208, 208);
+    padding: 5px;
+
+    #keypoint-edit-section-template-handler {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .keypoint-mainbutton-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 70%;
+
+        button {
+            width: 30%;
+        }
+
+        #tour-unreserve-button {
+            background-color: orange;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    #reserve-amount-div {
+
+        #reserve-amount-input {
+            width: 40px;
+            height: 30px;
+            margin: 10px;
+        }
+    }
+
+    .keypoint-form-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px rgb(0, 0, 0) solid;
+        height: fit-content;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: fit-content;
+        margin-right: 10px;
+
+        .keypoint-image-div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            height: fit-content;
+            margin: 20px;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .keypoint-info-div {
+            width: 60%;
+        }
+
+        .keypoint-location-div {
+            display: flex;
+            flex-direction: row;
+
+            div {
+                width: 45%;
+            }
+        }
+
+        .keypoint-input-div {
+            display: flex;
+            width: 90%;
+
+            input {
+                width: 100%;
+                padding: 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                margin-bottom: 2px;
+                margin-top: 4px;
+                background-color: white;
+            }
+
+            textarea {
+                width: 100%;
+                height: 100px;
+                padding: 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                margin-bottom: 2px;
+                resize: none;
+                background-color: white;
+            }
+        }
+    }
 }

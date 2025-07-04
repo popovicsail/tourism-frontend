@@ -23,6 +23,7 @@ function handleLogin(event: Event) {
             localStorage.setItem('username', user.username);
             localStorage.setItem('role', user.role);
             localStorage.setItem('password', password);
+            localStorage.setItem('reservations', JSON.stringify(user.reservations))
             window.location.href = "../../../index.html";
         })
         .catch((error) => {
@@ -35,5 +36,6 @@ export function handleLogout() {
     localStorage.removeItem('username');
     localStorage.removeItem('role');
     localStorage.removeItem('password');
+    localStorage.removeItem('reservations');
     window.location.href = "../../../index.html";
 }

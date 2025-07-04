@@ -1,16 +1,38 @@
 import { Tour } from "../models/tour.model.js"
+import { tourGetAllDTO } from "../models/tourGetAllDTO.model.js"
+import { TourFilters } from "../models/tourFilters.model.js"
 
 export class ToursServices {
     private apiUrl: string
-    private pagedDefault: string
 
     constructor() {
         this.apiUrl = "http://localhost:48696/api/tours"
-        this.pagedDefault = ""
     }
 
-    getAll(): Promise<Tour[]> {
-        return fetch(this.apiUrl + this.pagedDefault)
+    getAll(filters:TourFilters): Promise<tourGetAllDTO> {
+        const params = new URLSearchParams();
+
+        if (filters) {
+            if (filters.page !== undefined) {
+                params.append("page", filters.page.toString())
+            }
+            if (filters.pageSize !== undefined) {
+                params.append("pageSize", filters.pageSize.toString())
+            }
+            if (filters.orderBy) {
+                params.append("orderBy", filters.orderBy)
+            }
+            if (filters.orderDirection) {
+                params.append("orderDirection", filters.orderDirection)
+            }
+            if (filters.tourStatus) {
+                params.append("tourStatus", filters.tourStatus)
+            }
+        }
+
+        const url = this.apiUrl + (params.toString() ? "?" + params.toString() : "")
+
+        return fetch(url)
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
@@ -20,7 +42,7 @@ export class ToursServices {
                 return response.json()
             })
             .then((responseData) => {
-                return responseData.data as Tour[];
+                return responseData as tourGetAllDTO;
             })
             .catch(error => {
                 console.error('Error', error.status)
@@ -28,8 +50,8 @@ export class ToursServices {
             });
     }
 
-    getByTourId(tourId:number): Promise<Tour> {
-        return fetch(this.apiUrl + `/${tourId}` + this.pagedDefault)
+    getByTourId(tourId: number): Promise<Tour> {
+        return fetch(this.apiUrl + `/${tourId}`)
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
@@ -48,7 +70,7 @@ export class ToursServices {
     }
 
     getByGuideId(guideId: number): Promise<Tour[]> {
-        return fetch(this.apiUrl + `?guideId=${guideId}` + this.pagedDefault)
+        return fetch(this.apiUrl + `?guideId=${guideId}`)
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
@@ -89,7 +111,7 @@ export class ToursServices {
             });
     }
 
-    update(tourId:number, formData: Tour): Promise<Tour> {
+    update(tourId: number, formData: Tour): Promise<Tour> {
         return fetch(this.apiUrl + `/${tourId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -112,7 +134,7 @@ export class ToursServices {
             });
     }
 
-    delete(tourId:number): Promise<void> {
+    delete(tourId: number): Promise<void> {
         return fetch(this.apiUrl + `/${tourId}`, {
             method: 'DELETE'
         })

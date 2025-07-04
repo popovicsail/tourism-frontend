@@ -360,6 +360,8 @@ function keyPointEditSectionSetup() {
         keyPointEditSection.style.display = "flex"
         keyPointEditSectionTemplateHandler.append(keyPointEditSection)
 
+        order++
+
         keyPointEditCheckSubmitButton(keyPoint)
     })
 }

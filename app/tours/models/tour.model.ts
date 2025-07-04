@@ -11,4 +11,5 @@ export interface Tour {
     guide?: Guide;
     guideId: number;
     keyPoints?: KeyPoint[];
+    reservationCount?: number;
 }
