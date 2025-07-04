@@ -101,6 +101,7 @@
                 </div>
             </section>
         </section>
+        
         <template id="tours-pages-template">
             <div id="tours-pages-div">
                 <p id="tours-previous-button" class="filter-button">Previous Page</p>
@@ -137,16 +138,22 @@
                                 placeholder="Key Point Description" disabled></textarea>
                         </div>
                 </section>
-            </section>   
-            <div id="reserve-amount-div">
-                <label id="reserve-amount-label" for="reserve-amount-input">Enter the amount of reservations: </label>
-                <input type="number" id="reserve-amount-input" min="1" value="1"/>  
-            </div>
-   
-            <div class="keypoint-mainbutton-div">
-                <button type="button" id="tour-reserve-button">Reserve</button> 
-                <button type="button" id="tour-unreserve-button">Cancel Reservation</button> 
-            </div>
+            </section>
+
+            <section id="keypoint-mainbutton-template-handler">
+                <section id="keypoint-mainbutton-template">
+                    <div id="reserve-amount-div">
+                        <label id="reserve-amount-label" for="reserve-amount-input">Enter the amount of reservations:
+                        </label>
+                        <input type="number" id="reserve-amount-input" min="1" value="1" />
+                    </div>
+
+                    <div class="keypoint-mainbutton-div">
+                        <button type="button" id="tour-reserve-button">Reserve</button>
+                        <button type="button" id="tour-unreserve-button">Cancel Reservation</button>
+                    </div>
+                </section>
+            </section>
 
         </section>
     </section>

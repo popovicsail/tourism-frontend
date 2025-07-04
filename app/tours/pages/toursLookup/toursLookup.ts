@@ -47,6 +47,9 @@ let keyPointSection
 let keyPointEditSectionTemplateHandler
 let keyPointEditSectionTemplate
 
+let keypointMainbuttonTemplateHandler
+let keypointMainbuttonTemplate
+
 document.addEventListener("DOMContentLoaded", () => {
     logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
     logoutButton.addEventListener('click', handleLogout)
@@ -62,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     keyPointSection = document.getElementById("keypoint-section") as HTMLDivElement
     keyPointEditSectionTemplateHandler = document.getElementById("keypoint-edit-section-template-handler") as HTMLDivElement
     keyPointEditSectionTemplate = document.getElementById("keypoint-edit-section-template") as HTMLDivElement
+
+    keypointMainbuttonTemplateHandler = document.getElementById("keypoint-mainbutton-template-handler") as HTMLDivElement
+    keypointMainbuttonTemplate = document.getElementById("keypoint-mainbutton-template") as HTMLDivElement
 
     tourGetFilters()
 })
@@ -269,6 +275,15 @@ function keyPointEditSectionSetup(tourById) {
 
     })
 
+    reserveSectionSetup(tourById)
+
+}
+
+function reserveSectionSetup(tourById) {
+    keypointMainbuttonTemplateHandler.innerHTML = ''
+    const newKeypointMainbutton = keypointMainbuttonTemplate.cloneNode(true) as HTMLInputElement
+    keypointMainbuttonTemplateHandler.append(newKeypointMainbutton)
+    
     const reservationServices = new ReservationServices()
     tourId = tourById.id
 
