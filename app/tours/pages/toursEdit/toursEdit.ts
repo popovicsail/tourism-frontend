@@ -5,13 +5,11 @@ import { ToursUtils } from "../../utils/tours.utils.js"
 import { KeyPoint } from "../../models/keyPoint.model.js"
 import { KeyPointServices } from "../../services/keyPoint.services.js";
 import { KeyPointFlags } from "../../models/keyPointFlags.model.js"
-let logoutButton
 const url = window.location.search
 const searchParams = new URLSearchParams(url)
 const tourId = parseInt(searchParams.get("tourId"))
 const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
-
 let keyPointServices
 let tourById: Tour
 
@@ -50,7 +48,7 @@ let keyPointCreateImageURLFlag = false
 let order
 
 document.addEventListener("DOMContentLoaded", () => {
-    logoutButton = document.querySelector('#logout-button') as HTMLElement;
+    const logoutButton = document.querySelector('#logout-button') as HTMLElement;
     logoutButton.addEventListener('click', handleLogout)
 
     tourEditNameInput = document.getElementById("tour-edit-name-input") as HTMLInputElement
@@ -317,8 +315,8 @@ function keyPointEditSectionSetup() {
             keyPointEditCheckSubmitButton(keyPoint)
         })
 
-        
-        keyPointEditDescriptionInput.id = `keypoint-edit-description-input${keyPointId}`  
+
+        keyPointEditDescriptionInput.id = `keypoint-edit-description-input${keyPointId}`
         keyPointEditDescriptionInput.value = keyPoint.description
         keyPoint.flags.keyPointEditDescriptionFlag = toursUtils.validationSingleInput(keyPointEditDescriptionInput)
         keyPointEditDescriptionInput.addEventListener("blur", () => {
@@ -334,7 +332,7 @@ function keyPointEditSectionSetup() {
             keyPointEditCheckSubmitButton(keyPoint)
         })
 
-        
+
         keyPointEditDeleteButton.id = `keypoint-edit-delete-button${keyPointId}`
         keyPointEditDeleteButton.addEventListener("click", () => {
             keyPointServices.delete(keyPointId)

@@ -6,7 +6,9 @@ import { ToursUtils } from "../../utils/tours.utils.js"
 import { KeyPoint } from "../../models/keyPoint.model.js"
 import { ReservationServices } from "../../services/reservations.services.js"
 import { Reservation } from "../../models/reservation.model.js"
-let logoutButton
+const toursServices = new ToursServices()
+const toursUtils = new ToursUtils()
+const userId = JSON.parse(localStorage.getItem("id"))
 const tourFilters: TourFilters = {}
 tourFilters.page = 1
 tourFilters.pageSize = 5
@@ -14,12 +16,8 @@ tourFilters.orderBy = "Name"
 tourFilters.orderDirection = "ASC"
 tourFilters.tourStatus = "Published"
 
-const toursServices = new ToursServices()
-const toursUtils = new ToursUtils()
-const userId = JSON.parse(localStorage.getItem("id"))
 let userReservations
 let tourId
-
 
 let toursFiltered: Tour[]
 let toursTotalCount
@@ -51,7 +49,7 @@ let keypointMainbuttonTemplateHandler
 let keypointMainbuttonTemplate
 
 document.addEventListener("DOMContentLoaded", () => {
-    logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
+    const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
     logoutButton.addEventListener('click', handleLogout)
 
     toursLookupFilterSection = document.querySelectorAll('input[type="radio"]')
@@ -246,8 +244,6 @@ function pageNumbersInitialize() {
     })
 }
 
-
-
 function keyPointEditSectionSetup(tourById) {
     keyPointEditSectionTemplateHandler.innerHTML = ''
 
@@ -276,7 +272,6 @@ function keyPointEditSectionSetup(tourById) {
     })
 
     reserveSectionSetup(tourById)
-
 }
 
 function reserveSectionSetup(tourById) {
