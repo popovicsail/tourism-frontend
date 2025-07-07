@@ -99,6 +99,39 @@ export class RestaurantService{
             });
     }
 
+    getPaged(page: number, pageSize: number, orderBy: string = "Name", orderDirection: string = "ASC", status?: string): Promise<{ data: Restaurant[], totalCount: number }> {
+        const params = new URLSearchParams({
+            page: page.toString(),
+            pageSize: pageSize.toString(),
+            orderBy,
+            orderDirection
+        });
+    
+        if (status) {
+            params.append("status", status);
+        }
+    
+        return fetch(`${this.apiUrl}?${params.toString()}`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage };
+                    });
+                }
+                return response.json();
+            })
+            .then((responseData) => {
+                return {
+                    data: responseData.data as Restaurant[],
+                    totalCount: responseData.totalCount as number
+                };
+            })
+            .catch(error => {
+                console.error('Greška prilikom paginacije:', error.status);
+                throw error;
+            });
+    }
+
     
     deleteUser(restaurantId:number): void {
         fetch(this.apiUrl +'/'+ restaurantId + this.pagedDefault, {

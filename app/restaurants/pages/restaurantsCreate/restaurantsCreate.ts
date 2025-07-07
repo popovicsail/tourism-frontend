@@ -105,6 +105,7 @@ function validationRestaurantFormData() {
 }
 
 
+ 
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -120,4 +121,3 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     restaurantFormInitialize();
 });
-

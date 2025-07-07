@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/restaurants/pages/reservationForm/reservationForm.css">
+    <script type="module" src="../../../../dist/restaurants/pages/reservationForm/reservationForm.js"></script>
+    <title>Reservation</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li class="nav-item"><a href="../restaurantsUserEndView/restaurantsUserEndView.html">Nazad</a></li>
+            <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <form id="dodajForm">
+
+            <label for="datum">Date</label>
+            <input type="date" name="datum" id="datum" required>
+            
+            <label for="brojLjudi">Number of people</label>
+            <input type="text" name="brojLjudi" id="brojLjudi" required>
+    
+            <select id="Obrok" name="Obrok" required>
+                <option value="Doručak">Doručak (08 : 00 h)</option>
+                <option value="Ručak">Ručak (13 : 00 h)</option>
+                <option value="Večera">Večera (18 : 00 h)</option>
+            </select>
+    
+            <input type="button" value="Dalje" id = "Dodaj"/>
+            <input type="button" value="Cancel" id = "cancel"/>
+    
+            </form>
+    </div>
+</body>
+</html>

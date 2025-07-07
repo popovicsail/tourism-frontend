@@ -3,6 +3,30 @@ export class RestaurantUtils{
     constructor(){
 
     }
+
+    validateFutureDate(htmlElement: HTMLInputElement): boolean {
+        const inputValue = htmlElement.value;
+        const inputDate = new Date(inputValue);
+        const currentDate = new Date();
+        let validFlag = true;
+    
+        // Provera da li je datum validan i u budućnosti
+        if (isNaN(inputDate.getTime()) || inputDate <= currentDate) {
+            validFlag = false;
+            htmlElement.style.borderColor = "red";
+            htmlElement.placeholder = "Enter a valid future date!";
+        }
+    
+        if (!validFlag) {
+            htmlElement.addEventListener("click", () => {
+                htmlElement.style.borderColor = "black";
+                htmlElement.placeholder = "";
+            });
+            return false;
+        }
+    
+        return true;
+    }
     
     validationSingleInput(htmlElement: HTMLInputElement | HTMLTextAreaElement): boolean {
         const inputType = htmlElement.type

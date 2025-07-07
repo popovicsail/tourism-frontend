@@ -1,0 +1,30 @@
+@import '../../../styles/global.scss';
+
+.reservations-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.reservation-card {
+    width: 30%;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.izbrisi {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto; 
+    border: 1px solid $primary-color;
+    background-color: $primary-color;
+    color: #f4f4f9;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
