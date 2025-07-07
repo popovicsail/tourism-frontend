@@ -2,11 +2,8 @@ import {Reservation} from "../models/reservation.model.js"
 
 export class ReservationServices {
     private apiUrl: string
-    private pagedDefault: string
-
 
     constructor() {
-        this.pagedDefault = ""
         this.apiUrl = `http://localhost:48696/api/reservations`
     }
 
@@ -32,7 +29,6 @@ export class ReservationServices {
                 throw error
             });
     }
-
 
     delete(tourId: number): Promise<void> {
         return fetch(this.apiUrl + `?tourId=${tourId}`, {

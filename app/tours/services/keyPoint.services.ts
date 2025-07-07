@@ -3,12 +3,8 @@ import { Tour } from "../models/tour.model.js"
 
 export class KeyPointServices {
     private apiUrl: string
-    private pagedDefault: string
-    private tourId: number
 
     constructor(tourId) {
-        this.pagedDefault = ""
-        this.tourId = tourId
         this.apiUrl = `http://localhost:48696/api/tours/${tourId}/key-points`
     }
 

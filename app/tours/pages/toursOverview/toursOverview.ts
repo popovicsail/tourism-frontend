@@ -1,15 +1,13 @@
 import { Tour } from "../../models/tour.model.js"
 import { ToursServices } from "../../services/tours.services.js"
 import { handleLogout } from "../../../users/pages/login/login.js"
-let logoutButton
-
 const toursServices = new ToursServices()
 const guideId = parseInt(localStorage.getItem('id'));
 
 let addTourButton
 
 document.addEventListener("DOMContentLoaded", () => {
-    logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
+    const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
     logoutButton.addEventListener('click', handleLogout)
 
     addTourButton = document.getElementById("tours-create-button")
