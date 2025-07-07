@@ -24,11 +24,16 @@ function renderRestaurant(restoran: Restaurant) {
             <p><strong>Kapacitet:</strong> ${restoran.capacity}</p>
             <p><strong>Latitude:</strong> ${restoran.latitude}</p>
             <p><strong>Longitude:</strong> ${restoran.longitude}</p>
+            <input type="button" value="Rezervisi" id = "reservation"/>
         </div>
     `;
 
     container.appendChild(card);
 
+    const rezervisiBtn = document.getElementById("reservation") as HTMLButtonElement;
+    rezervisiBtn.addEventListener("click", () => {
+        window.location.href = `../reservationForm/reservationForm.html?restoranId=${restoranId}`;
+    });
 }
 
 function renderJela(jela: Jelo[]) {
@@ -51,7 +56,11 @@ function renderJela(jela: Jelo[]) {
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", async () => {
+    const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
+    logoutButton.addEventListener('click', handleLogout)
+
     try {
         // Povlačenje svih restorana
         const restaurant = await restaurantService.getById(restoranId);
@@ -60,10 +69,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("Greška prilikom povlačenja restorana:", error.message);
     }
+    
 });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-        const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
-        logoutButton.addEventListener('click', handleLogout)
-})
