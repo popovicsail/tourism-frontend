@@ -3,17 +3,16 @@ import { Reservation } from "../models/rezervacija.model";
 export class ReservationService{
     private apiUrl: string
     private pagedDefault: string
-    restoranId:number
+
 
     
-    constructor(restoranId:number) {
-        this.restoranId = restoranId
+    constructor() {
         this.apiUrl = `http://localhost:48696/api/restaurantReservetion`;
         this.pagedDefault = "";
     }
 
-    getAll(): Promise<Reservation[]> {
-            return fetch(this.apiUrl + this.pagedDefault)
+    getAll(touristId): Promise<Reservation[]> {
+            return fetch(this.apiUrl + `?touristId=${touristId}`)
                 .then(response => {
                     if (!response.ok) {
                         return response.text().then(errorMessage => {
@@ -23,7 +22,7 @@ export class ReservationService{
                     return response.json()
                 })
                 .then((responseData) => {
-                    return responseData.data as Reservation[];
+                    return responseData as Reservation[];
                 })
                 .catch(error => {
                     console.error('Error', error.status)
@@ -31,8 +30,8 @@ export class ReservationService{
                 });
         }
 
-    Post(formData: Reservation): Promise<Reservation> {
-        const url = `${this.apiUrl}/${this.restoranId}`
+    Post(formData: Reservation,restoranId:number): Promise<Reservation> {
+        const url = `${this.apiUrl}/${restoranId}`
         return fetch(url,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -63,8 +62,11 @@ export class ReservationService{
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
-            .then(response => {
+            .then(async (response) =>{
                 if (!response.ok) {
+                    const errorText = await response.text(); // Uhvati tekst greške sa servera
+                    alert(`${errorText}`); // Prikaz greške korisniku
+                    throw { status: response.status, message: errorText }; // Baci grešku za dalje rukovanje
                     return response.text().then(errorMessage => {
                         throw { status: response.status, message: errorMessage };
                     });

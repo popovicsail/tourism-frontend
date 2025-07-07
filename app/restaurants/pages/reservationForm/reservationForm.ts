@@ -8,7 +8,7 @@ const restoranUtils = new RestaurantUtils()
 const url = window.location.search;
 const searchParams = new URLSearchParams(url);
 const restoranId = parseInt(searchParams.get('restoranId'));
-const reservationService = new ReservationService(restoranId);
+const reservationService = new ReservationService();
 const reservationDatumElement = (document.getElementById("datum") as HTMLInputElement);
 const reservationNoPplElement = (document.getElementById("brojLjudi") as HTMLInputElement);
 const reservationObrok = document.getElementById('Obrok') as HTMLSelectElement;
@@ -29,7 +29,7 @@ function restaurantFormInitialize(): void {
 
 
     cancelBtn.addEventListener("click",function() {
-        window.location.href = "../../restaurants.html";
+        window.location.href = "../../../index.html";
     })
 
     submitBtn.addEventListener("click", () => {
@@ -41,19 +41,19 @@ function restaurantFormInitialize(): void {
 
 async function submitRestaurantFormData(){
     const formData: Reservation = {
-        RestaurantId: restoranId,
-        TouristId: userId, 
-        Date: reservationDatumElement.value,
-        Meal: reservationObrok.value,
-        NumberOfPeople: parseInt(reservationNoPplElement.value),
+        restaurantId: restoranId,
+        touristId: userId, 
+        date: reservationDatumElement.value,
+        meal: reservationObrok.value,
+        numberOfPeople: parseInt(reservationNoPplElement.value),
     };
 
     try {
-        const createdReservation = await reservationService.Post(formData);
-        const reservationId = createdReservation.Id;
+        const createdReservation = await reservationService.Post(formData,restoranId);
+        const reservationId = createdReservation.id;
 
         alert(`Kreirana rezervacija sa ID: ${reservationId}`);
-        window.location.href = "../../restaurants.html";
+        window.location.href = "../../../index.html";
     } catch (error) {
         console.error("Greška prilikom kreiranja rezervacije:", error.message);
     }

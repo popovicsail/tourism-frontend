@@ -1,8 +1,8 @@
 export interface Reservation {
-Id?:number
-RestaurantId:number
-TouristId:number
-Date:string
-Meal:string
-NumberOfPeople:number
+id?:number
+restaurantId:number
+touristId:number
+date:string
+meal:string
+numberOfPeople:number
 }
