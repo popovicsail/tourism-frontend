@@ -6,17 +6,21 @@ import { ToursUtils } from "../../utils/tours.utils.js"
 import { KeyPoint } from "../../models/keyPoint.model.js"
 import { ReservationServices } from "../../services/reservations.services.js"
 import { Reservation } from "../../models/reservation.model.js"
+import { TourRating } from "../../models/tourRating.model.js"
+import { TourRatingServices } from "../../services/tourRating.services.js"
+
 const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
 const userId = JSON.parse(localStorage.getItem("id"))
 const tourFilters: TourFilters = {}
+const tourRatingServices = new TourRatingServices()
 tourFilters.page = 1
 tourFilters.pageSize = 5
 tourFilters.orderBy = "Name"
 tourFilters.orderDirection = "ASC"
 tourFilters.tourStatus = "Published"
 
-let userReservations
+let userReservations = JSON.parse(localStorage.getItem("reservations"))
 let tourId
 
 let toursFiltered: Tour[]
@@ -48,6 +52,19 @@ let keyPointEditSectionTemplate
 let keypointMainbuttonTemplateHandler
 let keypointMainbuttonTemplate
 
+let keypointMainbuttonRate
+let star1
+let star2
+let star3
+let star4
+let star5
+
+let keypointMainbuttonRatingsTemplateHandler
+let keypointMainbuttonRatingsTemplate
+
+let reviewedFlag
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
     logoutButton.addEventListener('click', handleLogout)
@@ -67,6 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
     keypointMainbuttonTemplateHandler = document.getElementById("keypoint-mainbutton-template-handler") as HTMLDivElement
     keypointMainbuttonTemplate = document.getElementById("keypoint-mainbutton-template") as HTMLDivElement
 
+    keypointMainbuttonRatingsTemplateHandler = document.getElementById("keypoint-mainbutton-ratings-template-handler") as HTMLDivElement
+    keypointMainbuttonRatingsTemplate = document.getElementById("keypoint-mainbutton-ratings-template") as HTMLTemplateElement
+
     tourGetFilters()
 })
 
@@ -80,59 +100,65 @@ function tourGetFilters() {
 }
 
 function tourGetByFiltered() {
-    userReservations = JSON.parse(localStorage.getItem("reservations"))
     toursServices.getAll(tourFilters)
         .then((data) => {
             toursFiltered = data.data
             toursTotalCount = data.totalCount
-            keyPointEditSectionTemplateHandler.innerHTML = ''
-            toursLookupSectionSetup()
+            toursLookupSectionTemplateHandler.innerHTML = ''
+            tourGetFilteredById()
         })
+
 }
 
-function toursLookupSectionSetup() {
-    toursLookupSectionTemplateHandler.innerHTML = ''
+function tourGetFilteredById() {
     toursFiltered.forEach((tour: Tour) => {
-        const toursLookupSectionNew = toursLookupSectionTemplate.cloneNode(true) as HTMLDivElement
-        let tourKeyPoints: KeyPoint[]
-
-        const toursLookupNameNew = toursLookupSectionNew.querySelector("#tours-lookup-name") as HTMLParagraphElement
-        const toursLookupDateTimeNew = toursLookupSectionNew.querySelector("#tours-lookup-datetime") as HTMLParagraphElement
-        const toursLookupDescriptionNew = toursLookupSectionNew.querySelector("#tours-lookup-description") as HTMLTextAreaElement
-        const toursLookupMaxGuestsNew = toursLookupSectionNew.querySelector("#tours-lookup-maxguests") as HTMLParagraphElement
-
-        toursLookupSectionNew.id = `tours-lookup-section${tour.id}`
-        toursLookupSectionNew.classList.add("background-image")
-
-        toursLookupSectionNew.addEventListener("click", () => {
-            toursServices.getByTourId(tour.id)
-                .then((tourById) => {
-                    tourKeyPoints = tourById.keyPoints
-                    if (tourById.status == "Published") {
-                        toursLookupSectionNew.style.backgroundImage = `url("${tourKeyPoints[0].imageUrl}")`
-                    }
-                    keyPointSection.style.display = "flex"
-                    keyPointEditSectionSetup(tourById)
-                })
-        })
-
-        toursLookupNameNew.id = `tours-lookup-name${tour.id}`
-        toursLookupNameNew.textContent = tour.name
-
-        toursLookupDateTimeNew.id = `tours-lookup-datetime${tour.id}`
-        const tourDateTimeFormatted = tour.dateTime.replace("T", " ")
-        toursLookupDateTimeNew.textContent = `(${tourDateTimeFormatted})`
-
-        toursLookupDescriptionNew.id = `tours-lookup-description${tour.id}`
-        toursLookupDescriptionNew.textContent = tour.description
-        toursLookupDescriptionNew.disabled = true
-
-        toursLookupMaxGuestsNew.id = `tours-lookup-maxguests${tour.id}`
-        toursLookupMaxGuestsNew.textContent = `Max number of guests: ${tour.maxGuests.toString()}`
-
-        toursLookupSectionTemplateHandler.append(toursLookupSectionNew)
+        toursServices.getByTourId(tour.id)
+            .then((data) => {
+                tourId = data.id
+                toursLookupSectionSetup(data)
+            })
     })
     calculatePageNumbers()
+}
+
+function toursLookupSectionSetup(tour) {
+    const toursLookupSectionNew = toursLookupSectionTemplate.cloneNode(true) as HTMLDivElement
+    if (tour.status == "Published") {
+        toursLookupSectionNew.style.backgroundImage = `url("${tour.keyPoints[0].imageUrl}")`
+    }
+
+    if (userReservations.includes(tour.id)) {
+        toursLookupSectionNew.style.backgroundColor = "orange"
+    }
+
+    const toursLookupNameNew = toursLookupSectionNew.querySelector("#tours-lookup-name") as HTMLParagraphElement
+    const toursLookupDateTimeNew = toursLookupSectionNew.querySelector("#tours-lookup-datetime") as HTMLParagraphElement
+    const toursLookupDescriptionNew = toursLookupSectionNew.querySelector("#tours-lookup-description") as HTMLTextAreaElement
+    const toursLookupMaxGuestsNew = toursLookupSectionNew.querySelector("#tours-lookup-maxguests") as HTMLParagraphElement
+
+    toursLookupSectionNew.id = `tours-lookup-section${tour.id}`
+    toursLookupSectionNew.classList.add("background-image")
+
+    toursLookupSectionNew.addEventListener("click", () => {
+        keyPointSection.style.display = "flex"
+        keyPointEditSectionSetup(tour)
+    })
+
+    toursLookupNameNew.id = `tours-lookup-name${tour.id}`
+    toursLookupNameNew.textContent = tour.name
+
+    toursLookupDateTimeNew.id = `tours-lookup-datetime${tour.id}`
+    const tourDateTimeFormatted = tour.dateTime.replace("T", " ")
+    toursLookupDateTimeNew.textContent = `(${tourDateTimeFormatted})`
+
+    toursLookupDescriptionNew.id = `tours-lookup-description${tour.id}`
+    toursLookupDescriptionNew.textContent = tour.description
+    toursLookupDescriptionNew.disabled = true
+
+    toursLookupMaxGuestsNew.id = `tours-lookup-maxguests${tour.id}`
+    toursLookupMaxGuestsNew.textContent = `Max number of guests: ${tour.maxGuests.toString()}`
+
+    toursLookupSectionTemplateHandler.prepend(toursLookupSectionNew)
 }
 
 
@@ -244,10 +270,11 @@ function pageNumbersInitialize() {
     })
 }
 
-function keyPointEditSectionSetup(tourById) {
+function keyPointEditSectionSetup(tour) {
     keyPointEditSectionTemplateHandler.innerHTML = ''
+    showRatings(tour.id)
 
-    tourById.keyPoints.forEach((keyPoint: KeyPoint) => {
+    tour.keyPoints.forEach((keyPoint: KeyPoint) => {
         const keyPointId = keyPoint.id
 
         const keyPointEditSection = keyPointEditSectionTemplate.cloneNode(true) as HTMLDivElement
@@ -268,21 +295,18 @@ function keyPointEditSectionSetup(tourById) {
 
         keyPointEditSection.style.display = "flex"
         keyPointEditSectionTemplateHandler.append(keyPointEditSection)
-
     })
-
-    reserveSectionSetup(tourById)
+    reserveSectionSetup(tour)
 }
 
-function reserveSectionSetup(tourById) {
+function reserveSectionSetup(tour) {
     keypointMainbuttonTemplateHandler.innerHTML = ''
     const newKeypointMainbutton = keypointMainbuttonTemplate.cloneNode(true) as HTMLInputElement
     keypointMainbuttonTemplateHandler.append(newKeypointMainbutton)
-    
-    const reservationServices = new ReservationServices()
-    tourId = tourById.id
 
-    const tourAvailableReservations = tourById.maxGuests - tourById.reservationCount
+    const reservationServices = new ReservationServices()
+
+    const tourAvailableReservations = tour.maxGuests - tour.reservationCount
     const reserveAmountLabel = document.getElementById("reserve-amount-label") as HTMLInputElement
     const reserveAmountInput = document.getElementById("reserve-amount-input") as HTMLInputElement
 
@@ -301,7 +325,7 @@ function reserveSectionSetup(tourById) {
     tourUnreserveButton.style.display = "none";
 
     let timeLeftFlag
-    const tourDate = new Date(tourById.dateTime).getTime();
+    const tourDate = new Date(tour.dateTime).getTime();
     const now = Date.now();
 
     const hoursLeft = (tourDate - now) / (1000 * 60 * 60);
@@ -311,16 +335,27 @@ function reserveSectionSetup(tourById) {
         timeLeftFlag = false
     }
 
-    if (userReservations.includes(tourId)) {
+    let timeWindowFlag
+    const hoursPassed = (now - tourDate) / (1000 * 60 * 60);
+
+    if (hoursPassed > 3) {
+        timeWindowFlag = true;
+    } else {
+        timeWindowFlag = false;
+    }
+
+
+    if (userReservations.includes(tour.id)) {
         tourReserveButton.style.display = "none";
         reserveAmountInput.style.display = "none";
+        tourUnreserveButton.style.display = "none";
+        reserveAmountLabel.textContent = "You are allowed to cancel the reservation up to 24 hours before the tour starts."
         if (timeLeftFlag) {
-            tourUnreserveButton.style.display = "flex";
-            reserveAmountLabel.textContent = "You are allowed to cancel the reservation up to 24 hours before the tour starts."
+            tourUnreserveButton.style.display = "flex";          
         }
-        else {
-            tourUnreserveButton.style.display = "none";
-            reserveAmountLabel.textContent = "You are allowed to cancel the reservation up to 24 hours before the tour starts."
+
+        if (timeWindowFlag && !reviewedFlag) {
+            rateDivSetup(tourId)
         }
     }
 
@@ -346,4 +381,161 @@ function reserveSectionSetup(tourById) {
                 })
         })
     }
+}
+
+
+function showRatings(tourId) {
+    tourRatingServices.getById(tourId, "tourId")
+        .then((data:TourRating[]) => {
+            keypointMainbuttonRatingsTemplateHandler.innerHTML = ""
+            data.forEach((review) => {
+                const newKeypointMainbuttonReview = keypointMainbuttonRatingsTemplate.content.cloneNode(true) as HTMLElement
+                const newKeypointMainbuttonUsername = newKeypointMainbuttonReview.querySelector("#keypoint-mainbutton-ratings-username") as HTMLParagraphElement
+                const newKeypointMainbuttonImage = newKeypointMainbuttonReview.querySelector("#keypoint-mainbutton-ratings-img") as HTMLImageElement
+                const newKeypointMainbuttonTextarea = newKeypointMainbuttonReview.querySelector("#keypoint-mainbutton-ratings-textarea") as HTMLTextAreaElement
+
+                newKeypointMainbuttonUsername.textContent = `${review.username}`
+
+                newKeypointMainbuttonImage.src = `../../styles/star${review.rating}.png`
+                newKeypointMainbuttonTextarea.value = `${review.comment}`
+
+                keypointMainbuttonRatingsTemplateHandler.append(newKeypointMainbuttonReview)
+
+                if (review.userId == userId) {
+                    reviewedFlag = true
+                }
+            })
+        })
+}
+
+
+function rateDivSetup(tourId) {
+    keypointMainbuttonRate = document.getElementById("keypoint-mainbutton-rate") as HTMLDivElement
+    keypointMainbuttonRate.style.display = "flex"
+    const tourRateButton = document.getElementById("tour-rate-button") as HTMLButtonElement
+    const tourRateTextarea = document.getElementById("tour-rate-textarea") as HTMLTextAreaElement
+    star1 = document.getElementById("star1") as HTMLImageElement
+    star2 = document.getElementById("star2") as HTMLImageElement
+    star3 = document.getElementById("star3") as HTMLImageElement
+    star4 = document.getElementById("star4") as HTMLImageElement
+    star5 = document.getElementById("star5") as HTMLImageElement
+    let rating
+
+    keypointMainbuttonRate.addEventListener("mouseout", () => {
+        rateDivUnglow(rating)
+    })
+
+    star1.addEventListener("mouseover", () => {
+        rateDivGlow(1)
+    })
+
+    star2.addEventListener("mouseover", () => {
+        rateDivGlow(2)
+    })
+
+    star3.addEventListener("mouseover", () => {
+        rateDivGlow(3)
+    })
+
+    star4.addEventListener("mouseover", () => {
+        rateDivGlow(4)
+    })
+
+    star5.addEventListener("mouseover", () => {
+        rateDivGlow(5)
+    })
+
+
+    star1.addEventListener("click", () => {
+        rating = 1
+        tourRateButton.disabled = false
+    })
+
+    star2.addEventListener("click", () => {
+        rating = 2
+        tourRateButton.disabled = false
+    })
+
+    star3.addEventListener("click", () => {
+        rating = 3
+        tourRateButton.disabled = false
+    })
+
+    star4.addEventListener("click", () => {
+        rating = 4
+        tourRateButton.disabled = false
+    })
+
+    star5.addEventListener("click", () => {
+        rating = 5
+        tourRateButton.disabled = false
+    })
+
+    let comment = null
+
+    tourRateTextarea.addEventListener("blur", () => {
+        comment = tourRateTextarea.value
+    })
+
+    tourRateButton.addEventListener("click", () => {
+        const ratingDate = new Date().toISOString();
+
+        const tourRating: TourRating = { tourId, userId, ratingDate, rating, comment }
+
+        tourRatingServices.add(tourRating)
+            .then(() => {
+                showRatings(tourId)
+            })
+    })
+
+}
+
+function rateDivGlow(starNumber: number) {
+    star1.src = "../../styles/starRated.png"
+    if (starNumber == 1) {
+        return
+    }
+    star2.src = "../../styles/starRated.png"
+    if (starNumber == 2) {
+        return
+    }
+    star3.src = "../../styles/starRated.png"
+    if (starNumber == 3) {
+        return
+    }
+    star4.src = "../../styles/starRated.png"
+    if (starNumber == 4) {
+        return
+    }
+    star5.src = "../../styles/starRated.png"
+    if (starNumber == 5) {
+        return
+    }
+}
+
+function rateDivUnglow(starNumber: number) {
+    if (starNumber == 5) {
+        return
+    }
+    star5.src = "../../styles/starUnrated.png"
+
+    if (starNumber == 4) {
+        return
+    }
+    star4.src = "../../styles/starUnrated.png"
+
+    if (starNumber == 3) {
+        return
+    }
+    star3.src = "../../styles/starUnrated.png"
+
+    if (starNumber == 2) {
+        return
+    }
+    star2.src = "../../styles/starUnrated.png"
+
+    if (starNumber == 1) {
+        return
+    }
+    star1.src = "../../styles/starUnrated.png"
 }
