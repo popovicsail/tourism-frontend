@@ -17,29 +17,45 @@
         </ul>
     </nav>
 
-    <section class="tours-overview-section">
-        <table id="tours-overview-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Date and Time</th>
-                    <th>Max Guests</th>
-                    <th>Status</th>
-                    <th>Edit Tour</th>
-                    <th>Delete Tour</th>
-                </tr>
-            </thead>
-            <tbody id="tours-overview-table-body">
+    <section id="main-section">
+        <section class="tours-overview-section">
+            <table id="tours-overview-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Date and Time</th>
+                        <th>Max Guests</th>
+                        <th>Status</th>
+                        <th>Rating</th>
+                        <th>Edit Tour</th>
+                        <th>Delete Tour</th>
+                    </tr>
+                </thead>
+                <tbody id="tours-overview-table-body">
 
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td><button id="tours-create-button">Add Tour</button></td>
-                </tr>
-            </tfoot>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><button id="tours-create-button">Add Tour</button></td>
+                    </tr>
+                </tfoot>
 
-        </table>
+            </table>
+        </section>
+
+        <section id="tours-overview-rating-section">
+            <section id="tours-overview-rating-template-handler">
+                <p id="tour-title"></p>
+                <template id="tours-overview-rating-template"> 
+                    <div id="review">
+                        <p id="tours-overview-rating-username"></p>
+                        <img id="tours-overview-rating-img" src="" />
+                        <textarea id="tours-overview-rating-textarea" readonly></textarea>
+                    </div>
+                </template>
+            </section>
+        </section>
     </section>
 </body>
 
