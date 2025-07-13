@@ -41,6 +41,7 @@ function renderRestaurants(restorani: Restaurant[]) {
                 <h3>${restoran.name}</h3>
                 <p><strong>Opis:</strong> ${restoran.description}</p>
                 <p><strong>Kapacitet:</strong> ${restoran.capacity}</p>
+                <p><strong>Ocena:</strong> ${renderStars(restoran.averageRating)} (${restoran.averageRating})</p>
                 <input type="button" value="Detaljnije" class="details"/>
             </div>
         `;
@@ -92,3 +93,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateView();
 });
+
+
+function renderStars(rating) {
+    const maxStars = 5;
+    const fullStars = Math.round(rating); // Zaokruži na najbliži ceo broj
+    let stars = '';
+
+    for (let i = 0; i < maxStars; i++) {
+        stars += i < fullStars ? '★' : '☆';
+    }
+    return stars;
+}

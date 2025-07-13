@@ -113,3 +113,87 @@
     width: 80%;
     background-color: #f9f9f9;
 }
+
+#komentari{
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px auto;
+    width: 80%;
+    background-color: #f9f9f9;
+}
+
+#reviewForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 500px;
+    height: 300px;
+    margin: 2rem auto;
+    background-color: #f9f9f9;
+  }
+  
+  .rating-wrapper,
+  .comment-wrapper {
+    width: 80%;
+  }
+  
+  .star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    font-size: 2rem;
+  }
+  
+  .star-rating input {
+    display: none;
+  }
+  
+  .star-rating label {
+    color: lightgray;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: gold;
+  }
+  
+  textarea#comment {
+    width: 100%;
+    resize: vertical;
+    font-size: 1rem;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  button[type="button"] {
+    padding: 0.6rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    align-self: center;
+    transition: background-color 0.2s;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #0056b3;
+  }
+
+  #review-form-container{
+    display: none;
+  }
