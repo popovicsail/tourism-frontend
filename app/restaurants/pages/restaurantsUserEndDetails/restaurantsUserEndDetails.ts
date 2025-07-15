@@ -6,9 +6,11 @@ import { Jelo } from "../../models/jela.model.js";
 const url = window.location.search;
 const searchParams = new URLSearchParams(url);
 const restoranId = parseInt(searchParams.get('restoranId'));
+const userId = parseInt(localStorage.getItem("id"));
 const jelaContainer = document.getElementById("jela-container") as HTMLDivElement;
 const restaurantService = new RestaurantService();
-const oceniBtn = document.getElementById("oceni") as HTMLLIElement
+const oceniBtn = document.getElementById("oceni") as HTMLLIElement;
+const reviewBtn = document.getElementById("posaljiRecenziju") as HTMLButtonElement;
 const reviewForm = document.getElementById("review-form-container") as HTMLElement;
 
 
@@ -73,6 +75,15 @@ oceniBtn.addEventListener('click', () => {
 reviewForm.style.display = 'flex';
 })
 
+async function checkRatingPermission(userId: number, restoranId: number): Promise<string | null> {
+    const response = await fetch(`http://localhost:48696/api/restaurants/review/CanUserRate?restoranId=${restoranId}&userId=${userId}`);
+    if (response.status === 403) {
+        const message = await response.text(); // Dobijaš poruku sa backenda
+        return message;
+    }
+    return null; // dozvoljeno
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
     logoutButton.addEventListener('click', handleLogout)
@@ -85,6 +96,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("Greška prilikom povlačenja restorana:", error.message);
     }
+
+
+    checkRatingPermission(userId, restoranId).then(message => {
+        if (message) {
+            reviewBtn.disabled = true;
+    
+            const notice = document.createElement("p");
+            notice.textContent = message;
+            notice.style.color = "red";
+            notice.style.textAlign = "center";
+            reviewForm.insertBefore(notice, reviewBtn);
+        }
+    });
     
 });
 
