@@ -5,3 +5,4 @@ export interface Review {
     ReviewText?:string
     Rating:number
 }
+

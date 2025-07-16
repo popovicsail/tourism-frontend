@@ -1,4 +1,5 @@
 import { Review } from "../models/review.model.js";
+import { RawReview } from "../models/rawReview.model.js";
 
 export class ReviewService {
     private apiUrl: string
@@ -34,14 +35,20 @@ export class ReviewService {
                         if (!response.ok) {
                             if (response.status === 404) {
                                 console.warn("Nema recenzija za ovaj restoran.");
-                                return []; // Vrati praznu listu ako nema rezultata
+                                return [];
                             }
                             throw new Error(`Greška pri učitavanju recenzija: ${response.statusText}`);
                         }
                         return response.json();
                     })
-                    .then((data: Review[]) => {
-                        return data as Review[];
+                    .then((data: RawReview[]) => {
+                        return data.map(r => ({
+                            Id: r.id,
+                            RestoranId: r.restoranId,
+                            UserId: r.userId,
+                            ReviewText: r.reviewText,
+                            Rating: r.rating
+                        }));
                     })
                     .catch(error => {
                         console.error("Greška u komunikaciji sa serverom:", error);
@@ -97,4 +104,6 @@ export class ReviewService {
                     console.error("Greška pri kreiranju recenzije:", error.message);
                     return null;
                 });
-}}
+            }
+        
+}
