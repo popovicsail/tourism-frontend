@@ -46,6 +46,8 @@ export function handlePermission() {
         toursLookupLink.style.display = "flex"
         const restaurantsEndView = document.getElementById("restaurants-end-view") as HTMLLIElement
         restaurantsEndView.style.display = "flex"
+        const reservationsEndView = document.getElementById("reservation-lookup-link") as HTMLLIElement
+        reservationsEndView.style.display = "flex"
     }
     else if (role == "vodic") {
         const toursOverviewLink = document.getElementById("toursOverview-link") as HTMLLIElement

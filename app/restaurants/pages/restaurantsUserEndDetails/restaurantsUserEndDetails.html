@@ -12,12 +12,33 @@
         <ul class="nav-list">
             <li class="nav-item"><a href="../../../index.html">Home</a></li>
             <li class="nav-item"><a href="../restaurantsUserEndView/restaurantsUserEndView.html">Nazad</a></li>
+            <li id="oceni" class="nav-item"><a href="#">Oceni</a></li>
             <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
         </ul>
     </nav>
 
     <div id="restoran-container">
-
+        <div id="review-form-container">
+            <form id="reviewForm">
+                <div class="rating-wrapper">
+                  <label><strong>Ocena:</strong></label>
+                  <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                  </div>
+                </div>
+              
+                <div class="comment-wrapper">
+                  <label for="comment"><strong>Komentar:</strong></label>
+                  <textarea id="comment" name="comment" rows="4" placeholder="Napišite svoj utisak..."></textarea>
+                </div>
+              
+                <button type="button" id="posaljiRecenziju">Pošalji recenziju</button>
+              </form>
+        </div>
     </div>
 
     <div id="jela-header" class="jela-header">
@@ -25,6 +46,14 @@
     </div>
 
     <div id="jela-container" class="jela-container">
+    </div>
+
+    <div id="komentari">
+        Komentari
+    </div>
+
+    <div id="komentari-body">
+
     </div>
 </body>
 </html>
