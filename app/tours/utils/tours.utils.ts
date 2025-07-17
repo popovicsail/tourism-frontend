@@ -52,4 +52,5 @@ export class ToursUtils {
         const radio = document.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement;
         return radio ? radio.value : null;
     }
+    
 }

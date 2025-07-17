@@ -1,71 +1,138 @@
 @import "../../styles/global.scss";
 
-.form-section {
-    border: 2px black solid;
-    background-color: rgb(213, 208, 208);
+section#tour-edit-main,
+section#tour-create-main {
     width: 30%;
-    height: 58vh;
-    margin-right: 5px;
+    height: fit-content;
 
-    form {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        width: 90%;
-
-        .tour-input-div {
+    .form-section {
+        border: 2px black solid;
+        background-color: rgb(213, 208, 208);
+        width: 100%;
+        
+        form {
             display: flex;
+            flex-direction: column;
+            padding: 10px;
+            width: 90%;
 
-            label {
-                font-size: 20px;
-                color: $primary-color;
-                width: 35%;
+            .tour-input-div {
+                display: flex;
+
+                label {
+                    font-size: 20px;
+                    color: $primary-color;
+                    width: 35%;
+                }
+
+                input {
+                    width: 65%;
+                    padding: 8px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    margin-bottom: 15px;
+                }
+
+                textarea {
+                    width: 65%;
+                    padding: 8px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    margin-bottom: 15px;
+                }
             }
 
-            input {
-                width: 65%;
-                padding: 8px;
-                border-radius: 4px;
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-
-            textarea {
-                width: 65%;
-                padding: 8px;
-                border-radius: 4px;
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-        }
-
-        .tour-button-div {
-            width: 100%;
-            margin-bottom: 20px;
-
-            button {
+            .tour-button-div {
                 width: 100%;
+                margin-bottom: 20px;
+
+                button {
+                    width: 100%;
+                }
+
+                .tour-publish-button {
+                    margin-top: 3%;
+                    background-color: gray;
+                }
             }
 
-            #tour-edit-publish-button {
-                margin-top: 3%;
-                background-color: gray;
-            }
-        }
+            .tour-mainbutton-div {
+                display: flex;
+                justify-content: space-evenly;
 
-        .tour-mainbutton-div {
-            display: flex;
-            justify-content: space-evenly;
+                .tour-edit-cancel-button {
+                    background-color: $cancel-color;
+                    width: 30%;
+                }
 
-            .tour-edit-cancel-button {
-                background-color: $cancel-color;
-                width: 30%;
-            }
-
-            .tour-edit-submit-button {
-                background-color: gray;
-                width: 30%;
+                .tour-edit-submit-button {
+                    background-color: gray;
+                    width: 30%;
+                }
             }
         }
     }
+}
+
+#tours-reviews-main {
+    height: fit-content;
+    width: 30%;
+    margin: 10px;
+    justify-content: center;
+    display: flex;
+
+    #tours-reviews-template-handler {
+        background-color: lightgray;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        width: 100%;
+        padding: 10px;
+
+        textarea {
+            height: 60px;
+            width: 84%;
+            border: none;
+            resize: none;
+        }
+
+        .tours-reviews-section {
+            display: flex;
+            width: fit-content;
+            align-items: center;
+            margin: 10px;
+
+            p {
+                margin: 2%;
+            }
+
+            img {
+                width: 150px;
+                margin-right: 10px;
+            }
+
+            textarea {
+                margin: 0;
+                height: 40px;
+                width: 300px;
+                border: none;
+                resize: none;
+            }
+        }
+    }
+}
+
+.clickable-link {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }

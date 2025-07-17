@@ -1,4 +1,6 @@
 import { User } from "../model/user.model";
+import { TourRating } from "../../tours/models/tourRating.model";
+import { TourReservation } from "../../tours/models/tourReservation.model";
 
 export class UserService {
     private apiUrl: string;
@@ -31,4 +33,42 @@ export class UserService {
             throw error;
         });
     }
+
+        getTourReservationsByUserId(userId: number): Promise<TourReservation[]> {
+            return fetch(this.apiUrl + `/${userId}/tour-reservations`)
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(errorMessage => {
+                            throw { status: response.status, message: errorMessage }
+                        })
+                    }
+                    return response.json()
+                })
+                .then((responseData) => {
+                    return responseData as TourReservation[];
+                })
+                .catch(error => {
+                    console.error('Error', error.status)
+                    throw error
+                });
+        }
+    
+        getTourRatingsByUserId(userId: number): Promise<TourRating[]> {
+            return fetch(this.apiUrl + `/${userId}/tour-ratings`)
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(errorMessage => {
+                            throw { status: response.status, message: errorMessage }
+                        })
+                    }
+                    return response.json()
+                })
+                .then((responseData) => {
+                    return responseData as TourRating[];
+                })
+                .catch(error => {
+                    console.error('Error', error.status)
+                    throw error
+                });
+        }
 }

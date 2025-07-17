@@ -1,6 +1,6 @@
-import { KeyPointFlags } from "./keyPointFlags.model.js"
+import { TourKeyPointFlags } from "./tourKeyPointFlags.model.js"
 
-export interface KeyPoint {
+export interface TourKeyPoint {
     id?: number;
     order?: number;
     name: string;
@@ -9,5 +9,5 @@ export interface KeyPoint {
     latitude: number;
     longitude: number;
     tourId: number;
-    flags?: KeyPointFlags;
+    flags?: TourKeyPointFlags;
 }

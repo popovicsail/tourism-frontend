@@ -1,4 +1,4 @@
-export interface KeyPointFlags {
+export interface TourKeyPointFlags {
     keyPointEditNameFlag?: boolean;
     keyPointEditLongitudeFlag?: boolean;
     keyPointEditLatitudeFlag?: boolean;

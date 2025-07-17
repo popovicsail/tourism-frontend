@@ -1,6 +1,9 @@
 import { Tour } from "../models/tour.model.js"
-import { tourGetAllDTO } from "../models/tourGetAllDTO.model.js"
+import { TourGetAllDTO } from "../models/tourGetAllDTO.model.js"
 import { TourFilters } from "../models/tourFilters.model.js"
+import { TourReservation } from "../models/tourReservation.model.js"
+import { TourRating } from "../models/tourRating.model.js"
+import { TourKeyPoint } from "../models/tourKeyPoint.model.js"
 
 export class ToursServices {
     private apiUrl: string
@@ -9,7 +12,7 @@ export class ToursServices {
         this.apiUrl = "http://localhost:48696/api/tours"
     }
 
-    getAll(filters:TourFilters): Promise<tourGetAllDTO> {
+    getPaged(filters:TourFilters): Promise<TourGetAllDTO> {
         const params = new URLSearchParams();
 
         if (filters) {
@@ -42,7 +45,7 @@ export class ToursServices {
                 return response.json()
             })
             .then((responseData) => {
-                return responseData as tourGetAllDTO;
+                return responseData as TourGetAllDTO;
             })
             .catch(error => {
                 console.error('Error', error.status)
@@ -149,6 +152,63 @@ export class ToursServices {
                 console.error('Greška pri brisanju:', error.message);
                 alert('ERROR: Tour deletion unsuccessful');
                 throw error;
+            });
+    }
+
+    getTourReservationsByTourId(tourId: number): Promise<TourReservation[]> {
+        return fetch(this.apiUrl + `/${tourId}/tour-reservations`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage }
+                    })
+                }
+                return response.json()
+            })
+            .then((responseData) => {
+                return responseData as TourReservation[];
+            })
+            .catch(error => {
+                console.error('Error', error.status)
+                throw error
+            });
+    }
+
+    getTourRatingsByTourId(tourId: number): Promise<TourRating[]> {
+        return fetch(this.apiUrl + `/${tourId}/tour-ratings`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage }
+                    })
+                }
+                return response.json()
+            })
+            .then((responseData) => {
+                return responseData as TourRating[];
+            })
+            .catch(error => {
+                console.error('Error', error.status)
+                throw error
+            });
+    }
+
+    getTourKeyPointsByTourId(tourId: number): Promise<TourKeyPoint[]> {
+        return fetch(this.apiUrl + `/${tourId}/tour-key-points`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage }
+                    })
+                }
+                return response.json()
+            })
+            .then((responseData) => {
+                return responseData as TourKeyPoint[];
+            })
+            .catch(error => {
+                console.error('Error', error.status)
+                throw error
             });
     }
 }

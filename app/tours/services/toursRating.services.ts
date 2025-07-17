@@ -1,10 +1,10 @@
 import { TourRating } from "../models/tourRating.model.js"
 
-export class TourRatingServices {
+export class ToursRatingServices {
     private apiUrl: string
 
     constructor() {
-        this.apiUrl = `http://localhost:48696/api/comments`
+        this.apiUrl = `http://localhost:48696/api/tour-ratings`
     }
 
     getAll(): Promise<TourRating> {
@@ -26,19 +26,8 @@ export class TourRatingServices {
             });
     }
 
-    getById(id, idType): Promise<TourRating[]> {
-        const params = new URLSearchParams();
-
-        if (idType) {
-            if (idType == "tourId") {
-                params.append("idType", "tourId")
-            }
-            else if (idType =="userId") {
-                params.append("idType", "userId")
-            }
-        }
-
-        return fetch(this.apiUrl + `/${id}` + (params.toString() ? "?" + params.toString() : ""))
+    getById(id): Promise<TourRating[]> {
+        return fetch(this.apiUrl + `/${id}`)
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
