@@ -1,13 +1,14 @@
+import { handleLogout } from "../../../users/pages/login/login.js"
 import { Tour } from "../../../tours/models/tour.model.js";
 import { ToursServices } from "../../services/tours.services.js"
 import { ToursUtils } from "../../utils/tours.utils.js"
-import { handleLogout } from "../../../users/pages/login/login.js"
 const toursServices = new ToursServices()
 const toursUtils = new ToursUtils()
-
 const guideId = parseInt(localStorage.getItem('id'));
+
 let logoutButton
 
+let tourCreateMain
 let tourCreateNameInput
 let tourCreateDescriptionInput
 let tourCreateDateTimeInput
@@ -24,34 +25,34 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutButton = document.getElementById('logout-button') as HTMLElement;
     logoutButton.addEventListener('click', handleLogout)
 
-    tourCreateNameInput = document.getElementById("tour-create-name-input") as HTMLInputElement
-    tourCreateDescriptionInput = document.getElementById("tour-create-description-input") as HTMLInputElement
-    tourCreateDateTimeInput = document.getElementById("tour-create-datetime-input") as HTMLInputElement
-    tourCreateMaxGuestsInput = document.getElementById("tour-create-maxguests-input") as HTMLInputElement
-
-    tourCreateCancelButton = document.getElementById("tour-create-cancel-button") as HTMLButtonElement
-    tourCreateSubmitButton = document.getElementById("tour-create-submit-button") as HTMLButtonElement
+    tourCreateMain = document.getElementById("tour-create-main") as HTMLDivElement
+    tourCreateNameInput = tourCreateMain.querySelector(".tour-create-name-input") as HTMLInputElement
+    tourCreateDescriptionInput = tourCreateMain.querySelector(".tour-create-description-input") as HTMLInputElement
+    tourCreateDateTimeInput = tourCreateMain.querySelector(".tour-create-datetime-input") as HTMLInputElement
+    tourCreateMaxGuestsInput = tourCreateMain.querySelector(".tour-create-maxguests-input") as HTMLInputElement
+    tourCreateCancelButton = tourCreateMain.querySelector(".cancel-button") as HTMLButtonElement
+    tourCreateSubmitButton = tourCreateMain.querySelector(".submit-button") as HTMLButtonElement
 
     tourFormInitialize(guideId);
 })
 
 function tourFormInitialize(guideId: number): void {
-    tourCreateNameInput.addEventListener("blur", () => {
+    tourCreateNameInput.addEventListener("input", () => {
         tourNameFlag = toursUtils.validationSingleInput(tourCreateNameInput)
         validationTourFormData()
     })
 
-    tourCreateDescriptionInput.addEventListener("blur", () => {
+    tourCreateDescriptionInput.addEventListener("input", () => {
         tourDescriptionFlag = toursUtils.validationSingleInput(tourCreateDescriptionInput)
         validationTourFormData()
     })
 
-    tourCreateDateTimeInput.addEventListener("blur", () => {
+    tourCreateDateTimeInput.addEventListener("input", () => {
         tourDateTimeFlag = toursUtils.validationSingleInput(tourCreateDateTimeInput)
         validationTourFormData()
     })
 
-    tourCreateMaxGuestsInput.addEventListener("blur", () => {
+    tourCreateMaxGuestsInput.addEventListener("input", () => {
         tourMaxGuestsFlag = toursUtils.validationSingleInput(tourCreateMaxGuestsInput)
         validationTourFormData()
     })
@@ -81,7 +82,7 @@ function submitTourFormData(guideId: number): void {
     const description = tourCreateDescriptionInput.value
     const dateTime = tourCreateDateTimeInput.value
     const maxGuests = parseInt(tourCreateMaxGuestsInput.value)
-    const status = "Not ready"
+    const status = "Not Ready"
 
     const newTour: Tour = { name, description, dateTime, maxGuests, status, guideId }
 

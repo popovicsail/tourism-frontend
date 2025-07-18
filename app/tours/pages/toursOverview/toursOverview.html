@@ -17,46 +17,46 @@
         </ul>
     </nav>
 
-    <section id="main-section">
-        <section class="tours-overview-section">
-            <table id="tours-overview-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date and Time</th>
-                        <th>Max Guests</th>
-                        <th>Status</th>
-                        <th>Rating</th>
-                        <th>Edit Tour</th>
-                        <th>Delete Tour</th>
-                    </tr>
-                </thead>
-                <tbody id="tours-overview-table-body">
+    <main>
+        <section id="tours-overview-main">
+            <section class="tours-overview-section">
+                <table id="tours-overview-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date and Time</th>
+                            <th>Max Guests</th>
+                            <th>Status</th>
+                            <th>Rating</th>
+                            <th>Tour Details</th>
+                            <th>Delete Tour</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tours-overview-table-body">
 
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td><button id="tours-create-button">Add Tour</button></td>
-                    </tr>
-                </tfoot>
-
-            </table>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><button id="tours-create-button">Add Tour</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
         </section>
 
-        <section id="tours-overview-rating-section">
-            <section id="tours-overview-rating-template-handler">
-                <p id="tour-title"></p>
-                <template id="tours-overview-rating-template"> 
-                    <div id="review">
-                        <p id="tours-overview-rating-username"></p>
-                        <img id="tours-overview-rating-img" src="" />
-                        <textarea id="tours-overview-rating-textarea" readonly></textarea>
-                    </div>
+        <section id="tours-reviews-main">
+            <p id="tours-title"></p>
+            <section id="tours-reviews-template-handler">
+                <template id="tours-reviews-template">
+                    <section class="tours-reviews-section">
+                        <p class="tours-reviews-username"></p>
+                        <img class="tours-reviews-img" src="" />
+                        <textarea class="tours-reviews-textarea" readonly></textarea>
+                    </section>
                 </template>
             </section>
         </section>
-    </section>
+    </main>
 </body>
 
 </html>

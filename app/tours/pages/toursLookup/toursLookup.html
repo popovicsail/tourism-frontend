@@ -13,177 +13,130 @@
     <nav class="navbar">
         <ul class="nav-list">
             <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li class="nav-item" id="tours-lookup-link"><a href="../toursLookup/toursLookup.html">Tour Lookup</li>
             <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
         </ul>
     </nav>
 
-    <section id="main-section">
-        <section id="tours-lookup-filter-section">
-            <h1>Search Filters:</h1>
-            <div class="tours-lookup-filter-div">
-                <p>Order by:</p>
-                <div class="tours-lookup-div">
-                    <input type="radio" id="order-by-name" name="order-by" value="Name" checked />
-                    <label for="order-by-name">Name</label>
+    <main>
+        <section id="tours-lookup-filter-main">
+            <section class="tours-lookup-filter-section">
+                <button type="button" id="show-reserved-button">View reserved tours</button>
+                <h1>Search Filters:</h1>
+                <div class="tours-lookup-filter-div">
+                    <p>Order by:</p>
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="order-by-name" name="order-by" value="Name" checked />
+                        <label for="order-by-name">Name</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="order-by-description" name="order-by" value="Description" />
+                        <label for="order-by-description">Description</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="order-by-datetime" name="order-by" value="Date and Time" />
+                        <label for="order-by-datetime">Date and Time</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="order-by-maxguests" name="order-by" value="Max Guests" />
+                        <label for="order-by-maxguests">Max Guests</label>
+                    </div>
                 </div>
 
-                <div class="tours-lookup-div">
-                    <input type="radio" id="order-by-description" name="order-by" value="Description" />
-                    <label for="order-by-description">Description</label>
+                <div class="tours-lookup-filter-div">
+                    <p>Page size:</p>
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="page-size-5" name="page-size" value="5" checked />
+                        <label for="page-size-5">5</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="page-size-10" name="page-size" value="10" />
+                        <label for="page-size-10">10</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="page-size-20" name="page-size" value="20" />
+                        <label for="page-size-20">20</label>
+                    </div>
                 </div>
 
-                <div class="tours-lookup-div">
-                    <input type="radio" id="order-by-datetime" name="order-by" value="Date and Time" />
-                    <label for="order-by-datetime">Date and Time</label>
+                <div class="tours-lookup-filter-div">
+                    <p>Tour Status:</p>
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="published" name="tour-status" value="Published" checked />
+                        <label for="published">Published</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="ready" name="tour-status" value="Ready" />
+                        <label for="ready">Ready</label>
+                    </div>
+
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="not-ready" name="tour-status" value="Not Ready" />
+                        <label for="not-ready">Not Ready</label>
+                    </div>
                 </div>
 
-                <div class="tours-lookup-div">
-                    <input type="radio" id="order-by-maxguests" name="order-by" value="Max Guests" />
-                    <label for="order-by-maxguests">Max Guests</label>
-                </div>
-            </div>
+                <div class="tours-lookup-filter-div">
+                    <p>Sort by:</p>
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="order-direction-asc" name="order-direction" value="ASC" checked />
+                        <label for="order-direction-asc">Ascending</label>
+                    </div>
 
-            <div class="tours-lookup-filter-div">
-                <p>Page size:</p>
-                <div class="tours-lookup-div">
-                    <input type="radio" id="page-size-5" name="page-size" value="5" checked />
-                    <label for="page-size-5">5</label>
-                </div>
-
-                <div class="tours-lookup-div">
-                    <input type="radio" id="page-size-10" name="page-size" value="10" />
-                    <label for="page-size-10">10</label>
-                </div>
-
-                <div class="tours-lookup-div">
-                    <input type="radio" id="page-size-20" name="page-size" value="20" />
-                    <label for="page-size-20">20</label>
-                </div>
-            </div>
-
-            <div class="tours-lookup-filter-div">
-                <p>Tour Status:</p>
-                <div class="tours-lookup-div">
-                    <input type="radio" id="published" name="tour-status" value="Published" checked />
-                    <label for="published">Published</label>
-                </div>
-
-                <div class="tours-lookup-div">
-                    <input type="radio" id="ready" name="tour-status" value="Ready" />
-                    <label for="ready">Ready</label>
-                </div>
-
-                <div class="tours-lookup-div">
-                    <input type="radio" id="not-ready" name="tour-status" value="Not Ready" />
-                    <label for="not-ready">Not Ready</label>
-                </div>
-            </div>
-
-            <div class="tours-lookup-filter-div">
-                <p>Sort by:</p>
-                <div class="tours-lookup-div">
-                    <input type="radio" id="order-direction-asc" name="order-direction" value="ASC" checked />
-                    <label for="order-direction-asc">Ascending</label>
-                </div>
-
-                <div class="tours-lookup-div">
-                    <input type="radio" id="order-direction-desc" name="order-direction" value="DESC" />
-                    <label for="order-direction-desc">Descending</label>
-                </div>
-            </div>
-        </section>
-
-        <section id="tours-lookup-section-template-handler">
-            <section id="tours-lookup-section-template" class="tours-lookup-section">
-                <div id="tours-info-div-title" class="tours-info-div">
-                    <p id="tours-lookup-name"></p>
-                    <p id="tours-lookup-datetime"></p>
-                </div>
-                <div id="tours-info-div-about" class="tours-info-div">
-                    <textarea id="tours-lookup-description" rows="3"></textarea>
-                    <p id="tours-lookup-maxguests"></p>
+                    <div class="tours-lookup-div">
+                        <input type="radio" id="order-direction-desc" name="order-direction" value="DESC" />
+                        <label for="order-direction-desc">Descending</label>
+                    </div>
                 </div>
             </section>
         </section>
 
-        <template id="tours-pages-template">
-            <div id="tours-pages-div">
-                <p id="tours-previous-button" class="filter-button">Previous Page</p>
+        <section id="tours-lookup-main">        
+            <section id="tours-reserved-template-handler">
 
-                <p id="tours-pos1-number"></p>
-                <p id="tours-low-dots" class="dots">...</p>
-                <p id="tours-pos2-number"></p>
-                <p id="tours-pos3-number"></p>
-                <p id="tours-pos4-number"></p>
-                <p id="tours-pos5-number"></p>
-                <p id="tours-pos6-number"></p>
-                <p id="tours-high-dots" class="dots">...</p>
-                <p id="tours-pos7-number"></p>
-
-                <p id="tours-next-button" class="filter-button">Next Page</p>
-            </div>
-        </template>
-
-        <section id="keypoint-section">
-            <section id="keypoint-edit-section-template-handler">
-                <section id="keypoint-edit-section-template" class="keypoint-form-section">
-                    <div class="keypoint-image-div">
-                        <img id="keypoint-edit-image-img" src="../../../styles/loading.gif" />
-                    </div>
-
-                    <div class="keypoint-info-div">
-                        <div class="keypoint-input-div">
-                            <input type="text" id="keypoint-edit-name-input" name="keyPointName"
-                                placeholder="Key Point Name" disabled>
-                        </div>
-
-                        <div class="keypoint-input-div">
-                            <textarea id="keypoint-edit-description-input" name="keyPointDescription"
-                                placeholder="Key Point Description" disabled></textarea>
-                        </div>
-                </section>
             </section>
-
-            <section id="keypoint-mainbutton-template-handler">
-                <section id="keypoint-mainbutton-template">
-                    <div id="reserve-amount-div">
-                        <label id="reserve-amount-label" for="reserve-amount-input">Enter the amount of reservations:
-                        </label>
-                        <input type="number" id="reserve-amount-input" min="1" value="1" />
-                    </div>
-
-                    <div class="keypoint-mainbutton-div">
-                        <button type="button" id="tour-reserve-button">Reserve</button>
-                        <button type="button" id="tour-unreserve-button">Cancel Reservation</button>
-                    </div>
-
-                    <section id="keypoint-mainbutton-ratings-template-handler">
-                        <template id="keypoint-mainbutton-ratings-template">
-                            <div id="review">
-                                <p id="keypoint-mainbutton-ratings-username"></p>
-                                <img id="keypoint-mainbutton-ratings-img" src="" />
-                                <textarea id="keypoint-mainbutton-ratings-textarea" readonly></textarea>
-                            </div>
-                        </template>
+            <section id="tours-lookup-template-handler">
+                <template id="tours-lookup-template" class="tours-lookup-section">
+                    <section class="tours-lookup-section background-image">
+                        <div class="tours-info-div-title">
+                            <p class="tours-name"></p>
+                            <p class="tours-datetime"></p>
+                            <p class="tours-maxguests"></p>
+                            <p class="tours-rating"></p>
+                            <button type="button" class="tours-details-button">Tour Details</button>
+                        </div>
                     </section>
-
-                    <div id="keypoint-mainbutton-rate">
-                        <p>Rate the tour!</p>
-                        <div>
-                            <img id="star1" src="../../styles/starUnrated.png" />
-                            <img id="star2" src="../../styles/starUnrated.png" />
-                            <img id="star3" src="../../styles/starUnrated.png" />
-                            <img id="star4" src="../../styles/starUnrated.png" />
-                            <img id="star5" src="../../styles/starUnrated.png" />
-                        </div>
-                        <p>Average Rating:</p>
-                        <textarea id="tour-rate-textarea"></textarea>
-                        <button type="button" id="tour-rate-button" disabled>Rate</button>
-                    </div>
-                </section>
+                </template>
             </section>
         </section>
-    </section>
+
+        <section id="tours-pages-main">
+            <section id="tours-pages-template-handler">
+                <template id="tours-pages-template">
+                    <section class="tours-pages-section">
+                        <p class="tours-previous-button filter-button clickable-link">Previous Page</p>
+                        <p class="tours-pos1-number clickable-link"></p>
+                        <p class="tours-low-dots dots clickable-link">...</p>
+                        <p class="tours-pos2-number clickable-link"></p>
+                        <p class="tours-pos3-number clickable-link"></p>
+                        <p class="tours-pos4-number clickable-link"></p>
+                        <p class="tours-pos5-number clickable-link"></p>
+                        <p class="tours-pos6-number clickable-link"></p>
+                        <p class="tours-high-dots dots clickable-link">...</p>
+                        <p class="tours-pos7-number clickable-link"></p>
+                        <p class="tours-next-button filter-button clickable-link">Next Page</p>
+                    </section>
+                </template>
+            </section>
+        </section>
+
+    </main>
 </body>
 
 </html>

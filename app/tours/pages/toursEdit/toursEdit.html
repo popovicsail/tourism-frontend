@@ -13,125 +13,111 @@
     <nav class="navbar">
         <ul class="nav-list">
             <li class="nav-item"><a href="../../../index.html">Home</a></li>
-            <li class="nav-item" id="toursOverview"><a href="../../pages/toursOverview/toursOverview.html">Tour
-                    Overview</a></li>
+            <li class="nav-item" id="toursOverview"><a href="../../pages/toursOverview/toursOverview.html">Tour Overview</a></li>
             <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
         </ul>
     </nav>
 
-    <section id="main-section">
-        <section id="tour-edit-section" class="form-section">
-            <form>
-                <h1>Manage Tour</h1>
-                <div class="tour-input-div">
-                    <label for="tour-edit-name-input">Name</label>
-                    <input type="text" id="tour-edit-name-input" name="tourName" placeholder="Tour Name" required>
-                </div>
-                <div class="tour-input-div">
-                    <label for="tour-edit-description-input">Description</label>
-                    <textarea id="tour-edit-description-input" name="tourDescription" rows="8"
-                        placeholder="Tour Description" required></textarea>
-                </div>
-                <div class="tour-input-div">
-                    <label for="tour-edit-datetime-input">Date</label>
-                    <input type="datetime-local" id="tour-edit-datetime-input" name="tourDateTime"
-                        placeholder="Tour Date" required>
-                </div>
-                <div class="tour-input-div">
-                    <label for="tour-edit-maxguests-input">Guests(Max)</label>
-                    <input type="number" id="tour-edit-maxguests-input" name="tourMaxGuests"
-                        placeholder="Tour Max Guests" required>
-                </div>
-                <div class="tour-button-div">
-                    <button type="button" id="tour-keypoint-edit-button">Key Points</button>
-                    <button type="button" id="tour-edit-publish-button" disabled>At least 2 key points needed to
-                        publish
-                        tour</button>
-                </div>
-                <div class="tour-mainbutton-div">
-                    <button type="button" id="tour-edit-cancel-button" class="cancel-button">Cancel</button>
-                    <button type="button" id="tour-edit-submit-button" class="submit-button" disabled>Save
-                        Changes</button>
-                </div>
-            </form>
+    <main>
+        <section id="tour-edit-main">
+            <section class="tour-edit-section form-section">
+                <form>
+                    <h1>Manage Tour</h1>
+                    <div class="tour-input-div">
+                        <label for="tour-name-input">Name</label>
+                        <input type="text" class="tour-name-input" name="tourName" placeholder="Tour Name" required>
+                    </div>
+                    <div class="tour-input-div">
+                        <label for="tour-description-input">Description</label>
+                        <textarea class="tour-description-input" name="tourDescription" rows="8" placeholder="Tour Description" required></textarea>
+                    </div>
+                    <div class="tour-input-div">
+                        <label for="tour-datetime-input">Date</label>
+                        <input type="datetime-local" class="tour-datetime-input" name="tourDateTime" placeholder="Tour Date" required>
+                    </div>
+                    <div class="tour-input-div">
+                        <label for="tour-maxguests-input">Guests(Max)</label>
+                        <input type="number" class="tour-maxguests-input" name="tourMaxGuests" placeholder="Tour Max Guests" required>
+                    </div>
+                    <div class="tour-button-div">
+                        <button type="button" class="tour-keypoint-button">Key Points</button>
+                        <button type="button" class="tour-publish-button" disabled>At least 2 key points needed to publish tour</button>
+                    </div>
+                    <div class="tour-mainbutton-div">
+                        <button type="button" class="cancel-button">Cancel</button>
+                        <button type="button" class="submit-button" disabled>Save Changes</button>
+                    </div>
+                </form>
+            </section>
         </section>
 
-
-        <section id="keypoint-section">
-            <section id="keypoint-create-section" class="keypoint-form-section">
-                <div class="keypoint-image-div">
-                    <img id="keypoint-create-image-img" src="../../../styles/loading.gif" />
-                </div>
-                <div class="keypoint-info-div">
-                    <div class="keypoint-input-div">
-                        <input type="text" id="keypoint-create-name-input" name="keyPointName"
-                            placeholder="Key Point Name" required>
-                    </div>
-                    <div class="keypoint-location-div">
-                        <div class="keypoint-input-div">
-                            <input type="number" id="keypoint-create-latitude-input" name="keyPointLatitude"
-                                placeholder="Latitude" required>
-                        </div>
-                        <div class="keypoint-input-div">
-                            <input type="number" id="keypoint-create-longitude-input" name="keyPointLongitude"
-                                placeholder="Longitude" required>
-                        </div>
-                    </div>
-                    <div class="keypoint-input-div">
-                        <textarea id="keypoint-create-description-input" name="keyPointDescription"
-                            placeholder="Key Point Description" required></textarea>
-                    </div>
-                    <div class="keypoint-input-div">
-                        <input type="text" id="keypoint-create-imageurl-input" name="keyPointImageURL"
-                            placeholder="Key Point ImageURL" required>
-                    </div>
-                    <div class="keypoint-mainbutton-div">
-                        <button type="button" id="keypoint-create-submit-button"
-                            class="keypoint-create-submit-button">Submit</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="keypoint-edit-section-template-handler">
-                <section id="keypoint-edit-section-template" class="keypoint-form-section">
+        <section id="keypoint-main">
+            <section id="keypoint-create-main">
+                <section class="keypoint-create-section keypoint">
                     <div class="keypoint-image-div">
-                        <img id="keypoint-edit-image-img" src="../../../styles/loading.gif" />
+                        <img class="keypoint-image-img" src="../../../styles/loading.gif" />
                     </div>
                     <div class="keypoint-info-div">
                         <div class="keypoint-input-div">
-                            <input type="text" id="keypoint-edit-name-input" name="keyPointName"
-                                placeholder="Key Point Name" required>
+                            <input type="text" class="keypoint-name-input" name="keyPointName" placeholder="Key Point Name" required>
                         </div>
                         <div class="keypoint-location-div">
                             <div class="keypoint-input-div">
-                                <input type="number" id="keypoint-edit-latitude-input" name="keyPointLatitude"
-                                    placeholder="Latitude" required>
+                                <input type="number" class="keypoint-latitude-input" name="keyPointLatitude" placeholder="Latitude" required>
                             </div>
                             <div class="keypoint-input-div">
-                                <input type="number" id="keypoint-edit-longitude-input" name="keyPointLongitude"
-                                    placeholder="Longitude" required>
+                                <input type="number" class="keypoint-longitude-input" name="keyPointLongitude" placeholder="Longitude" required>
                             </div>
                         </div>
                         <div class="keypoint-input-div">
-                            <textarea id="keypoint-edit-description-input" name="keyPointDescription"
-                                placeholder="Key Point Description" required></textarea>
+                            <textarea class="keypoint-description-input" name="keyPointDescription" placeholder="Key Point Description" required></textarea>
                         </div>
                         <div class="keypoint-input-div">
-                            <input type="text" id="keypoint-edit-imageurl-input" name="keyPointImageURL"
-                                placeholder="Key Point ImageURL" required>
+                            <input type="text" class="keypoint-imageurl-input" name="keyPointImageURL" placeholder="Key Point ImageURL" required>
                         </div>
                         <div class="keypoint-mainbutton-div">
-                            <button type="button" id="keypoint-edit-delete-button"
-                                class="keypoint-edit-delete-button">Delete</button>
-                            <button type="button" id="keypoint-edit-save-button" class="keypoint-edit-save-button"
-                                disabled>Save
-                                Info</button>
+                            <button type="button" class="keypoint-submit-button">Submit</button>
                         </div>
+                    </div>
                 </section>
             </section>
 
+            <section id="keypoint-edit-main">
+                <section id="keypoint-edit-template-handler">
+                    <template id="keypoint-edit-template">
+                        <section class="keypoint-edit-section keypoint">
+                            <div class="keypoint-image-div">
+                                <img class="keypoint-image-img" src="../../../styles/loading.gif" />
+                            </div>
+                            <div class="keypoint-info-div">
+                                <div class="keypoint-input-div">
+                                    <input type="text" class="keypoint-name-input" name="keyPointName" placeholder="Key Point Name" required>
+                                </div>
+                                <div class="keypoint-location-div">
+                                    <div class="keypoint-input-div">
+                                        <input type="number" class="keypoint-latitude-input" name="keyPointLatitude" placeholder="Latitude" required>
+                                    </div>
+                                    <div class="keypoint-input-div">
+                                        <input type="number" class="keypoint-longitude-input" name="keyPointLongitude" placeholder="Longitude" required>
+                                    </div>
+                                </div>
+                                <div class="keypoint-input-div">
+                                    <textarea class="keypoint-description-input" name="keyPointDescription" placeholder="Key Point Description" required></textarea>
+                                </div>
+                                <div class="keypoint-input-div">
+                                    <input type="text" class="keypoint-imageurl-input" name="keyPointImageURL" placeholder="Key Point ImageURL" required>
+                                </div>
+                                <div class="keypoint-mainbutton-div">
+                                    <button type="button" class="keypoint-delete-button">Delete</button>
+                                    <button type="button" class="keypoint-save-button" disabled>Save Info</button>
+                                </div>
+                            </div>
+                        </section>
+                    </template>
+                </section>
+            </section>
         </section>
-    </section>
+    </main>
 </body>
 
 </html>

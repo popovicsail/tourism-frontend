@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/tours/pages/toursDetails/toursDetails.css">
+    <title>Tour Overview</title>
+    <script type="module" src="../../../../dist/tours/pages/toursDetails/toursDetails.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li class="nav-item" id="tours-lookup-link"><a href="../toursLookup/toursLookup.html">Tour Lookup</li>        
+            <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="tour-keypoint-main">
+            <section id="tour-keypoint-template-handler">
+                <template id="tour-keypoint-template">
+                    <section class="tour-keypoint-section keypoint">
+                        <div class="keypoint-image-div">
+                            <img class="keypoint-image-img">
+                            <input type="text" class="keypoint-name-input" readonly>
+                        </div>
+                        <div class="keypoint-input-div">
+                            <textarea class="keypoint-description-input" readonly></textarea>
+                        </div>
+                    </section>
+                </template>
+            </section>
+        </section>
+
+        <section id="tours-feedback-main">
+            <section id="tours-reviews-main">
+                <p id="tours-title"></p>
+                <section id="tours-reviews-template-handler">
+                    <template id="tours-reviews-template">
+                        <section class="tours-reviews-section">
+                            <p class="tours-reviews-username"></p>
+                            <img class="tours-reviews-img" src="" />
+                            <textarea class="tours-reviews-textarea" readonly></textarea>
+                        </section>
+                    </template>
+                </section>
+            </section>
+
+            <section id="tour-give-review-main">
+                <section class="tour-give-review-section">
+                    <div>
+                        <img id="star1" src="../../styles/starUnrated.png" />
+                        <img id="star2" src="../../styles/starUnrated.png" />
+                        <img id="star3" src="../../styles/starUnrated.png" />
+                        <img id="star4" src="../../styles/starUnrated.png" />
+                        <img id="star5" src="../../styles/starUnrated.png" />
+                    </div>
+                    <textarea class="tour-give-review-comment"></textarea>
+                    <button type="button" class="tour-give-review-button" disabled>Rate tour</button>
+                </section>
+            </section>
+        </section>
+
+                <section id="tour-reservations-main">
+            <section id="tour-reserved-main">
+                <section id="tour-reserved-template-handler">
+                    <template id="tour-reserved-template">
+                        <section class="tour-reserved-section">
+                            <p class="reservation-id"></p>
+                            <p class="tour-id"></p>
+                            <p class="user-id"></p>
+                        </section>
+                    </template>
+                </section>
+            </section>
+
+            <section id="tour-reserve-main">
+                <section class="tour-reserve-section">
+                    <div class="tour-reserve-number-div">
+                        <p class="tour-reserve-available">Available spots:</p>
+
+                    </div>
+                    <div class="tour-reserve-button-div">
+                        <input class="tour-reserve-number" min="0" type="number">
+                        <button class="tour-reserve-button" type="button">Reserve</button>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>

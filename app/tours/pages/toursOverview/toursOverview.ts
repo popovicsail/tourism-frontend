@@ -1,17 +1,16 @@
-import { Tour } from "../../models/tour.model.js"
-import { ToursServices } from "../../services/tours.services.js"
 import { handleLogout } from "../../../users/pages/login/login.js"
-import { TourRatingServices } from "../../services/tourRating.services.js"
+import { Tour } from "../../models/tour.model.js"
 import { TourRating } from "../../models/tourRating.model.js"
-const tourRatringServices = new TourRatingServices()
+import { ToursServices } from "../../services/tours.services.js"
 const toursServices = new ToursServices()
 const guideId = parseInt(localStorage.getItem('id'));
 
 let addTourButton
 
-let toursOverviewRatingTemplateHandler
-let toursOverviewRatingTemplate
-let toursOverviewRatingSection
+let toursReviewsMain
+let toursReviewsTemplateHandler
+let toursReviewsTemplate
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addTourButton = document.getElementById("tours-create-button")
 
-    toursOverviewRatingSection = document.getElementById("tours-overview-rating-section") as HTMLDivElement
-    toursOverviewRatingTemplateHandler = document.getElementById("tours-overview-rating-template-handler") as HTMLDivElement
-    toursOverviewRatingTemplate = document.getElementById("tours-overview-rating-template") as HTMLTemplateElement
+    toursReviewsMain = document.getElementById("tours-reviews-main") as HTMLDivElement
+    toursReviewsTemplateHandler = toursReviewsMain.querySelector("#tours-reviews-template-handler") as HTMLDivElement
+    toursReviewsTemplate = toursReviewsMain.querySelector("#tours-reviews-template") as HTMLTemplateElement
 
     addTourButton.addEventListener("click", () => window.location.href = `../toursForm/toursForm.html`)
     getByGuideId(guideId);
@@ -45,10 +44,6 @@ function toursOverviewInitialize(data: Tour[]) {
         name.textContent = tour.name
         newRow.appendChild(name)
 
-        const description = document.createElement("td")
-        description.textContent = tour.description
-        newRow.appendChild(description)
-
         const dateTime = document.createElement("td")
         dateTime.textContent = tour.dateTime.replace("T", " ")
         newRow.appendChild(dateTime)
@@ -61,25 +56,29 @@ function toursOverviewInitialize(data: Tour[]) {
         status.textContent = tour.status
         newRow.appendChild(status)
 
-        tourRatringServices.getById(tour.id, "tourId")
+        const tourRating = document.createElement("td")
+        toursServices.getTourRatingsByTourId(tour.id)
             .then((data: TourRating[]) => {
+                if (data.length == 0) {
+                    tourRating.textContent = "No ratings yet"
+                    return;
+                }
                 const total = data.reduce((sum, rating) => sum + rating.rating, 0)
                 const averageRating = (total / data.length).toFixed(2)
                 tourRating.textContent = averageRating.toString()
             })
-        const tourRating = document.createElement("td")
         newRow.appendChild(tourRating)
 
-        tourRating.addEventListener("click", () => {
-            showAllRatings(tour)
+        const tourDetailsTd = document.createElement("td")
+        const tourDetailsButton = document.createElement("button")
+        tourDetailsButton.textContent = "Tour Details"
+
+        tourDetailsButton.addEventListener("click", () => {
+            showTourRatings(tour)
         })
 
-        const editButtonTd = document.createElement("td")
-        const editButton = document.createElement("button")
-        editButton.textContent = "Edit Tour"
-        editButton.addEventListener("click", () => window.location.href = `../toursEdit/toursEdit.html?tourId=${tour.id}`)
-        editButtonTd.append(editButton)
-        newRow.appendChild(editButtonTd)
+        tourDetailsTd.append(tourDetailsButton)
+        newRow.appendChild(tourDetailsTd)
 
         const deleteButtonTd = document.createElement("td")
         const deleteButton = document.createElement("button")
@@ -97,33 +96,44 @@ function toursOverviewInitialize(data: Tour[]) {
     })
 }
 
-function showAllRatings(tour) {
-    tourRatringServices.getById(tour.id, "tourId")
+function showTourRatings(tour) {
+    toursServices.getTourRatingsByTourId(tour.id)
         .then((data: TourRating[]) => {
-            toursOverviewRatingTemplateHandler.innerHTML = ''
-
-            if (data.length == 0) {
-                return;
-            }
+            toursReviewsTemplateHandler.innerHTML = ''
 
             const tourTitle = document.createElement("p")
             tourTitle.textContent = tour.name
-            toursOverviewRatingTemplateHandler.append(tourTitle)
+            toursReviewsTemplateHandler.append(tourTitle)
+
+            const tourDescription = document.createElement("textarea")
+            tourDescription.textContent = tour.description
+            toursReviewsTemplateHandler.append(tourDescription)
+
+            if (data.length == 0) {
+                const tourNoReviews = document.createElement("p")
+                tourNoReviews.textContent = "This tour has not yet been reviewed."
+                toursReviewsTemplateHandler.append(tourNoReviews)
+            }
 
             data.forEach(review => {
-                const newReview = toursOverviewRatingTemplate.content.cloneNode(true) as HTMLElement
+                const tourReviewsFragment = toursReviewsTemplate.content.cloneNode(true) as DocumentFragment
+                const toursReviewsSection = tourReviewsFragment.querySelector(".tours-reviews-section") as HTMLDivElement
 
-                const newReviewUsername = newReview.querySelector("#tours-overview-rating-username") as HTMLParagraphElement
-                const newReviewImage = newReview.querySelector("#tours-overview-rating-img") as HTMLImageElement
-                const newReviewTextarea = newReview.querySelector("#tours-overview-rating-textarea") as HTMLTextAreaElement
+                const newReviewImg = toursReviewsSection.querySelector(".tours-reviews-img") as HTMLImageElement
+                const newReviewTextarea = toursReviewsSection.querySelector(".tours-reviews-textarea") as HTMLTextAreaElement
 
-                newReviewUsername.textContent = `${review.username}`
-
-                newReviewImage.src = `../../styles/star${review.rating}.png`
+                newReviewImg.src = `../../styles/star${review.rating}.png`
                 newReviewTextarea.value = `${review.comment}`
-                toursOverviewRatingTemplateHandler.append(newReview)
-
-                toursOverviewRatingSection.style.display = "flex"
+                toursReviewsTemplateHandler.append(toursReviewsSection)
             })
+
+            const tourEditButton = document.createElement("button")
+            tourEditButton.textContent = "Edit Tour"
+            tourEditButton.addEventListener("click", () => {
+                window.location.href = `../toursEdit/toursEdit.html?tourId=${tour.id}`
+            })
+            toursReviewsTemplateHandler.append(tourEditButton)
+
+            toursReviewsTemplateHandler.style.display = "flex"
         })
 }

@@ -1,13 +1,13 @@
-import {Reservation} from "../models/reservation.model.js"
+import { TourReservation } from "../models/tourReservation.model.js"
 
-export class ReservationServices {
+export class ToursReservationServices {
     private apiUrl: string
 
     constructor() {
-        this.apiUrl = `http://localhost:48696/api/reservations`
+        this.apiUrl = `http://localhost:48696/api/tour-reservations`
     }
 
-    add(reservationData: Reservation, reservationAmount:number): Promise<Reservation> {
+    add(reservationData: TourReservation, reservationAmount: number): Promise<TourReservation> {
         return fetch(this.apiUrl + `?reservationAmount=${reservationAmount}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -21,7 +21,7 @@ export class ReservationServices {
                 }
                 return response.json()
             })
-            .then((reservation: Reservation) => {
+            .then((reservation: TourReservation) => {
                 return reservation;
             })
             .catch(error => {
@@ -30,8 +30,8 @@ export class ReservationServices {
             });
     }
 
-    delete(tourId: number): Promise<void> {
-        return fetch(this.apiUrl + `?tourId=${tourId}`, {
+    delete(reservationId: number): Promise<void> {
+        return fetch(this.apiUrl + `?reservationId=${reservationId}`, {
             method: 'DELETE'
         })
             .then(response => {

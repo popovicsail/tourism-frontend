@@ -1,14 +1,14 @@
-import { KeyPoint } from "../models/keyPoint.model.js"
+import { TourKeyPoint } from "../models/tourKeyPoint.model.js"
 import { Tour } from "../models/tour.model.js"
 
-export class KeyPointServices {
+export class ToursKeyPointServices {
     private apiUrl: string
 
     constructor(tourId) {
         this.apiUrl = `http://localhost:48696/api/tours/${tourId}/key-points`
     }
 
-    add(keyPointData: KeyPoint): Promise<KeyPoint> {
+    add(keyPointData: TourKeyPoint): Promise<TourKeyPoint> {
         return fetch(this.apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ export class KeyPointServices {
                 }
                 return response.json()
             })
-            .then((keyPoint: KeyPoint) => {
+            .then((keyPoint: TourKeyPoint) => {
                 return keyPoint;
             })
             .catch(error => {
@@ -31,7 +31,7 @@ export class KeyPointServices {
             });
     }
 
-    update(keyPointData: KeyPoint): Promise<Tour> {
+    update(keyPointData: TourKeyPoint): Promise<Tour> {
         return fetch(this.apiUrl, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },

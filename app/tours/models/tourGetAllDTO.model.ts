@@ -1,6 +1,6 @@
 import {Tour} from "./tour.model"
 
-export interface tourGetAllDTO {
+export interface TourGetAllDTO {
     data: Tour[];
     totalCount: number;
 }

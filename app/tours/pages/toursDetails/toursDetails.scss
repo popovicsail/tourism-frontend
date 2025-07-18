@@ -1,0 +1,185 @@
+@import "../../styles/tours.scss";
+
+#tours-feedback-main {
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    height: fit-content;
+
+    #tours-reviews-main {
+        display: flex;
+
+        #tours-reviews-template-handler {
+
+            textarea.tours-description {
+                margin: 2%;
+                height: 80px;
+                width: 300px;
+                resize: none;
+                background-color: lightgray;
+            }
+        }
+    }
+
+    #tour-give-review-main {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .tour-give-review-section {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            
+            div {
+                display: flex;
+                justify-content: center;
+            }
+
+            img {
+                height: 50px;
+                width: 50px;
+            }
+
+            textarea {
+                margin: 2%;
+                height: 80px;
+                width: 300px;
+                resize: none;
+            }
+
+            button {
+                width: 50%;
+                background-color: gray;
+            }
+        }
+
+    }
+
+}
+
+
+main {
+    display: flex;
+
+    #tour-keypoint-main {
+        width: fit-content;
+        min-width: fit-content;
+        height: fit-content;
+        display: none;
+        flex-direction: column;
+        border: 2px black solid;
+        background-color: rgb(213, 208, 208);
+        margin: 10px;
+        padding: 10px;
+        gap: 10px;
+
+        #tour-keypoint-template-handler {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .keypoint {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border: 2px rgb(0, 0, 0) solid;
+            height: 26vh;
+            width: 25%;
+            min-width: fit-content;
+
+            .keypoint-image-div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                width: 200px;
+                height: 200px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 20px;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            .keypoint-input-div {
+                display: flex;
+                width: 90%;
+
+                textarea {
+                    width: 100%;
+                    padding: 8px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    resize: none;
+                    margin: 10px;
+                }
+            }
+        }
+    }
+
+    #tour-reservations-main {
+
+        #tour-reserved-main {
+            margin: 10px;
+            background-color: gray;
+            width: 100%;
+
+            #tour-reserved-template-handler {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+
+                .tour-reserved-section {
+                    padding: 10px;
+                    border: black 2px solid;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: lightgreen;
+                }
+            }
+        }
+
+        #tour-reserve-main {
+            width: 100%;
+            margin: 10px;
+
+            .tour-reserve-section {
+                display: none;
+                flex-direction: column;
+                background-color: lightcoral;
+                padding: 10px;
+
+                p {
+                    margin: 0;
+                }
+
+                .tour-reserve-number-div {
+                    display: flex;
+                    justify-content: center;
+
+                    input {
+                        text-align: center;
+                    }
+                }
+
+                .tour-reserve-button-div {
+                    display: flex;
+                    gap: 10px;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
