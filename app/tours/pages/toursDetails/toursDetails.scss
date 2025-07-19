@@ -8,16 +8,20 @@
     margin: 10px;
     padding: 10px;
     height: fit-content;
+    width: 30%;
 
     #tours-reviews-main {
         display: flex;
+        width: 100%;
 
         #tours-reviews-template-handler {
+            display: flex;
+            width: 100%;
 
             textarea.tours-description {
                 margin: 2%;
-                height: 80px;
-                width: 300px;
+                height: 150px;
+                width: 80%;
                 resize: none;
                 background-color: lightgray;
             }

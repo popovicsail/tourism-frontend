@@ -2,6 +2,8 @@ import { handleLogout } from "../../../users/pages/login/login.js"
 import { Tour } from "../../models/tour.model.js"
 import { TourRating } from "../../models/tourRating.model.js"
 import { ToursServices } from "../../services/tours.services.js"
+import { ToursKeyPointServices } from "../../services/toursKeyPoint.services.js"
+const toursKeyPointServices = new ToursKeyPointServices
 const toursServices = new ToursServices()
 const guideId = parseInt(localStorage.getItem('id'));
 
@@ -72,17 +74,16 @@ function toursOverviewInitialize(data: Tour[]) {
         const tourDetailsTd = document.createElement("td")
         const tourDetailsButton = document.createElement("button")
         tourDetailsButton.textContent = "Tour Details"
-
         tourDetailsButton.addEventListener("click", () => {
             showTourRatings(tour)
         })
-
         tourDetailsTd.append(tourDetailsButton)
         newRow.appendChild(tourDetailsTd)
 
         const deleteButtonTd = document.createElement("td")
         const deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete Tour"
+        deleteButton.classList.add("cancel-button")
         deleteButton.addEventListener("click", () => {
             toursServices.delete(tour.id)
                 .then(() => getByGuideId(guideId))
@@ -91,6 +92,17 @@ function toursOverviewInitialize(data: Tour[]) {
         })
         deleteButtonTd.appendChild(deleteButton)
         newRow.appendChild(deleteButtonTd)
+
+
+        const duplicateButtonTd = document.createElement("td")
+        const duplicateButton = document.createElement("button")
+        duplicateButton.textContent = "Duplicate Tour"
+        duplicateButton.classList.add("duplicate-button")
+        duplicateButton.addEventListener("click", () => {
+            duplicateTourById(tour.id)
+        })
+        duplicateButtonTd.appendChild(duplicateButton)
+        newRow.appendChild(duplicateButtonTd)
 
         toursOverviewTableBody.appendChild(newRow)
     })
@@ -137,3 +149,42 @@ function showTourRatings(tour) {
             toursReviewsTemplateHandler.style.display = "flex"
         })
 }
+
+
+function duplicateTourById(tourId) {
+    Promise.all([
+        toursServices.getByTourId(tourId),
+        toursServices.getTourKeyPointsByTourId(tourId)
+    ])
+        .then(([tourToDuplicate, tourKeyPoints]) => {
+            const name = tourToDuplicate.name
+            const description = tourToDuplicate.description
+            const dateTime = tourToDuplicate.dateTime
+            const maxGuests = tourToDuplicate.maxGuests
+            let status = tourToDuplicate.status
+
+            if (status == "Published") {
+                status = "Ready"
+            }
+
+            const tourDuplicated: Tour = { name, description, dateTime, maxGuests, status, guideId }
+
+            toursServices.add(tourDuplicated)
+                .then((tourDuplicatedData) => {
+                    tourKeyPoints.forEach((keyPoint) => {
+                        keyPoint.tourId = tourDuplicatedData.id
+                        toursKeyPointServices.add(keyPoint)
+                            .then(() => {
+                                getByGuideId(guideId)
+                            })
+                    })
+                })
+        })
+        .catch((error) => {
+            console.error(error.status, error.message);
+        });
+
+}
+
+
+

@@ -68,8 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toursLookupMain = document.getElementById("tours-lookup-main") as HTMLDivElement
     toursLookupTemplateHandler = toursLookupMain.querySelector("#tours-lookup-template-handler") as HTMLDivElement
+    toursLookupTemplateHandler.style.display = "none";
     toursReservedTemplateHandler = toursLookupMain.querySelector("#tours-reserved-template-handler") as HTMLDivElement
-    toursReservedTemplateHandler.style.display = "none";
+    toursReservedTemplateHandler.style.display = "flex";
     toursLookupTemplate = toursLookupMain.querySelector("#tours-lookup-template") as HTMLTemplateElement
 
     toursPagesMain = document.getElementById("tours-pages-main") as HTMLDivElement
