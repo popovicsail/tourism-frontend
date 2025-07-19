@@ -4,8 +4,8 @@ import { Tour } from "../models/tour.model.js"
 export class ToursKeyPointServices {
     private apiUrl: string
 
-    constructor(tourId) {
-        this.apiUrl = `http://localhost:48696/api/tours/${tourId}/key-points`
+    constructor() {
+        this.apiUrl = `http://localhost:48696/api/tour-key-points/`
     }
 
     add(keyPointData: TourKeyPoint): Promise<TourKeyPoint> {
@@ -55,7 +55,7 @@ export class ToursKeyPointServices {
     }
 
     delete(keyPointId: number): Promise<void> {
-        return fetch(this.apiUrl + '/' + keyPointId, {
+        return fetch(this.apiUrl + keyPointId, {
             method: 'DELETE'
         })
             .then(response => {

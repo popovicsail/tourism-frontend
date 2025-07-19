@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../../dist/tours/pages/toursDetails/toursDetails.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <title>Tour Overview</title>
     <script type="module" src="../../../../dist/tours/pages/toursDetails/toursDetails.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" defer></script>
 </head>
 
 <body>
@@ -62,9 +64,10 @@
                     <button type="button" class="tour-give-review-button" disabled>Rate tour</button>
                 </section>
             </section>
+            <div id="map" style="height: 400px; width: 100%;"></div>
         </section>
 
-                <section id="tour-reservations-main">
+        <section id="tour-reservations-main">
             <section id="tour-reserved-main">
                 <section id="tour-reserved-template-handler">
                     <template id="tour-reserved-template">

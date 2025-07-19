@@ -4,7 +4,7 @@ main {
     display: flex;
 
     #tours-overview-main {
-        width: 40%;
+        width: 50%;
         display: flex;
 
         .tours-overview-section {
@@ -44,6 +44,14 @@ main {
                         &:hover {
                             background-color: $accent-color;
                         }
+                    }
+
+                    .cancel-button  {
+                        background-color: red;
+                    }
+
+                    .duplicate-button {
+                        background-color: orange;
                     }
                 }
             }

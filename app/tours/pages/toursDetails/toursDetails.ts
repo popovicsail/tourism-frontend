@@ -37,10 +37,6 @@ let tourReserveAvailable
 let tourReserveNumber
 let tourReserveButton
 
-
-
-let toursFeedbackMain
-
 let toursReviewsMain
 let toursReviewsTemplateHandler
 let toursReviewsTemplate
@@ -53,6 +49,8 @@ let star3
 let star4
 let star5
 
+let map: L.Map;
+let currentMarker: L.Marker;
 
 document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.querySelector('#logout-button') as HTMLButtonElement;
@@ -74,8 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tourReserveAvailable = tourReserveSection.querySelector(".tour-reserve-available") as HTMLParagraphElement
     tourReserveNumber = tourReserveSection.querySelector(".tour-reserve-number") as HTMLInputElement
     tourReserveButton = tourReserveSection.querySelector(".tour-reserve-button") as HTMLButtonElement
-
-    toursFeedbackMain = document.getElementById("tours-feedback-main") as HTMLDivElement
 
     tourGiveReviewMain = document.getElementById("tour-give-review-main") as HTMLDivElement
     tourGiveReviewSection = tourGiveReviewMain.querySelector(".tour-give-review-section") as HTMLDivElement
@@ -108,6 +104,7 @@ function tourGetById(tourId) {
             keyPointSectionSetup()
             reserveSectionCalculate()
             showTourRatings()
+            initMap(tourByIdKeyPoints[0])
         })
         .catch((error) => {
             console.error(error.status, error.message);
@@ -131,6 +128,9 @@ function keyPointSectionSetup() {
         keyPointSection.id = `keypoint-edit-section${keyPointId}`
 
         keyPointImageImg.src = keyPoint.imageUrl
+        keyPointImageImg.addEventListener("click", () => {
+            setupMap(keyPoint)
+        })
 
         keyPointNameInput.id = `keypoint-edit-name-input${keyPointId}`
         keyPointNameInput.value = keyPoint.name
@@ -209,11 +209,6 @@ function reserveSectionCalculate() {
 
 
 function showTourRatings() {
-    if(tourByIdRatings.length == 0) {
-        toursReviewsMain.style.display = "none"
-        return;
-    }
-
     toursReviewsTemplateHandler.innerHTML = ''
 
     const tourTitle = document.createElement("p")
@@ -379,4 +374,30 @@ function rateDivUnglow(starNumber: number) {
         return
     }
     star1.src = "../../styles/starUnrated.png"
+}
+
+
+function initMap(keyPoint): void {
+    const lat = keyPoint.latitude
+    const lng = keyPoint.longitude
+    map = L.map("map").setView([lat, lng], 13)
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors"
+    }).addTo(map)
+}
+
+function setupMap(keyPoint): void {
+    const lat = keyPoint.latitude
+    const lng = keyPoint.longitude
+
+    map.setView([lat, lng], 15); // Pomeraj mapu
+
+    if (currentMarker) {
+        map.removeLayer(currentMarker)
+    }
+
+    currentMarker = L.marker([lat, lng]).addTo(map)
+        .bindPopup(`${keyPoint.name}`)
+        .openPopup()
 }
