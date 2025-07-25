@@ -1,13 +1,19 @@
 import {StatisticsService} from '../../services/statistics.service.js'
-import {RestoranStatistics} from '../../models/satistics.model.js'
+import {MonthlyOccupancyStatistic} from '../../models/satistics.model.js'
+import {MonthlyOccupancy} from '../../models/satistics.model.js'
 
 
 const chartContainer = document.getElementById('chart-container') as HTMLDivElement;
 declare const Chart: typeof import("chart.js").Chart;
 
-function drawSummaryChart(statistics: RestoranStatistics[]) {
-    const labels = statistics.map(s => s.restoranName);
-    const data = statistics.map(s => s.totalBookings);
+const url = window.location.search;
+const searchParams = new URLSearchParams(url);
+const restoranId = parseInt(searchParams.get('restoranId'));
+
+function drawSummaryChart(statistics: MonthlyOccupancyStatistic) {
+    const monthlyOccupancy:MonthlyOccupancy[] = statistics.monthlyOccupancy
+    const labels = monthlyOccupancy.map(m => m.month);
+    const data = monthlyOccupancy.map(m => m.occupancyRate);
     // Kreiranje canvas-a
     const canvas = document.createElement("canvas");
     canvas.width = 500;
@@ -37,16 +43,8 @@ function drawSummaryChart(statistics: RestoranStatistics[]) {
             }
             },
             scales: {
-            x: { title: { display: true, text: "Restoran" } },
-            y: { title: { display: true, text: "Broj rezervacija" }, beginAtZero: true }
-            }
-
-            ,onClick: (_, elements) => {
-                if (elements.length > 0) {
-                  const index = elements[0].index;
-                  const restoranId = statistics[index].restoranId;
-                  window.location.href = `../restaurantsStatisticsDetails/restaurantsStatisticsDetails.html?restoranId=${restoranId}`;
-                }
+            x: { title: { display: true, text: "Mesec" } },
+            y: { title: { display: true, text: "Procenat popunjenosti %" }, beginAtZero: true }
             }
         }
     });
@@ -56,9 +54,9 @@ function drawSummaryChart(statistics: RestoranStatistics[]) {
 const statisticsService = new StatisticsService();
 
 document.addEventListener("DOMContentLoaded", () => {
-    statisticsService.GetTotalReservationsForYear()
+    statisticsService.GetOccupancyByMonth(restoranId)
     .then(drawSummaryChart)
     .catch(error => {
-        console.error("Neuspešno učitavanje grafikona:", error.message);
+        alert(`Neuspešno učitavanje grafikona: ${error.message}`);
     });
 })

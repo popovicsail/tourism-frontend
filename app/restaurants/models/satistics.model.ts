@@ -5,11 +5,11 @@ export interface RestoranStatistics {
 }
 
 export interface MonthlyOccupancy{
-    Month:string
-    OccupancyRate:number
+    month:string
+    occupancyRate:number
 }
 
 export interface MonthlyOccupancyStatistic{
-    RestaurantName:string
-    MonthlyOccupancy:MonthlyOccupancy[]
+    restaurantName:string
+    monthlyOccupancy:MonthlyOccupancy[]
 }

@@ -43,7 +43,7 @@ export class StatisticsService{
             return response.json()
         })
         .then((responseData) => {
-            return responseData.data as MonthlyOccupancyStatistic;
+            return responseData as MonthlyOccupancyStatistic;
         })
         .catch(error => {
             console.error('Error', error.status)
