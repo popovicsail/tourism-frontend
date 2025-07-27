@@ -1,0 +1,14 @@
+@use '../../../styles/global.scss';
+
+body {
+    margin: 0;
+  }
+  
+  #chart-container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    width: 90%;
+    height: 600px;
+    margin-left: 60px;         
+  }

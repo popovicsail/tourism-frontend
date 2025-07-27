@@ -55,7 +55,9 @@ export function handlePermission() {
     }
     else if (role == "vlasnik") {
         const toursRestaurantsLink = document.getElementById("restaurants-link") as HTMLLIElement
+        const statisticsLink = document.getElementById("statistics-restaurant") as HTMLLIElement
         toursRestaurantsLink.style.display = "flex"
+        statisticsLink.style.display = "flex"
     }
 
     loginButton.style.display = "none"
