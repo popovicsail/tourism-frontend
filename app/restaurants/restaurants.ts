@@ -80,11 +80,24 @@ function ispisiRestorane(){
                             window.location.href = '../index.html';
 
          }});
+
+         const menuCell = noviRed.insertCell();
+            const menuCellBtn = document.createElement('button');
+            menuCellBtn.textContent = 'Izmena Meni-a';
+            menuCell.appendChild(menuCellBtn);
+
+            menuCellBtn.addEventListener('click', () => {
+                const red = menuCellBtn.closest('tr')!;
+                const id = parseInt(red.cells[0].textContent!);
+                window.location.href = `pages/menuUpdate/menuUpdate.html?id=${id}`;
+            });
             
          });
      }}).catch((error) => {
          console.error('Greška prilikom učitavanja restorana:', error);
      });
+
+        
 }
 
 dodajBtn.addEventListener('click', () => {

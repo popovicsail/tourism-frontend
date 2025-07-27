@@ -4,6 +4,7 @@ export interface Jelo {
     name: string;
     price: number;
     ingredients: string;
+    status:string
     imageUrl: string;
     restaurantId: number;
     }
