@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../dist/restaurants/pages/menuUpdate/menuUpdate.css">
+    <script type="module" src="../../../../dist/restaurants/pages/menuUpdate/menuUpdate.js"></script>
+    <title>Menu Update</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../../../index.html">Home</a></li>
+            <li class="nav-item"><a id="backButton" href="../../restaurants.html">Nazad</a></li>
+            <li id="logout-button" class="nav-item push-right"><a href="../../../index.html">Logout</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Forma za izmenu korisnika -->
+    <div id="izmeniForm">
+        <h2>Izmena Meni-a</h2>
+        <table id="Jela-Tabela" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Order</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Ingredients</th>
+                    <th>Status</th>
+                    <th>ImageUrl</th>
+                </tr>
+            </thead>
+            <tbody id="korisniciBody">
+                <!-- Redovi će biti dodati dinamički -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

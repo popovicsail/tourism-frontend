@@ -4,6 +4,7 @@ import { handleLogout } from "../../../users/pages/login/login.js";
 import { Jelo } from "../../models/jela.model.js";
 import { ReviewService } from "../../services/review.service.js";
 import { Review } from "../../models/review.model.js";
+import { JelaService } from "../../services/jela.service.js";
 
 const url = window.location.search;
 const searchParams = new URLSearchParams(url);
@@ -13,6 +14,7 @@ const jelaContainer = document.getElementById("jela-container") as HTMLDivElemen
 const komentariContainer = document.getElementById('komentari-body') as HTMLDivElement;
 const restaurantService = new RestaurantService();
 const reviewService = new ReviewService();
+const jelaService = new JelaService(restoranId);
 const commentCreate = document.getElementById('comment') as HTMLInputElement;
 const oceniBtn = document.getElementById("oceni") as HTMLLIElement;
 const reviewBtn = document.getElementById("posaljiRecenziju") as HTMLButtonElement;
@@ -67,6 +69,7 @@ function renderReviews(reviews: Review[]) {
 function renderJela(jela: Jelo[]) {
     jelaContainer.innerHTML = "";
     jela.forEach((jelo) => {
+        if (jelo.status === 'U ponudi') {
         const card = document.createElement("div");
         card.className = "jelo-card";
 
@@ -80,7 +83,7 @@ function renderJela(jela: Jelo[]) {
         `;
 
         jelaContainer.appendChild(card);
-
+        }
     });
 }
 
@@ -150,7 +153,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Povlačenje svih restorana
         const restaurant = await restaurantService.getById(restoranId);
         renderRestaurant(restaurant);
-        renderJela(restaurant.jela);
+        const restaurantJela = await jelaService.Get()
+        renderJela(restaurantJela);
     } catch (error) {
         console.error("Greška prilikom povlačenja restorana:", error.message);
     }

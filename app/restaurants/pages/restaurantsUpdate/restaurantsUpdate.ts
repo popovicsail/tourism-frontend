@@ -126,7 +126,7 @@ async function submitRestaurantFormData(){
         const restaurantId = createdRestaurant.id;
 
         console.log(`Kreiran restoran sa ID: ${restaurantId}`);
-        window.location.href = `../restaurantsJela/restaurantsJela.html?restoranId=${restaurantId}`;
+        window.location.href = `../../restaurants.html`;
     } catch (error) {
         console.error("Greška prilikom kreiranja restorana:", error.message);
     }
