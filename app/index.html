@@ -4,25 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.scss">
+    <script type="module" src="index.ts"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
     <title>Tourism</title>
-    <link rel="stylesheet" href="../dist/index.css">
-    <script type="module" src="../dist/index.js"></script>
-</head>
+
 
 <body>
-    <nav class="navbar">
-        <ul class="nav-list">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item" id="restaurants-link"><a href="restaurants/restaurants.html">Restaurants</li>
-            <li class="nav-item" id="toursOverview-link"><a
-                    href="tours/pages/toursOverview/toursOverview.html?guideId=10">Tour Overview</a></li>
-            <li class="nav-item" id="tours-lookup-link"><a href="tours/pages/toursLookup/toursLookup.html">Tour Lookup</li>
-            <li class="nav-item" id="statistics-restaurant"><a href="restaurants/pages/restaurantsStatistics/restaurantsStatistics.html">Statistics</li>
-            <li class="nav-item" id="reservation-lookup-link"><a href="restaurants/pages/reservationUserEndView/reservationUserEndView.html">My Reservations</li>
-            <li id="restaurants-end-view"><a href="../app/restaurants/pages/restaurantsUserEndView/restaurantsUserEndView.html">Restaurants</a></li>
-            <li class="nav-item push-right" id="login-button"><a href="./users/pages/login/login.html">Login</a></li>
-            <li class="nav-item push-right" id="logout-button"><a href="index.html">Logout</a></li>
-    </nav>
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li class="nav-item"><a href="/index.html">Home</a></li>
+      <li class="nav-item" id="restaurants-link"><a href="/restaurants/restaurants.html">Restaurants</a></li>
+      <li class="nav-item" id="toursOverview-link"><a href="/tours/pages/toursOverview/toursOverview.html?guideId=10">Tour Overview</a></li>
+      <li class="nav-item" id="tours-lookup-link"><a href="/tours/pages/toursLookup/toursLookup.html">Tour Lookup</a></li>
+      <li class="nav-item" id="statistics-restaurant"><a href="/restaurants/pages/restaurantsStatistics/restaurantsStatistics.html">Statistics</a></li>
+      <li class="nav-item" id="reservation-lookup-link"><a href="/restaurants/pages/reservationUserEndView/reservationUserEndView.html">My Reservations</a></li>
+      <li class="nav-item" id="restaurants-end-view"><a href="/restaurants/pages/restaurantsUserEndView/restaurantsUserEndView.html">Restaurants</a></li>
+      <li class="nav-item push-right" id="login-button"><a href="/users/pages/login/login.html">Login</a></li>
+      <li class="nav-item push-right" id="logout-button"><a href="/index.html">Logout</a></li>
+    </ul>
+  </nav>
+  
+
+  <section class="gastronomy-intro">
+      <h2>Putovanje Kroz Gastronomiju</h2>
+      <p>
+        Putovanje Kroz Gastronomiju vam omogućava da isplanirate vaše letovanje lako i efikasno.  
+        Na svakoj tački putovanja nudimo širok asortiman restorana sa raznim specijalitetima –  
+        od domaće kuhinje pa do egzotičnih poslastica.
+      </p>
+  </section>
+
+  <div id="map" style="height: 500px;">
+    
+  </div>
 </body>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </html>
