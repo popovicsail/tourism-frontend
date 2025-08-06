@@ -42,6 +42,8 @@ export function handlePermission() {
     }
 
     if (role == "turista") {
+        const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
+        accControlPanel.style.display = "flex"
         const toursLookupLink = document.getElementById("tours-lookup-link") as HTMLLIElement
         toursLookupLink.style.display = "flex"
         const restaurantsEndView = document.getElementById("restaurants-end-view") as HTMLLIElement
@@ -52,12 +54,16 @@ export function handlePermission() {
     else if (role == "vodic") {
         const toursOverviewLink = document.getElementById("toursOverview-link") as HTMLLIElement
         toursOverviewLink.style.display = "flex"
+        const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
+        accControlPanel.style.display = "flex"
     }
     else if (role == "vlasnik") {
         const toursRestaurantsLink = document.getElementById("restaurants-link") as HTMLLIElement
         const statisticsLink = document.getElementById("statistics-restaurant") as HTMLLIElement
         toursRestaurantsLink.style.display = "flex"
         statisticsLink.style.display = "flex"
+        const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
+        accControlPanel.style.display = "flex"
     }
 
     loginButton.style.display = "none"
