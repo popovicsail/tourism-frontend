@@ -50,12 +50,16 @@ export function handlePermission() {
         restaurantsEndView.style.display = "flex"
         const reservationsEndView = document.getElementById("reservation-lookup-link") as HTMLLIElement
         reservationsEndView.style.display = "flex"
+        const registerBtn = document.getElementById('register-button') as HTMLLIElement
+        registerBtn.style.display = 'none'
     }
     else if (role == "vodic") {
         const toursOverviewLink = document.getElementById("toursOverview-link") as HTMLLIElement
         toursOverviewLink.style.display = "flex"
         const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
         accControlPanel.style.display = "flex"
+        const registerBtn = document.getElementById('register-button') as HTMLLIElement
+        registerBtn.style.display = 'none'
     }
     else if (role == "vlasnik") {
         const toursRestaurantsLink = document.getElementById("restaurants-link") as HTMLLIElement
@@ -64,6 +68,8 @@ export function handlePermission() {
         statisticsLink.style.display = "flex"
         const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
         accControlPanel.style.display = "flex"
+        const registerBtn = document.getElementById('register-button') as HTMLLIElement
+        registerBtn.style.display = 'none'
     }
 
     loginButton.style.display = "none"
