@@ -64,6 +64,10 @@ saveButton.addEventListener('click', async (e) => {
   try {
     await userService.updateUser(updatedUser);
     alert('Podaci su uspešno sačuvani.');
+
+    localStorage.setItem('username', usernameInput.value);
+    localStorage.setItem('password', passwordInput.value);
+    localStorage.setItem('role', roleInput.value);
   } catch (err) {
     alert(`Greška pri ažuriranju: ${err.message || 'Nepoznata greška'}`);
   }

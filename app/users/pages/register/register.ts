@@ -1,11 +1,13 @@
 import { UserService } from "../../service/user.services.js"; // prilagodi putanju
 
 const form = document.getElementById("register-form") as HTMLFormElement;
+const usernameInput = form.username as HTMLInputElement;
 const passwordInput = form.password as HTMLInputElement;
 const confirmInput = form.confirmPassword as HTMLInputElement;
 const roleSelect = document.getElementById ('select-role') as HTMLSelectElement;
 const roleDesc = document.getElementById("role-description")!;
 const submitBtn = form.querySelector("button")!;
+const feedback = document.getElementById("form-feedback")!;
 const userService = new UserService;
 
 const roleMap: Record<string, string> = {
@@ -18,15 +20,36 @@ roleSelect.addEventListener("change", () => {
   roleDesc.textContent = roleMap[roleSelect.value] || "";
 });
 
-form.addEventListener("input", () => {
-  const isValid =
-    form.username.value.trim().length > 2 &&
-    passwordInput.value.length >= 8 &&
-    passwordInput.value === confirmInput.value &&
-    roleSelect.value !== "";
+document.addEventListener('DOMContentLoaded', () => {
 
-  submitBtn.disabled = !isValid;
-});
+  
+    const validateForm = () => {
+      const isValid =
+        usernameInput.value.trim().length > 2 &&
+        passwordInput.value.length >= 8 &&
+        passwordInput.value === confirmInput.value &&
+        roleSelect.value !== "";
+  
+      if (!isValid) {
+        submitBtn.disabled = true;
+        submitBtn.style.background = "red";
+        feedback.textContent = "Molimo vas da ispravno popunite sva polja.";
+        feedback.style.color = "red";
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.style.background = ""; // vraća na default
+        feedback.textContent = "Podaci su validni. Možete nastaviti.";
+        feedback.style.color = "green";
+      }
+    };
+  
+    // Provera odmah po učitavanju
+    validateForm();
+  
+    // Provera pri svakom unosu
+    form.addEventListener("input", validateForm);
+  });
+  
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
