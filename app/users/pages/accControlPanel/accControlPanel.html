@@ -22,7 +22,6 @@
           <ul>
             <li id="profile-link">Profil</li>
             <li id="edit-user-tab">Izmeni podatke</li>
-            <li>Aktivnosti</li>
           </ul>
         </aside>
         <main class="content">
@@ -35,56 +34,28 @@
 
           <section id="izmeni-podatke-form">
             <form id="edit-user-form">
-                <div class="form-row">
-                  <label for="edit-username">Korisničko ime:</label>
-                  <input type="text" id="edit-username" required />
-                </div>
-                <div class="form-row">
-                  <label for="edit-password">Lozinka:</label>
-                  <input type="password" id="edit-password" required />
-                </div>
-                <button>Sačuvaj</button>
-              </form>
+              <div class="form-row">
+                <label for="edit-username">Korisničko ime:</label>
+                <input type="text" id="edit-username" required />
+              </div>
+          
+              <div class="form-row">
+                <label for="edit-password">Lozinka:</label>
+                <input type="password" id="edit-password" required />
+              </div>
+          
+              <div class="form-row">
+                <label for="edit-role">Tip naloga:</label>
+                <select id="edit-role" required>
+                  <option value="turista">Turista</option>
+                  <option value="vodic">Vodič</option>
+                  <option value="vlasnik">Vlasnik</option>
+                </select>
+              </div>
+          
+              <button id="save">Sačuvaj</button>
+            </form>
           </section>
-
-          <section id="aktivnosti-form">
-            <h2>Vaše aktivnosti</h2>
-          
-            <div class="activity-buttons">
-              <button id="btn-restorani">Rezervacije restorana</button>
-              <button id="btn-ture">Posećene ture</button>
-            </div>
-          
-            <div id="activity-tables">
-
-              <table id="restaurant-table" class="activity-table" style="display: none;">
-                <thead>
-                  <tr>
-                    <th>Restoran ID</th>
-                    <th>Datum</th>
-                    <th>Obrok</th>
-                    <th>Broj osoba</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-          
-              <table id="tour-table" class="activity-table" style="display: none;">
-                <thead>
-                  <tr>
-                    <th>Tura</th>
-                    <th>Datum</th>
-                    <th>Lokacija</th>
-                    <th>Detalji</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          
-            <div id="activity-details" class="details-box"></div>
-          </section>
-          
           
         </main>
       </div>

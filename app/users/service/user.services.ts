@@ -71,4 +71,52 @@ export class UserService {
                     throw error
                 });
         }
+
+        updateUser(user: User): Promise<void> {
+            const url = `${this.apiUrl}/${user.id}`;
+        
+            return fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage };
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Update error:', error.message || error);
+                throw error;
+            });
+        }
+
+        createUser(user: User): Promise<void> {
+            const url = this.apiUrl;
+        
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage };
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Create error:', error.message || error);
+                throw error;
+            });
+        }
+        
+        
 }
