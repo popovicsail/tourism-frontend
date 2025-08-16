@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="accControlPanel.scss">
+    <script type="module" src="accControlPanel.ts"></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="/index.html">Home</a></li>
+          <li class="nav-item" id="reservation-lookup-link"><a href="/restaurants/pages/reservationUserEndView/reservationUserEndView.html">My Reservations</a></li>
+          <li class="nav-item push-right" id="logout-button"><a href="/index.html">Logout</a></li>
+        </ul>
+      </nav>
+    <div class="account-panel">
+        <aside class="sidebar">
+          <ul>
+            <li id="profile-link">Profil</li>
+            <li id="edit-user-tab">Izmeni podatke</li>
+          </ul>
+        </aside>
+        <main class="content">
+          <section id="profil-view">
+                <p><strong>ID:</strong> <span id="user-id"></span></p>
+                <p><strong>Korisničko ime:</strong> <span id="user-username"></span></p>
+                <p><strong>Uloga:</strong> <span id="user-role"></span></p>
+          </section>
+
+
+          <section id="izmeni-podatke-form">
+            <form id="edit-user-form">
+              <div class="form-row">
+                <label for="edit-username">Korisničko ime:</label>
+                <input type="text" id="edit-username" required />
+              </div>
+          
+              <div class="form-row">
+                <label for="edit-password">Lozinka:</label>
+                <input type="password" id="edit-password" required />
+              </div>
+          
+              <div class="form-row">
+                <label for="edit-role">Tip naloga:</label>
+                <select id="edit-role" required>
+                  <option value="turista">Turista</option>
+                  <option value="vodic">Vodič</option>
+                  <option value="vlasnik">Vlasnik</option>
+                </select>
+              </div>
+          
+              <button id="save">Sačuvaj</button>
+            </form>
+          </section>
+          
+        </main>
+      </div>
+</body>
+</html>

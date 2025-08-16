@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.scss">
+    <script type="module" src="register.ts"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form id="register-form" class="form-container">
+        <section class="form-section">
+          <h2>👤 Lični podaci</h2>
+          <input type="text" name="username" placeholder="Korisničko ime" required />
+        </section>
+      
+        <section class="form-section">
+          <h2>🔒 Bezbednost</h2>
+          <input type="password" name="password" placeholder="Lozinka" required />
+          <input type="password" name="confirmPassword" placeholder="Potvrdi lozinku" required />
+          <div id="password-strength"></div>
+        </section>
+      
+        <section class="form-section">
+          <h2>🧭 Uloga</h2>
+          <select id="select-role" name="role" required>
+            <option value="">Izaberi ulogu</option>
+            <option value="turista">🧳 Turista</option>
+            <option value="vodic">🗺️ Vodič</option>
+            <option value="vlasnik">🏨 Vlasnik</option>
+          </select>
+          <small id="role-description"></small>
+        </section>
+      
+        <section class="form-section">
+          <h2>✅ Pregled i potvrda</h2>
+          <button type="submit" disabled>Registruj se</button>
+        </section>
+      </form>
+      <div id="form-feedback" style="margin-top: 1rem; font-weight: bold;"></div>
+      
+</body>
+</html>

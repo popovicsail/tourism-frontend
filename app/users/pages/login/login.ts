@@ -42,22 +42,34 @@ export function handlePermission() {
     }
 
     if (role == "turista") {
+        const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
+        accControlPanel.style.display = "flex"
         const toursLookupLink = document.getElementById("tours-lookup-link") as HTMLLIElement
         toursLookupLink.style.display = "flex"
         const restaurantsEndView = document.getElementById("restaurants-end-view") as HTMLLIElement
         restaurantsEndView.style.display = "flex"
         const reservationsEndView = document.getElementById("reservation-lookup-link") as HTMLLIElement
         reservationsEndView.style.display = "flex"
+        const registerBtn = document.getElementById('register-button') as HTMLLIElement
+        registerBtn.style.display = 'none'
     }
     else if (role == "vodic") {
         const toursOverviewLink = document.getElementById("toursOverview-link") as HTMLLIElement
         toursOverviewLink.style.display = "flex"
+        const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
+        accControlPanel.style.display = "flex"
+        const registerBtn = document.getElementById('register-button') as HTMLLIElement
+        registerBtn.style.display = 'none'
     }
     else if (role == "vlasnik") {
         const toursRestaurantsLink = document.getElementById("restaurants-link") as HTMLLIElement
         const statisticsLink = document.getElementById("statistics-restaurant") as HTMLLIElement
         toursRestaurantsLink.style.display = "flex"
         statisticsLink.style.display = "flex"
+        const accControlPanel = document.getElementById("accControlPanel") as HTMLLIElement
+        accControlPanel.style.display = "flex"
+        const registerBtn = document.getElementById('register-button') as HTMLLIElement
+        registerBtn.style.display = 'none'
     }
 
     loginButton.style.display = "none"
