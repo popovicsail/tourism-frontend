@@ -8,6 +8,7 @@ const userRole = localStorage.getItem('role') ?? 'Nedefinisano';
 const usernameInput = document.getElementById('edit-username') as HTMLInputElement;
 const passwordInput = document.getElementById('edit-password') as HTMLInputElement;
 const roleInput = document.getElementById ('edit-role') as HTMLSelectElement;
+const roleSelect = document.getElementById('edit-role') as HTMLSelectElement;
 const saveButton = document.getElementById('save') as HTMLButtonElement;
 const userService = new UserService;
 
@@ -26,6 +27,7 @@ function renderEditForm(){
     // Prepopuni ako imaš user objekat
     (document.getElementById('edit-username') as HTMLInputElement).value = userName;
     (document.getElementById('edit-password') as HTMLInputElement).value = userPass;
+    roleSelect.value = userRole;
 }
 
 
